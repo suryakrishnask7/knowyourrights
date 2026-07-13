@@ -49,6 +49,7 @@ const EXAMPLE_QUERIES = [
   "My employer hasn't paid my salary for the last two months. What can I do?",
   "I was fired without any notice or reason. Is this legal?",
   "My manager has been making inappropriate comments. How do I file a POSH complaint?",
+  "My landlord is refusing to return my security deposit after I vacated. What are my rights?",
 ];
 
 // ─── Client-side tokenizer (mirrors server-side tokenize()) ──────────────────
@@ -802,6 +803,7 @@ export default function Home() {
               <button
                 id="submit-query-btn"
                 type="submit"
+                suppressHydrationWarning
                 disabled={loading || !query.trim()}
                 style={{
                   width: "100%", padding: "14px 0",

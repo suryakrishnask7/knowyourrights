@@ -11,7 +11,7 @@
  */
 
 export type Jurisdiction = "central" | "TN" | "MH" | "KA";
-export type Category = "unpaid_wages" | "wrongful_termination" | "posh_complaint";
+export type Category = "unpaid_wages" | "wrongful_termination" | "posh_complaint" | "tenant_landlord";
 
 export type Chunk = {
   id: string;
@@ -152,6 +152,74 @@ export const CORPUS: Chunk[] = [
     keywords: ["inquiry", "report", "recommendation", "action", "POSH", "60 days", "finding", "misconduct"],
     text:
       "On the completion of an inquiry under the Act, the Internal Committee shall provide a report of its findings to the employer within a period of ten days. The inquiry shall be completed within a period of ninety days. Where the IC concludes that the allegation against the respondent has been proved, it shall recommend to the employer: (a) to take action for sexual harassment as a misconduct; and (b) to deduct from the salary or wages of the respondent a sum as it deems appropriate to be paid to the aggrieved woman.",
+  },
+
+  // ── TENANT / LANDLORD ─────────────────────────────────────────────────────
+  {
+    id: "tpa-s106",
+    act: "Transfer of Property Act, 1882",
+    section: "Section 106",
+    jurisdiction: "central",
+    category: "tenant_landlord",
+    keywords: ["notice", "lease", "terminate", "month to month", "15 days", "tenancy", "landlord", "tenant", "quit", "vacate", "notice period"],
+    text:
+      "In the absence of a contract or local usage to the contrary, a lease of immovable property for agricultural or manufacturing purpose shall be deemed a lease from year to year, terminable by six months' notice expiring with the end of a year of the tenancy. A lease of immovable property for any other purpose shall be deemed a lease from month to month, terminable on the part of either lessor or lessee by fifteen days' notice expiring with the end of a month of the tenancy. Every notice to quit must be in writing signed by or on behalf of the person giving it.",
+  },
+  {
+    id: "tpa-s108",
+    act: "Transfer of Property Act, 1882",
+    section: "Section 108",
+    jurisdiction: "central",
+    category: "tenant_landlord",
+    keywords: ["rights", "lessee", "tenant", "lessor", "landlord", "repair", "quiet possession", "defect", "liability", "enjoy", "maintenance"],
+    text:
+      "In the absence of a contract to the contrary, the lessor is bound to disclose any material defect in the property of which he is aware and the lessee could not discover with ordinary care. The lessor is bound to put the lessee in possession of the property. The lessee is entitled to quiet enjoyment of the property during the continuance of the lease. The lessor is bound to pay all public charges and rent accruing due in respect of the property during the lease. The lessee must return the property in as good a condition as it was when delivered, fair wear and tear excepted.",
+  },
+  {
+    id: "mta-s4-5",
+    act: "Model Tenancy Act, 2021",
+    section: "Sections 4 & 5",
+    jurisdiction: "central",
+    category: "tenant_landlord",
+    keywords: ["tenancy agreement", "written agreement", "security deposit", "advance", "rent authority", "two months", "six months", "receipt", "deposit", "refund"],
+    text:
+      "No person shall let or take on rent any premises except by an agreement in writing. The tenancy agreement shall be submitted by the landlord to the Rent Authority within two months from the date of its execution. The landlord shall not collect from the tenant more than two months' rent as security deposit for residential premises, and not more than six months' rent for non-residential premises. The security deposit shall be refunded by the landlord at the time of vacating, after deducting dues if any. The landlord shall issue a receipt for every payment received, including security deposit and advance rent.",
+  },
+
+  // ── TENANT / LANDLORD ── Tamil Nadu ──────────────────────────────────────
+  {
+    id: "tn-rrrlat-s21",
+    act: "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    section: "Section 21",
+    jurisdiction: "TN",
+    category: "tenant_landlord",
+    keywords: ["eviction", "tenant", "landlord", "Tamil Nadu", "TN", "rent", "arrears", "subletting", "damage", "own use", "vacate", "rent court"],
+    text:
+      "A landlord may apply to the Rent Court for an order of eviction of a tenant on the following grounds: (a) the tenant has not paid rent for a period of two months after it became due; (b) the tenant has sublet, assigned or otherwise parted with possession of the whole or part of the premises without the landlord's written consent; (c) the tenant has used the premises for a purpose other than that for which it was let; (d) the tenant has caused material damage to the premises; (e) the landlord requires the premises bona fide for occupation by himself or a member of his family. An eviction order shall direct the tenant to vacate within thirty days of the date of the order.",
+  },
+
+  // ── TENANT / LANDLORD ── Maharashtra ────────────────────────────────────
+  {
+    id: "mh-rca-s12",
+    act: "Maharashtra Rent Control Act, 1999",
+    section: "Section 12",
+    jurisdiction: "MH",
+    category: "tenant_landlord",
+    keywords: ["eviction", "tenant", "landlord", "Maharashtra", "MH", "rent", "possession", "subletting", "own use", "arrears", "standard rent", "nuisance"],
+    text:
+      "A landlord shall not be entitled to recover possession of any premises so long as the tenant pays or is ready and willing to pay the standard rent and permitted increases and observes the conditions of the tenancy. A landlord may apply to the Court for recovery of possession on grounds including: (a) non-payment of rent for six months; (b) subletting without written consent of the landlord; (c) using the premises for a purpose other than agreed in the tenancy; (d) causing nuisance or annoyance to neighbouring occupiers; (e) the premises being required bona fide by the landlord for occupation by himself or his family members for residential purposes.",
+  },
+
+  // ── TENANT / LANDLORD ── Karnataka ──────────────────────────────────────
+  {
+    id: "ka-ra-s27",
+    act: "Karnataka Rent Act, 1999",
+    section: "Section 27",
+    jurisdiction: "KA",
+    category: "tenant_landlord",
+    keywords: ["eviction", "tenant", "landlord", "Karnataka", "KA", "rent", "possession", "arrears", "subletting", "own use", "rent controller", "repair"],
+    text:
+      "A landlord seeking possession of premises from a tenant may apply to the Rent Controller on the following grounds: (a) the tenant has not paid the arrears of rent within thirty days of the expiry of a six-month period from the date arrears fell due; (b) the tenant has sublet, assigned, or parted with possession of the premises without the landlord's consent; (c) the tenant has caused substantial damage to the premises; (d) the premises is required reasonably and in good faith by the landlord for occupation by himself or any member of his family; (e) the premises requires urgent reconstruction or repair that cannot be carried out without the tenant vacating. The Rent Controller shall pass an eviction order only after hearing both parties and being satisfied that the ground is made out.",
   },
 ];
 
