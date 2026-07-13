@@ -6,11 +6,11 @@
  * anything that calls it.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import Groq from "groq-sdk";
 import { CORPUS, PATHWAYS, type Chunk, type Category } from "./corpus";
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -41,6 +41,25 @@ export type QueryResponse = {
 };
 
 export type ScoredChunk = Chunk & { score: number };
+
+export type ScoredChunkDebug = {
+  act: string;
+  section: string;
+  jurisdiction: string;
+  category: string;
+  score: number;
+  keywordMatches: string[];
+  textMatches: string[];
+  textPreview: string;
+  selected: boolean;
+};
+
+export type RagDebug = {
+  queryTokens: string[];
+  totalInCorpus: number;
+  filteredByJurisdiction: number;
+  allScored: ScoredChunkDebug[];
+};
 
 // ─── 1. retrieveChunks ────────────────────────────────────────────────────────
 
@@ -89,9 +108,72 @@ function tokenize(text: string): string[] {
     .filter((t) => t.length > 2);
 }
 
-// ─── 2. callClaude ────────────────────────────────────────────────────────────
+// ─── 1b. retrieveChunksWithDebug ─────────────────────────────────────────────
 
-type ClaudeOutput = {
+/**
+ * Same as retrieveChunks but also returns a full RagDebug trace:
+ * which tokens were extracted, how many corpus chunks were eligible,
+ * and every chunk's individual keyword + text match breakdown.
+ */
+export function retrieveChunksWithDebug(
+  query: string,
+  state: "TN" | "MH" | "KA",
+  k = 4
+): { chunks: ScoredChunk[]; ragDebug: RagDebug } {
+  const queryTokens = tokenize(query);
+
+  const candidates = CORPUS.filter(
+    (c) => c.jurisdiction === "central" || c.jurisdiction === state
+  );
+
+  const withScores = candidates
+    .map((chunk) => {
+      const textTokens = tokenize(chunk.text);
+
+      const kwMatches = chunk.keywords.filter((kw) =>
+        queryTokens.some(
+          (qt) => qt.includes(kw.toLowerCase()) || kw.toLowerCase().includes(qt)
+        )
+      );
+      const txtMatches = queryTokens.filter((qt) =>
+        textTokens.some((tt) => tt.includes(qt) || qt.includes(tt))
+      );
+
+      const score = kwMatches.length * 2 + txtMatches.length;
+      return { chunk, score, kwMatches, txtMatches };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  const topK = withScores.slice(0, k);
+  const topKIds = new Set(topK.map((x) => `${x.chunk.act}|${x.chunk.section}`));
+
+  const allScored: ScoredChunkDebug[] = withScores.map(({ chunk, score, kwMatches, txtMatches }) => ({
+    act: chunk.act,
+    section: chunk.section,
+    jurisdiction: chunk.jurisdiction,
+    category: chunk.category,
+    score,
+    keywordMatches: kwMatches,
+    textMatches: txtMatches,
+    textPreview: chunk.text.slice(0, 200),
+    selected: topKIds.has(`${chunk.act}|${chunk.section}`),
+  }));
+
+  return {
+    chunks: topK.map((x) => ({ ...x.chunk, score: x.score })),
+    ragDebug: {
+      queryTokens,
+      totalInCorpus: CORPUS.length,
+      filteredByJurisdiction: candidates.length,
+      allScored,
+    },
+  };
+}
+
+// ─── 2. callGroq ─────────────────────────────────────────────────────────────
+
+type GroqOutput = {
   answer: string;
   citations: Citation[];
   missingFacts: string[];
@@ -99,15 +181,15 @@ type ClaudeOutput = {
 };
 
 /**
- * One Claude API call. Returns strict JSON parsed into ClaudeOutput.
- * Instructs Claude to answer ONLY from the provided chunks and cite
+ * One Groq API call. Returns strict JSON parsed into GroqOutput.
+ * Instructs the model to answer ONLY from the provided chunks and cite
  * every factual claim with act + section.
  */
-export async function callClaude(
+export async function callGroq(
   query: string,
   state: string,
   chunks: ScoredChunk[]
-): Promise<ClaudeOutput> {
+): Promise<GroqOutput> {
   const stateNames: Record<string, string> = {
     TN: "Tamil Nadu",
     MH: "Maharashtra",
@@ -151,26 +233,31 @@ ${chunkContext}
 
 Answer based only on the provisions above.`;
 
-  const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-5",
+  const response = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
     max_tokens: 1500,
-    system: systemPrompt,
-    messages: [{ role: "user", content: userMessage }],
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userMessage },
+    ],
+    response_format: { type: "json_object" },
   });
 
-  const rawText =
-    response.content[0].type === "text" ? response.content[0].text : "";
+  const rawText = response.choices[0]?.message?.content ?? "";
 
-  // Strip any accidental markdown fences Claude might add
+  // Strip any accidental markdown fences the model might add
   const jsonText = rawText
     .replace(/^```json\s*/i, "")
     .replace(/^```\s*/i, "")
     .replace(/\s*```$/i, "")
     .trim();
 
-  const parsed = JSON.parse(jsonText) as ClaudeOutput;
+  const parsed = JSON.parse(jsonText) as GroqOutput;
   return parsed;
 }
+
+/** Backward-compat alias so existing callers don't need to change. */
+export const callClaude = callGroq;
 
 // ─── 3. evidenceSufficiency ───────────────────────────────────────────────────
 

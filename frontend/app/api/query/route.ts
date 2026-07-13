@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  retrieveChunks,
+  retrieveChunksWithDebug,
   callClaude,
   evidenceSufficiency,
   getPathway,
@@ -26,8 +26,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 1. Retrieve relevant chunks (keyword overlap, jurisdiction-filtered)
-    const chunks = retrieveChunks(query.trim(), state);
+    // 1. Retrieve relevant chunks + full RAG debug trace
+    const { chunks, ragDebug } = retrieveChunksWithDebug(query.trim(), state);
 
     if (chunks.length === 0) {
       return NextResponse.json(
@@ -69,6 +69,7 @@ export async function POST(req: NextRequest) {
       evidence,
       pathway,
       detectedCategory: claudeOutput.detectedCategory,
+      ragDebug,
     });
   } catch (err) {
     console.error("[/api/query] Error:", err);
