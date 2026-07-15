@@ -23,10 +23,16 @@ export type Chunk = {
   text: string;
 };
 
+export type PathwayStep = {
+  title: string;      // Short imperative — "Gather your documents"
+  detail: string;     // Full explanatory sentence(s)
+  docs?: string[];    // Optional list of specific documents to gather/prepare
+};
+
 export type Pathway = {
   authority: string;
   deadlineNote: string;
-  steps: string[];
+  steps: PathwayStep[];
 };
 
 // ─── Corpus ───────────────────────────────────────────────────────────────────
@@ -97,7 +103,6 @@ export const CORPUS: Chunk[] = [
     text:
       "No employer shall terminate the service of an employee who has been in continuous employment for not less than six months, except for a reasonable cause and without giving such employee at least one month's notice or wages in lieu thereof. An employee aggrieved by such termination may appeal to the authority prescribed by the government within 30 days of the termination order.",
   },
-
   // ── WRONGFUL TERMINATION — Maharashtra ───────────────────────────────────
   {
     id: "mh-se-s66",
@@ -227,41 +232,202 @@ export const CORPUS: Chunk[] = [
 
 export const PATHWAYS: Record<string, Pathway> = {
   unpaid_wages: {
-    authority: "Payment of Wages Authority / Labour Commissioner (jurisdictional)",
-    deadlineNote: "File a claim within 12 months of the delayed or withheld payment (Section 15, Payment of Wages Act).",
+    authority: "Payment of Wages Authority / Labour Commissioner (jurisdictional district office)",
+    deadlineNote: "File a claim within 12 months of the delayed or withheld payment (Section 15, Payment of Wages Act, 1936). Do not wait — the 12-month window runs from each individual delayed payday.",
     steps: [
-      "Gather evidence: payslips, bank statements, employment contract, any written communication about salary.",
-      "Send a written demand to your employer (via registered post) specifying the exact amount owed and a 7-day payment deadline. Keep the postal receipt.",
-      "If unresolved, file Form I (Application under Section 15) before the Payment of Wages Authority in your district. No court fee required.",
-      "Attend the hearing. The Authority can order payment of the unpaid wages plus a penalty of up to ten times the withheld amount.",
-      "If the Authority's order is not complied with, apply to the Magistrate's court for execution of the order.",
+      {
+        title: "Gather and organise your evidence",
+        detail:
+          "Before approaching any authority, assemble a complete paper trail. Courts and authorities look for exact amounts, exact dates, and written proof that a payment was due. Without documents, your claim rests only on your word against your employer's.",
+        docs: [
+          "Payslips or salary statements for every delayed month",
+          "Bank statements showing the absence of salary credit",
+          "Your appointment letter or employment contract (shows agreed salary)",
+          "Any WhatsApp messages, emails, or letters about salary delays",
+          "Attendance records or biometric reports (if available)",
+        ],
+      },
+      {
+        title: "Send a formal written demand to your employer",
+        detail:
+          "Write a demand notice specifying the exact amount owed, the months it covers, and a 7-day deadline to pay. Send it via registered post (Speed Post with acknowledgement due) so you have legal proof of delivery. Keep the postal receipt — it is evidence of the date and delivery. Email alone is not sufficient as primary proof.",
+      },
+      {
+        title: "File Form I before the Payment of Wages Authority",
+        detail:
+          "If the employer does not pay within 7 days, file an application under Section 15 of the Payment of Wages Act at the office of the Payment of Wages Authority (usually the Assistant Labour Commissioner) in your district. No court fee or lawyer is required. The form is available at the district Labour Office or online on your state Labour Department portal. Attach all gathered documents as annexures.",
+        docs: [
+          "Completed Form I (Application under Section 15)",
+          "Copy of demand notice and postal receipt",
+          "Copies of payslips / bank statements",
+          "Copy of appointment letter",
+          "Any other supporting evidence",
+        ],
+      },
+      {
+        title: "Attend the hearing — no lawyer required",
+        detail:
+          "The Authority will summon both you and your employer for a hearing, typically within 2–4 weeks of filing. You may appear in person. The Authority can order payment of the full withheld wages plus a penalty of up to ten times the withheld amount under Section 15(3). Keep attending every scheduled date — non-appearance can result in dismissal of the claim.",
+      },
+      {
+        title: "Enforce the Authority's order if needed",
+        detail:
+          "If the employer ignores the Authority's order, the Authority can forward the order to the Collector (District Magistrate) for recovery as arrears of land revenue — meaning the employer's property can be attached. You may also file an execution application before the competent Magistrate's court. This step is rarely needed once the employer receives the Authority's summons.",
+      },
     ],
   },
 
   wrongful_termination: {
-    authority: "Labour Court (Industrial Disputes Act) or relevant State Shops & Establishments Authority",
-    deadlineNote: "Raise an industrial dispute within 3 years of termination (ID Act). State S&E appeal deadlines vary: TN — 30 days; MH — 60 days; KA — 30 days.",
+    authority: "Labour Court (Industrial Disputes Act, 1947) for workmen in industry; State Shops & Establishments Authority for shop/commercial establishment employees.",
+    deadlineNote: "State Shops & Establishments appeal deadlines are strict: Tamil Nadu — 30 days from termination; Maharashtra — 60 days; Karnataka — 30 days. For an industrial dispute under the ID Act, raise it within 3 years. Missing the S&E deadline can bar your appeal entirely.",
     steps: [
-      "Collect all documents: appointment letter, termination letter, pay stubs, ID proof, any HR communication.",
-      "Send a legal notice to the employer citing the specific violation (IDA §25F or relevant S&E section) and demand reinstatement or full retrenchment compensation.",
-      "File a 'Statement of Claim' with the Labour Commissioner or Conciliation Officer to raise an industrial dispute formally.",
-      "If conciliation fails, the government may refer the dispute to the Labour Court or Industrial Tribunal.",
-      "Alternatively (for S&E establishments), file a direct appeal before the prescribed Authority under the applicable State Shops & Establishments Act within the state-specific deadline.",
-      "Attend hearings; the Labour Court may order reinstatement with back wages or award compensation in lieu.",
+      {
+        title: "Secure all documents immediately",
+        detail:
+          "Collect every document before you lose access to company systems. If you have been locked out, send a written request (registered post + email) to HR for copies. Your termination letter must state the reason for termination — if it does not, that itself is a violation under Section 25F of the Industrial Disputes Act.",
+        docs: [
+          "Appointment letter / offer letter",
+          "Termination letter (note whether it gives a reason)",
+          "Notice period pay or final settlement slip",
+          "Last 6 months' salary slips / bank statements",
+          "PF account statement (UAN portal)",
+          "Any HR emails, show-cause notices, or warning letters",
+          "ID proof and address proof",
+        ],
+      },
+      {
+        title: "Calculate what your employer owes you",
+        detail:
+          "Under Section 25F of the Industrial Disputes Act, a workman with 1+ year of continuous service is entitled to: (a) one month's notice or pay in lieu, and (b) retrenchment compensation at 15 days' average pay for every completed year of service. Under your state's Shops & Establishments Act, verify the notice period applicable to your tenure (TN: 1 month; MH: 14–30 days depending on tenure; KA: 1 month). If these were not paid, list the exact shortfall.",
+      },
+      {
+        title: "Send a legal notice to your employer",
+        detail:
+          "Draft a notice citing the specific statutory provisions violated (e.g., IDA Section 25F, and the relevant S&E section for your state). Demand either reinstatement with back wages, or full retrenchment compensation including unpaid notice pay. Send via registered post. Retain the postal receipt and the returned acknowledgement card. This step creates an official record and often prompts employers to settle.",
+      },
+      {
+        title: "File before the Conciliation Officer / Labour Commissioner",
+        detail:
+          "If the employer does not respond within 15 days, file a Statement of Claim (Form H under the ID Act Rules) with the Conciliation Officer (usually the Assistant Labour Commissioner) to formally raise an industrial dispute. For S&E employees, file a direct appeal before the prescribed State Authority within your state's deadline. The Conciliation Officer will call both parties for a settlement conference.",
+        docs: [
+          "Statement of Claim (Form H) or State S&E Appeal Form",
+          "Copy of legal notice and postal receipt",
+          "All employment documents listed in Step 1",
+          "Calculation sheet of dues owed",
+        ],
+      },
+      {
+        title: "Proceed to Labour Court if conciliation fails",
+        detail:
+          "If conciliation fails (which the Officer records in a Failure Report), the government may refer the dispute to the Labour Court or Industrial Tribunal. Alternatively, for S&E matters, your appeal before the State Authority proceeds to a hearing. At the Labour Court, you may be represented by a union representative or a lawyer. The court can order reinstatement with full back wages, or award compensation in lieu of reinstatement.",
+      },
+      {
+        title: "Consider parallel remedies",
+        detail:
+          "You can simultaneously: (a) file a complaint with your state's EPF Commissioner if provident fund was not paid during service; (b) file a complaint with the Inspector under the applicable S&E Act for procedural violations; (c) approach your trade union if you are a member. These parallel actions do not prejudice your main claim and can accelerate settlement.",
+      },
     ],
   },
 
   posh_complaint: {
-    authority: "Internal Committee (IC) at the workplace. If no IC exists (< 10 employees), file with the Local Committee (LC) constituted by the District Officer.",
-    deadlineNote: "File complaint within 3 months of the incident (or last incident in a series). IC may grant one further extension of up to 3 months (Section 9, POSH Act 2013).",
+    authority: "Internal Committee (IC) at your workplace. If your employer has fewer than 10 employees or has not constituted an IC, file with the Local Committee (LC) at the District Women & Child Development / Social Welfare office.",
+    deadlineNote: "File your written complaint within 3 months of the incident — or within 3 months of the last incident if it was a series of incidents. The IC may grant one extension of up to 3 more months if you can show circumstances prevented timely filing (Section 9, POSH Act, 2013).",
     steps: [
-      "Write down a detailed account of each incident — date, time, location, witnesses, and nature of the behaviour.",
-      "Submit a written complaint to the Presiding Officer of your workplace's Internal Committee (IC) within 3 months of the incident.",
-      "If your employer has fewer than 10 employees or has not constituted an IC, file with the Local Committee (LC) at the District Women & Child Development office.",
-      "The IC must complete the inquiry within 90 days and submit its report to the employer within 10 days of completion.",
-      "You are entitled to request interim relief (transfer, leave) from the IC during the inquiry.",
-      "If dissatisfied with the IC's findings, appeal to the employer (or District Officer for LC cases) within 90 days of the recommendation.",
-      "Criminal FIR under IPC Section 354A may be filed simultaneously at the local police station.",
+      {
+        title: "Document every incident in writing",
+        detail:
+          "Write a detailed personal account of each incident as soon as possible — memory fades and contemporaneous notes carry more weight. For each incident note: exact date, time, location, what was said or done, any witnesses present, and how it affected you. Keep this document in a personal file outside company systems (your personal email or home).",
+        docs: [
+          "Written incident log (your own notes)",
+          "Screenshots of offensive messages, emails, or chats",
+          "Names and contact details of any witnesses",
+          "Medical or counselling records if you sought help",
+        ],
+      },
+      {
+        title: "Identify the right authority to approach",
+        detail:
+          "First, check if your employer has an Internal Committee (IC): employers with 10 or more employees are legally required to constitute one under Section 4 of the POSH Act. The IC's constitution should be displayed at the workplace. If an IC exists, address your complaint to its Presiding Officer. If no IC exists or your employer has fewer than 10 employees, go directly to the Local Committee (LC) at your district's Women & Child Development office — the LC has identical powers.",
+      },
+      {
+        title: "Submit your formal written complaint",
+        detail:
+          "Write a formal complaint letter (not just an email marked 'informal') addressed to the IC Presiding Officer or LC Chairperson. State the name of the respondent, describe each incident chronologically, list witnesses, and attach your supporting documents. Submit within 3 months of the incident. Make 6 copies — one for the IC/LC, one for yourself, and additional copies may be needed during inquiry. Obtain a written acknowledgement with a date stamp.",
+        docs: [
+          "Formal complaint letter (signed)",
+          "Copies of all supporting documents",
+          "Written acknowledgement from IC / LC",
+        ],
+      },
+      {
+        title: "Request interim relief if needed",
+        detail:
+          "Immediately upon filing, you may apply to the IC for interim measures under Section 12 of the POSH Act: transfer of yourself or the respondent to a different department, granting you special leave (paid, not counted against your leave balance), or restraining the respondent from reporting on your work. The IC must decide your interim relief application promptly — it does not have to wait for the inquiry to complete.",
+      },
+      {
+        title: "Cooperate with the inquiry process",
+        detail:
+          "The IC must complete the inquiry within 90 days. You will be called for statements. You have the right to be heard in person and to present witnesses. The IC must follow principles of natural justice — the respondent also gets to respond. You are entitled to be accompanied by a colleague of your choice. Do not share the inquiry proceedings with others — confidentiality is mandatory under Section 16 and breach can lead to penalty.",
+      },
+      {
+        title: "Act on the IC's findings",
+        detail:
+          "The IC submits its report to the employer within 10 days of completing the inquiry. The employer must act on the recommendations within 60 days. If the allegation is proved, recommendations can include: disciplinary action (including dismissal), deduction from the respondent's salary as compensation to you, or counselling. If the IC's recommendations are not implemented, you can complain to the District Officer (for LC cases) or approach the court.",
+      },
+      {
+        title: "Escalate or file a criminal complaint if appropriate",
+        detail:
+          "The POSH process and criminal law run in parallel — filing a POSH complaint does not prevent you from also filing an FIR under Section 354A IPC (sexual harassment) or Section 509 IPC (words or gestures intending to insult the modesty of a woman) at your local police station. If dissatisfied with the IC's decision, appeal to the employer within 90 days; if that fails, approach the appropriate court. National Commission for Women (NCW) can also assist.",
+      },
+    ],
+  },
+
+  tenant_landlord: {
+    authority: "Rent Court / Rent Controller (state-specific). For disputes on notice or deposit: civil court with jurisdiction, or State Rent Authority.",
+    deadlineNote: "Notice periods under the Transfer of Property Act, 1882: 15 days for residential/non-agricultural leases, 6 months for agricultural or manufacturing leases. State rent laws may set different periods — check your tenancy agreement.",
+    steps: [
+      {
+        title: "Read your tenancy agreement carefully",
+        detail:
+          "Your rights and obligations depend first on your written agreement. Check: the rent amount, notice period for termination (by either side), security deposit terms, and grounds for eviction listed in the agreement. Under the Model Tenancy Act, 2021, all tenancy agreements must be in writing and registered with the Rent Authority — an oral agreement is still enforceable but harder to prove.",
+        docs: [
+          "Signed tenancy / lease agreement",
+          "Rent receipts for all payments made",
+          "Bank statements showing rent debits",
+          "Any written communication with the landlord",
+        ],
+      },
+      {
+        title: "Document the dispute with written communication",
+        detail:
+          "Whatever the dispute — security deposit refund, illegal eviction, rent increase without notice — communicate with your landlord in writing. Send a WhatsApp message (screenshot and save), an email, or a registered letter. If verbally told to vacate, respond in writing asking for written notice. This creates a paper trail that the Rent Court will rely on.",
+      },
+      {
+        title: "Send a formal legal notice",
+        detail:
+          "If the landlord is refusing to return your deposit, is attempting illegal eviction, or has increased rent without proper notice, send a registered legal notice (ideally through an advocate) citing the relevant section of your state's Rent Act and demanding remediation within 15 days. Under the Model Tenancy Act, the landlord must refund the security deposit at the time of vacating, after deducting any legitimate dues.",
+        docs: [
+          "Copy of legal notice and postal receipt",
+          "Tenancy agreement",
+          "All rent receipts and bank statements",
+        ],
+      },
+      {
+        title: "File a complaint with the Rent Authority / Rent Court",
+        detail:
+          "If the landlord does not comply: in Tamil Nadu, file before the Rent Court under the TNRRRLT Act, 2017; in Maharashtra, file before the Court under the Maharashtra Rent Control Act, 1999; in Karnataka, file before the Rent Controller under the Karnataka Rent Act, 1999. The Rent Controller can order the landlord to return the deposit, regularise the tenancy, or prevent illegal eviction. No advance court fee required in many states — check local rules.",
+        docs: [
+          "Petition/application in prescribed format",
+          "All tenancy and payment documents",
+          "Copy of legal notice sent to landlord",
+          "Proof of your identity and address",
+        ],
+      },
+      {
+        title: "Contest any eviction petition filed against you",
+        detail:
+          "A landlord can only legally evict a tenant on the specific grounds listed in the applicable Rent Act (e.g., non-payment of rent for 2 months in TN, or 6 months in MH; subletting without consent; bona fide own use). If the landlord files an eviction petition, file your written objection within the time given by the Rent Court. You may continue in possession until the Rent Court passes a final order. Seek legal aid if needed — every district has a Legal Services Authority providing free lawyers for eligible persons.",
+      },
     ],
   },
 };

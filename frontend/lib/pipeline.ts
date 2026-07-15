@@ -7,7 +7,7 @@
  */
 
 import Groq from "groq-sdk";
-import { CORPUS, PATHWAYS, type Chunk, type Category } from "./corpus";
+import { CORPUS, PATHWAYS, type Chunk, type Category, type PathwayStep } from "./corpus";
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
@@ -29,7 +29,7 @@ export type EvidenceResult = {
 export type PathwayResult = {
   authority: string;
   deadlineNote: string;
-  steps: string[];
+  steps: PathwayStep[];
 };
 
 export type QueryResponse = {
@@ -347,11 +347,20 @@ export function getPathway(category: string | null): PathwayResult {
 
     return {
       authority: "Labour Commissioner / District Legal Services Authority",
-      deadlineNote: "Deadlines vary by category. Consult a legal aid clinic promptly.",
+      deadlineNote: "Deadlines vary by category. Consult a legal aid clinic promptly to avoid missing any filing window.",
       steps: [
-        "Document all relevant facts and communications in writing.",
-        "Consult the nearest Legal Services Authority (free legal aid) for guidance.",
-        "Contact the Labour Commissioner's office for the applicable procedure.",
+        {
+          title: "Document all relevant facts",
+          detail: "Write down a chronological account of your situation, including dates, amounts, people involved, and any written communications. This record is the foundation of any legal claim.",
+        },
+        {
+          title: "Consult the nearest Legal Services Authority",
+          detail: "Every district has a District Legal Services Authority (DLSA) that provides free legal aid to eligible persons. Visit in person or call your state's DLSA helpline to get initial guidance on your specific situation.",
+        },
+        {
+          title: "Contact the Labour Commissioner's office",
+          detail: "The District Labour Commissioner can direct you to the exact authority and form applicable to your complaint category. Most offices have a public help desk on working days.",
+        },
       ],
     };
   }
