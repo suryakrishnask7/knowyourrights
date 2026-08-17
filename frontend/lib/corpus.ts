@@ -1,13 +1,8 @@
 /**
- * lib/corpus.ts — Hardcoded legal corpus for Phase 1.
+ * lib/corpus.ts — Seed data source for backend/scripts/seed.py.
  *
- * Three scenarios, verified against the actual statutes:
- *   1. unpaid_wages      — Payment of Wages Act (central)
- *   2. wrongful_termination — IDA §25F (central) + state Shops & Establishments
- *   3. posh_complaint    — POSH Act 2013 (central)
- *
- * EXTENSION POINT (Phase 2): Replace CORPUS with a Postgres + pgvector query
- * inside retrieveChunks(). The caller signature does not change.
+ * Not imported at runtime; the live corpus lives in Supabase's legal_chunks table.
+ * Edit this file only to add new provisions before re-running the seed script.
  */
 
 export type Jurisdiction = "central" | "TN" | "MH" | "KA";

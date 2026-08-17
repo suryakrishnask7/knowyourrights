@@ -4,10 +4,10 @@ import { useState, useRef, useEffect, useMemo } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Citation    = { act: string; section: string; jurisdiction: string };
-type Evidence    = { level: "High" | "Medium" | "Low"; reasons: string[] };
+type Citation = { act: string; section: string; jurisdiction: string };
+type Evidence = { level: "High" | "Medium" | "Low"; reasons: string[] };
 type PathwayStep = { title: string; detail: string; docs?: string[] };
-type Pathway     = { authority: string; deadlineNote: string; steps: PathwayStep[] };
+type Pathway = { authority: string; deadlineNote: string; steps: PathwayStep[] };
 
 type ScoredChunkDebug = {
   act: string; section: string; jurisdiction: string; category: string;
@@ -28,9 +28,16 @@ type State = "TN" | "MH" | "KA";
 const STATE_LABELS: Record<State, string> = { TN: "Tamil Nadu", MH: "Maharashtra", KA: "Karnataka" };
 const EXAMPLES = [
   "My employer hasn't paid my salary for 2 months.",
-  "I was fired without notice or reason.",
-  "How do I file a POSH complaint?",
-  "My landlord won't return my security deposit.",
+  "Company deducted PF from payslip but didn't deposit into EPFO.",
+  "I resigned after 6 years of service and HR is refusing gratuity.",
+  "Employer is denying 26 weeks paid maternity leave.",
+  "Forced to work 60 hours a week without double overtime pay.",
+  "Fired without 1-month written notice or retrenchment severance.",
+  "How do I file a workplace sexual harassment (POSH) complaint?",
+  "Landlord refusing to refund my 3-month security deposit.",
+  "Landlord threatening forceful eviction and cutting electricity.",
+  "Unilateral 25% rent increase without 3 months prior notice.",
+  "Severe ceiling seepage and landlord refuses to repair.",
 ];
 
 // ─── Theme ────────────────────────────────────────────────────────────────────
@@ -56,17 +63,17 @@ function useTheme() {
 // ─── Design tokens (accessed via inline CSS vars) ─────────────────────────────
 
 const T = {
-  bg:        "var(--bg)",
-  bgSubtle:  "var(--bg-subtle)",
-  bgMuted:   "var(--bg-muted)",
-  border:    "var(--border)",
+  bg: "var(--bg)",
+  bgSubtle: "var(--bg-subtle)",
+  bgMuted: "var(--bg-muted)",
+  border: "var(--border)",
   borderMid: "var(--border-mid)",
-  t1:        "var(--text-1)",
-  t2:        "var(--text-2)",
-  t3:        "var(--text-3)",
-  t4:        "var(--text-4)",
-  accent:    "var(--accent)",
-  accentFg:  "var(--accent-fg)",
+  t1: "var(--text-1)",
+  t2: "var(--text-2)",
+  t3: "var(--text-3)",
+  t4: "var(--text-4)",
+  accent: "var(--accent)",
+  accentFg: "var(--accent-fg)",
 };
 
 // ─── Divider ──────────────────────────────────────────────────────────────────
@@ -78,9 +85,9 @@ function Divider({ my = 32 }: { my?: number }) {
 // ─── Evidence ─────────────────────────────────────────────────────────────────
 
 const EV_CFG = {
-  High:   { c: "#16a34a", bg: "rgba(22,163,74,0.08)",  br: "rgba(22,163,74,0.18)"  },
-  Medium: { c: "#b45309", bg: "rgba(180,83,9,0.08)",   br: "rgba(180,83,9,0.18)"   },
-  Low:    { c: "#dc2626", bg: "rgba(220,38,38,0.08)",  br: "rgba(220,38,38,0.18)"  },
+  High: { c: "#16a34a", bg: "rgba(22,163,74,0.08)", br: "rgba(22,163,74,0.18)" },
+  Medium: { c: "#b45309", bg: "rgba(180,83,9,0.08)", br: "rgba(180,83,9,0.18)" },
+  Low: { c: "#dc2626", bg: "rgba(220,38,38,0.08)", br: "rgba(220,38,38,0.18)" },
 } as const;
 
 function EvidenceBlock({ ev }: { ev: Evidence }) {
@@ -407,7 +414,8 @@ export default function Home() {
     const q = query.trim();
     setLoading(true); setError(null); setResult(null); setSubmitted(q);
     try {
-      const res = await fetch("/api/query", {
+      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, "");
+      const res = await fetch(`${apiUrl}/api/query`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: q, state }),
@@ -454,10 +462,6 @@ export default function Home() {
           </div>
           {/* Right */}
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{
-              fontSize: 11, color: T.t4, padding: "2px 8px",
-              border: `1px solid ${T.border}`, borderRadius: 4, letterSpacing: "0.04em",
-            }}>PHASE 1</span>
             <button
               onClick={toggle}
               suppressHydrationWarning
@@ -618,8 +622,8 @@ export default function Home() {
             </button>
           </form>
 
-          {/* RAG trace */}
-          {submitted && (
+          {/* RAG pipeline trace debug panel (enabled via NEXT_PUBLIC_SHOW_DEBUG=true) */}
+          {process.env.NEXT_PUBLIC_SHOW_DEBUG === "true" && submitted && (
             <RagPanel query={submitted} loading={loading} ragDebug={result?.ragDebug ?? null} state={state} />
           )}
 
@@ -718,8 +722,8 @@ export default function Home() {
                   }}>§ Sources</p>
                   {result.citations.length > 0
                     ? result.citations.map((c, i) => (
-                        <CitationRow key={i} c={c} i={i} total={result.citations.length} />
-                      ))
+                      <CitationRow key={i} c={c} i={i} total={result.citations.length} />
+                    ))
                     : <p style={{ fontSize: 13, color: T.t3 }}>No citations returned.</p>
                   }
                 </section>
