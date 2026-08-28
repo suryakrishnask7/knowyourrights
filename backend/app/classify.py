@@ -53,6 +53,24 @@ Return ONLY valid JSON matching this schema:
 }
 Do not include markdown code fences or conversational text."""
 
+
+
+def extract_json_from_llm(raw_text: str) -> dict:
+    import re, json
+    cleaned = re.sub(r"<think>.*?</think>", "", raw_text, flags=re.DOTALL).strip()
+    cleaned = cleaned.replace("```json", "").replace("```", "").strip()
+    start_idx = cleaned.find("{")
+    if start_idx != -1:
+        try:
+            decoder = json.JSONDecoder()
+            obj, _ = decoder.raw_decode(cleaned[start_idx:])
+            if isinstance(obj, dict):
+                return obj
+        except Exception:
+            pass
+    return json.loads(cleaned)
+
+
 def classify_query(query_text: str) -> Dict[str, Any]:
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key or api_key.startswith("mock_"):
@@ -106,17 +124,16 @@ def classify_query(query_text: str) -> Dict[str, Any]:
     try:
         client = Groq(api_key=api_key)
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-120b",
             max_tokens=500,
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": f"Query: \"{query_text}\""}
             ],
-            response_format={"type": "json_object"}
+            
         )
         raw_content = response.choices[0].message.content or "{}"
-        clean_json = raw_content.replace("```json", "").replace("```", "").strip()
-        data = json.loads(clean_json)
+        data = extract_json_from_llm(raw_content)
         cat = data.get("category")
         if cat not in VALID_CATEGORIES:
             cat = None

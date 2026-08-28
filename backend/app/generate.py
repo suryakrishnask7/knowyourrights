@@ -1,3 +1,4 @@
+import re
 import os
 import json
 import logging
@@ -27,6 +28,35 @@ CRITICAL RULES:
 }
 
 Do not include markdown, code fences, or any text outside the JSON object."""
+
+
+
+
+def extract_json_from_llm(raw_text: str) -> dict:
+    import re, json
+    cleaned = re.sub(r"<think>.*?</think>", "", raw_text, flags=re.DOTALL).strip()
+    cleaned = cleaned.replace("```json", "").replace("```", "").strip()
+    start_idx = cleaned.find("{")
+    if start_idx != -1:
+        try:
+            decoder = json.JSONDecoder()
+            obj, _ = decoder.raw_decode(cleaned[start_idx:])
+            if isinstance(obj, dict):
+                return obj
+        except Exception:
+            pass
+    return json.loads(cleaned)
+
+
+def post_process_answer(answer: str) -> str:
+    text = answer.strip()
+    import re
+    NL = chr(10)
+    text = re.sub(r"\s*(?:the\s+rule,\s+applied|the\s+rule\s+applied)\s*:", NL + NL + "The rule, applied:", text, flags=re.IGNORECASE)
+    text = re.sub(r"\s*what\s+to\s+do\s*:", NL + NL + "What to do:", text, flags=re.IGNORECASE)
+    text = re.sub(r"\n{3,}", NL + NL, text)
+    return text.strip()
+
 
 def call_llm(
     query: str,
@@ -63,18 +93,19 @@ Answer based only on the provisions above."""
     try:
         client = Groq(api_key=api_key)
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-120b",
             max_tokens=1500,
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_message}
             ],
-            response_format={"type": "json_object"}
+            
         )
         
         raw_text = response.choices[0].message.content or "{}"
-        clean_json = raw_text.replace("```json", "").replace("```", "").strip()
-        parsed = json.loads(clean_json)
+        parsed = extract_json_from_llm(raw_text)
+        if isinstance(parsed, dict) and "answer" in parsed:
+            parsed["answer"] = post_process_answer(parsed["answer"])
         return parsed
     except Exception as e:
         logger.error(f"Error calling LLM via Groq: {e}")
