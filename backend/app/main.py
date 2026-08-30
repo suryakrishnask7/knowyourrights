@@ -1,4 +1,4 @@
-﻿import os
+import os
 import json
 import logging
 from typing import Optional, List, Dict, Any
@@ -10,17 +10,24 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from app.fact_requirements import (
+    REQUIRED_FACTS,
+    QUESTION_TEMPLATES,
+    REASON_TEMPLATES,
+    DEFAULT_REASON,
+    YES_NO_FACTS,
+)
 from app.classify import classify_query
 from app.retrieve import retrieve_chunks
 from app.conflicts import check_conflicts
 from app.evidence import evidence_sufficiency
-from app.clarify import ask_clarifying_question
+from app.clarify import get_next_clarifying_question, try_cheap_extraction
 from app.generate import call_llm
 from app.pathway import get_pathway
 from app.cache import make_cache_key, get_cached_response, set_cached_response, get_corpus_version
 from app.cases import (
     get_case, create_case,
-    update_case_awaiting, update_case_resolved, update_case_facts,
+    update_case_awaiting, update_case_resolved, update_case_facts, reset_case_facts,
     MAX_CLARIFICATION_ROUNDS,
 )
 
@@ -98,7 +105,7 @@ class CaseStateResponse(BaseModel):
 
 def record_query_log(query_text, state, retrieved_chunk_ids, llm_response, evidence_level):
     db_url = os.getenv("DATABASE_URL")
-    if not db_url:
+    if not db_url or "localhost:5432/postgres" in db_url:
         return
     try:
         import psycopg2, uuid as _uuid
@@ -123,16 +130,6 @@ def record_query_log(query_text, state, retrieved_chunk_ids, llm_response, evide
         logger.warning("Could not record query log: %s", e)
 
 
-def _pick_blocking_fact(missing_facts: List[str]) -> Optional[str]:
-    """Return the single most important missing fact to ask about, or None."""
-    return missing_facts[0] if missing_facts else None
-
-
-def _build_clarifying_question(blocking_fact: str) -> str:
-    """Wrap a raw fact label into a friendly question."""
-    return f"To give you a more precise answer, could you tell us: {blocking_fact}?"
-
-
 # ── GET /api/case/{case_id} — restore in-progress or resolved case ─────────────
 
 @app.get("/api/case/{case_id}", response_model=CaseStateResponse)
@@ -148,8 +145,18 @@ async def get_case_state(case_id: str):
         raise HTTPException(status_code=410, detail="Case has expired.")
 
     asked_facts = row.get("asked_facts") or []
+    if isinstance(asked_facts, str):
+        try:
+            asked_facts = json.loads(asked_facts)
+        except Exception:
+            asked_facts = []
+
     last_asked = asked_facts[-1] if asked_facts else None
-    clarifying_q = _build_clarifying_question(last_asked) if last_asked and row.get("status") == "awaiting_clarification" else None
+    clarifying_q = None
+    if last_asked and row.get("status") == "awaiting_clarification":
+        clarifying_q = QUESTION_TEMPLATES.get(
+            last_asked, f"To give you a more precise answer, could you tell us: {last_asked}?"
+        )
 
     result = row.get("result")
     if isinstance(result, str):
@@ -189,58 +196,99 @@ async def handle_query(req: QueryRequest):
 
     corpus_version = get_corpus_version()
 
-    # ── Step 0: Load or create case ─────────────────────────────────────────
+    # ── Step 0: Load existing case if case_id provided ───────────────────────
     existing_case = None
     if incoming_case_id:
         existing_case = get_case(incoming_case_id)
-        # Treat expired / not-found as no case (creates a new one below)
         if existing_case and existing_case.get("status") == "expired":
             existing_case = None
 
-    # Previously stored facts (from earlier clarification rounds)
     prior_facts: Dict[str, Any] = {}
     clarification_round: int = 0
     asked_facts: List[str] = []
+    case_id: Optional[str] = None
+    original_query: str = query_text
+    is_answering_clarification = False
 
     if existing_case:
         case_id = str(existing_case["case_id"])
+        original_query = existing_case.get("original_query", query_text)
         prior_facts = existing_case.get("facts") or {}
         if isinstance(prior_facts, str):
-            prior_facts = json.loads(prior_facts)
+            try:
+                prior_facts = json.loads(prior_facts)
+            except Exception:
+                prior_facts = {}
+
         clarification_round = existing_case.get("clarification_round", 0)
         asked_facts_raw = existing_case.get("asked_facts") or []
         if isinstance(asked_facts_raw, str):
-            asked_facts_raw = json.loads(asked_facts_raw)
+            try:
+                asked_facts_raw = json.loads(asked_facts_raw)
+            except Exception:
+                asked_facts_raw = []
         asked_facts = list(asked_facts_raw)
-        logger.info("Loaded case %s (round %d, status %s)", case_id, clarification_round, existing_case.get("status"))
+
+        if existing_case.get("status") == "awaiting_clarification" and asked_facts:
+            is_answering_clarification = True
+
+        logger.info(
+            "Loaded case %s (round %d, status %s)",
+            case_id,
+            clarification_round,
+            existing_case.get("status"),
+        )
+
+    # ── Step 1: Classify query & handle clarification answers ────────────────
+    if is_answering_clarification and case_id:
+        most_recent_asked_fact = asked_facts[-1]
+        resolved_via_cheap = False
+
+        if most_recent_asked_fact in YES_NO_FACTS:
+            cheap_val = try_cheap_extraction(most_recent_asked_fact, query_text)
+            if cheap_val is not None:
+                prior_facts[most_recent_asked_fact] = cheap_val
+                update_case_facts(case_id, {most_recent_asked_fact: cheap_val})
+                resolved_via_cheap = True
+
+        if not resolved_via_cheap:
+            prior_facts[most_recent_asked_fact] = query_text
+            update_case_facts(case_id, {most_recent_asked_fact: query_text})
+
+        combined_text = f"{original_query} [Additional context: {query_text}]"
+        classification = classify_query(combined_text, known_facts=prior_facts)
+        category = classification.get("category")
+
+        # Topic drift check: if user answered with a completely different issue
+        old_category = existing_case.get("category") if existing_case else None
+        if category and old_category and category != old_category:
+            logger.info("Topic drift detected: %s -> %s. Resetting facts.", old_category, category)
+            prior_facts = {}
+            reset_case_facts(case_id, category)
+            classification = classify_query(combined_text, known_facts={})
+            category = classification.get("category")
     else:
-        # Will be created after classification so we have category
-        case_id = None  # type: ignore[assignment]
+        classification = classify_query(query_text, known_facts=prior_facts)
+        category = classification.get("category")
 
-    # ── Step 1: Classify query ───────────────────────────────────────────────
-    classification = classify_query(query_text)
-    category = classification.get("category")
-    missing_facts: List[str] = classification.get("missingFacts", [])
-
-    # Remove facts already asked in prior rounds
-    missing_facts = [f for f in missing_facts if f not in asked_facts]
-
-    # ── Create case row now that we have category ────────────────────────────
+    # Create case if new
     if case_id is None:
         case_id = create_case(
             original_query=query_text,
             category=category,
             jurisdiction=state,
-            facts={},
+            facts=prior_facts,
         )
         clarification_round = 0
 
-    # ── Step 2: Response cache check ─────────────────────────────────────────
+    missing_facts: List[str] = classification.get("missingFacts", [])
+    # Remove facts that have already been asked
+    missing_facts = [f for f in missing_facts if f not in asked_facts]
+
+    # ── Step 2: Response cache check (fresh queries only) ───────────────────
     cache_key = None
-    if category:
+    if category and not prior_facts and clarification_round == 0:
         cache_key = make_cache_key(category, state, missing_facts)
-        # IMPORTANT: cache_key is built from (category, state, missing_facts) only.
-        # case_id is intentionally NOT part of the key.
         cached = await get_cached_response(cache_key, corpus_version)
         if cached:
             update_case_resolved(case_id, category, cached)
@@ -251,7 +299,8 @@ async def handle_query(req: QueryRequest):
             )
 
     # ── Step 3: Retrieve chunks ──────────────────────────────────────────────
-    chunks, rag_debug = retrieve_chunks(query_text, state, category=category, k=4)
+    retrieve_query = original_query if not is_answering_clarification else f"{original_query} {query_text}"
+    chunks, rag_debug = retrieve_chunks(retrieve_query, state, category=category, k=4)
 
     if not chunks:
         fallback_pathway = get_pathway(None)
@@ -279,60 +328,62 @@ async def handle_query(req: QueryRequest):
     if conflicts:
         logger.info("Conflicts found for %s/%s: %s", category, state, conflicts)
 
-    # ── Step 5: Evidence sufficiency ─────────────────────────────────────────
+    # ── Step 5: Evidence sufficiency (hard gate on blocking facts) ───────────
     evidence = evidence_sufficiency(chunks, missing_facts, state, category)
 
     # ── Step 6: Clarification gate ───────────────────────────────────────────
-    # Gate: evidence is Low AND we have a blocking fact AND haven't hit the round cap
-    blocking_fact = _pick_blocking_fact(missing_facts)
     should_clarify = (
         evidence["level"] == "Low"
-        and blocking_fact is not None
+        and len(missing_facts) > 0
         and clarification_round < MAX_CLARIFICATION_ROUNDS
     )
 
-    if should_clarify:
-        new_round = clarification_round + 1
-        clarifying_q = _build_clarifying_question(blocking_fact)
-        update_case_awaiting(
-            case_id=case_id,
-            clarification_round=new_round,
-            asked_fact=blocking_fact,
-            category=category,
-            jurisdiction=state,
-            facts=prior_facts,
-        )
-        logger.info("Case %s awaiting clarification (round %d): %s", case_id, new_round, blocking_fact)
+    if should_clarify and category:
+        next_question_dict = get_next_clarifying_question(category, missing_facts)
+        if next_question_dict:
+            new_round = clarification_round + 1
+            asked_fact = next_question_dict["fact_being_requested"]
+            update_case_awaiting(
+                case_id=case_id,
+                clarification_round=new_round,
+                asked_fact=asked_fact,
+                category=category,
+                jurisdiction=state,
+                facts=prior_facts,
+            )
+            logger.info("Case %s awaiting clarification (round %d): %s", case_id, new_round, asked_fact)
 
-        # Return WITHOUT calling generate.py
-        fallback_pathway = get_pathway(category)
-        return QueryResponse(
-            answer="",  # frontend won't show this in CLARIFICATION state
-            citations=[],
-            evidence=Evidence(**evidence),
-            pathway=Pathway(**fallback_pathway),
-            detectedCategory=category,
-            ragDebug=rag_debug,
-            case_id=case_id,
-            needsClarification=True,
-            clarifyingQuestion=clarifying_q,
-            clarifyingReason=f"This detail affects which specific rules apply to your situation.",
-            turnCount=new_round,
-            maxTurns=MAX_CLARIFICATION_ROUNDS,
-        )
+            fallback_pathway = get_pathway(category)
+            return QueryResponse(
+                answer="",  # UI handles CLARIFICATION view using clarifyingQuestion
+                citations=[],
+                evidence=Evidence(**evidence),
+                pathway=Pathway(**fallback_pathway),
+                detectedCategory=category,
+                ragDebug=rag_debug,
+                case_id=case_id,
+                needsClarification=True,
+                clarifyingQuestion=next_question_dict["clarifying_question"],
+                clarifyingReason=next_question_dict["reason_shown_to_user"],
+                turnCount=new_round,
+                maxTurns=MAX_CLARIFICATION_ROUNDS,
+            )
 
-    # ── Step 7: Clarifying question extension point (stub) ───────────────────
-    ask_clarifying_question(evidence, category)
-
-    # ── Step 8: Generate answer ──────────────────────────────────────────────
-    llm_output = call_llm(query_text, state, chunks)
+    # ── Step 7: Generate answer ──────────────────────────────────────────────
+    llm_output = call_llm(retrieve_query, state, chunks)
     final_category = llm_output.get("detectedCategory") or category
     answer_text = llm_output.get("answer", "")
     has_recourse = llm_output.get("hasDirectRecourse", True)
     if "no direct legal recourse" in answer_text.lower() or not llm_output.get("citations"):
         has_recourse = False
 
-    # ── Step 9: Pathway ──────────────────────────────────────────────────────
+    # Cap-out handling: if evidence is still Low after 2 rounds, flag unresolved gaps clearly
+    if evidence["level"] == "Low" and missing_facts:
+        missing_str = ", ".join(missing_facts)
+        if "missing" not in answer_text.lower() and "unresolved" not in answer_text.lower():
+            answer_text += f"\n\nNote: This legal summary is based on available facts. Unresolved details ({missing_str}) may affect the exact statutory remedies available."
+
+    # ── Step 8: Pathway ──────────────────────────────────────────────────────
     pathway_dict = get_pathway(final_category) if has_recourse else get_pathway(None)
     if not has_recourse:
         evidence["level"] = "Low"
@@ -348,7 +399,7 @@ async def handle_query(req: QueryRequest):
         "ragDebug": rag_debug,
     }
 
-    # ── Cache High/Medium responses (never Low, never with case_id) ──────────
+    # ── Step 9: Cache High/Medium responses ──────────────────────────────────
     if cache_key and evidence["level"] in ("High", "Medium"):
         try:
             await set_cached_response(
@@ -362,12 +413,12 @@ async def handle_query(req: QueryRequest):
         except Exception as e:
             logger.warning("Failed to cache: %s", e)
 
-    # ── Persist resolved case ─────────────────────────────────────────────────
+    # ── Step 10: Persist resolved case ───────────────────────────────────────
     update_case_resolved(case_id, final_category, response_payload)
 
-    # ── Log query ─────────────────────────────────────────────────────────────
+    # ── Step 11: Log query ───────────────────────────────────────────────────
     chunk_ids = [c.get("id", str(c.get("act", ""))) for c in chunks]
-    record_query_log(query_text, state, chunk_ids, llm_output, evidence["level"])
+    record_query_log(retrieve_query, state, chunk_ids, llm_output, evidence["level"])
 
     return QueryResponse(
         answer=answer_text,

@@ -1,4 +1,8 @@
+# backend/app/evidence.py
+
 from typing import List, Dict, Any, Optional
+from app.fact_requirements import REQUIRED_FACTS
+
 
 def evidence_sufficiency(
     chunks: List[Dict[str, Any]],
@@ -7,11 +11,21 @@ def evidence_sufficiency(
     detected_category: Optional[str]
 ) -> Dict[str, Any]:
     """
-    Pure function — no API call. Determines evidence level from:
-      - Number and quality of retrieved chunks
-      - Whether a state-specific chunk was found (for wrongful_termination)
-      - Whether missing_facts is empty
+    Determines evidence level.
+    HARD GATE: If any blocking fact for the detected category is missing,
+    returns 'Low' immediately before any point arithmetic.
     """
+    if detected_category and detected_category in REQUIRED_FACTS:
+        blocking = set(REQUIRED_FACTS[detected_category]["blocking"])
+        still_missing_blocking = blocking & set(missing_facts)
+        if still_missing_blocking:
+            return {
+                "level": "Low",
+                "reasons": [
+                    f"Missing required fact(s): {', '.join(sorted(still_missing_blocking))}."
+                ]
+            }
+
     reasons: List[str] = []
     top_score = chunks[0]["score"] if chunks and "score" in chunks[0] else 0
     has_state_chunk = any(c.get("jurisdiction") == state for c in chunks)
