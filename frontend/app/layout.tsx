@@ -22,13 +22,11 @@ export const metadata: Metadata = {
   keywords: ["Indian law", "statutory rights", "labour legislation", "POSH Act", "Payment of Wages"],
 };
 
-// Injected before React hydration to prevent flash of wrong theme.
+// Always set dark theme
 const themeScript = `
 (function(){
   try {
-    var stored = localStorage.getItem('kyr-theme');
-    var theme = stored || 'light';
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', 'dark');
   } catch(e){}
 })();
 `;
@@ -37,13 +35,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${newsreader.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${newsreader.variable}`} data-theme="dark" suppressHydrationWarning>
       <head>
-        {/* Prevents theme flash on load */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }
-

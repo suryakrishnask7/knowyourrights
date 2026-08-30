@@ -28,23 +28,6 @@ type CaseState = {
 
 const STATE_LABELS: Record<StateCode, string> = { TN: "Tamil Nadu", MH: "Maharashtra", KA: "Karnataka" };
 
-function useTheme() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  useEffect(() => {
-    const s = localStorage.getItem("kyr-theme");
-    const t = (s as "light" | "dark") || "light";
-    setTheme(t);
-    document.documentElement.setAttribute("data-theme", t);
-  }, []);
-  const toggle = () => {
-    const n = theme === "light" ? "dark" : "light";
-    setTheme(n);
-    document.documentElement.setAttribute("data-theme", n);
-    localStorage.setItem("kyr-theme", n);
-  };
-  return { theme, toggle };
-}
-
 const PIPELINE_STEPS = [
   "Processing statement & jurisdiction parameters",
   "Identifying applicable statutory category",
@@ -184,7 +167,6 @@ function DebugPanel({ data }: { data: unknown }) {
 }
 
 export default function Home() {
-  const { theme, toggle } = useTheme();
   const [appState, setAppState] = useState<AppState>("EMPTY");
   const [loadingStep, setLoadingStep] = useState(0);
   const [stateCode, setStateCode] = useState<StateCode>("TN");
@@ -279,7 +261,7 @@ export default function Home() {
 
   const copyLegalBrief = () => {
     if (!result) return;
-    const text = `KNOWYOURRIGHTS — STATUTORY CASE ANALYSIS BRIEF\nCASE ID: ${caseId ?? "001"}\nJURISDICTION: ${STATE_LABELS[stateCode]}\nCONFIDENCE: ${result.evidence.level}\n\nREPORTED FACTS:\n"${originalQuery}"\n\nLEGAL POSITION:\n${result.answer}\n\nSTATUTORY PROVISIONS:\n${result.citations.map(c => `- ${c.act} §${c.section}`).join("\n")}`;
+    const text = `KNOWYOURRIGHTS — STATUTORY LEGAL ANALYSIS BRIEF\nJURISDICTION: ${STATE_LABELS[stateCode]}\nCONFIDENCE: ${result.evidence.level}\n\nREPORTED FACTS:\n"${originalQuery}"\n\nLEGAL POSITION:\n${result.answer}\n\nSTATUTORY PROVISIONS:\n${result.citations.map(c => `- ${c.act} §${c.section}`).join("\n")}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -307,12 +289,9 @@ export default function Home() {
             </button>
             {appState !== "EMPTY" && (
               <button onClick={handleNewQuestion} className="border border-[var(--text-1)] bg-[var(--text-1)] text-[var(--bg)] px-3 py-1 font-bold">
-                + NEW CASE
+                + NEW QUERY
               </button>
             )}
-            <button onClick={toggle} suppressHydrationWarning className="border border-[var(--border)] px-2 py-1 text-[var(--text-2)] hover:text-[var(--text-1)]">
-              {theme === "light" ? "DARK MODE" : "LIGHT MODE"}
-            </button>
           </div>
         </header>
 
@@ -452,7 +431,7 @@ export default function Home() {
           <main className="py-8 animate-fade-up max-w-2xl mx-auto font-sans">
             <div className="border border-[var(--border)] bg-[var(--bg-surface)] p-6 sm:p-10 shadow-sm">
               <div className="flex items-center justify-between border-b border-[var(--border)] pb-3 mb-6 font-mono text-xs text-[var(--text-3)]">
-                <span className="font-bold text-[var(--text-1)]">CASE / {caseId ? caseId.slice(0, 8).toUpperCase() : "001"}</span>
+                <span className="font-bold text-[var(--text-1)]">STATUTORY INTAKE</span>
                 <span>FACT INTAKE {clarifyTurn} OF {MAX_TURNS}</span>
               </div>
 
@@ -471,7 +450,6 @@ export default function Home() {
                 <textarea
                   value={clarifyAnswer}
                   onChange={e => setClarifyAnswer(e.target.value)}
-                  placeholder="4 years"
                   rows={3}
                   autoFocus
                   className="w-full p-4 border border-[var(--border)] bg-[var(--bg-subtle)] text-base text-[var(--text-1)] placeholder:text-[var(--text-4)] focus:outline-none focus:border-[var(--text-1)] font-sans"
@@ -514,7 +492,7 @@ export default function Home() {
               <div className="flex items-center justify-between border-b-2 border-[var(--text-1)] pb-4 mb-8 font-mono text-xs flex-wrap gap-4">
                 <div className="flex items-center gap-3">
                   <span className="font-bold text-base tracking-wider text-[var(--text-1)]">
-                    CASE / {caseId ? caseId.slice(0, 8).toUpperCase() : "001"}
+                    LEGAL CASE SHEET
                   </span>
                   <span className="legal-stamp">VERIFIED STATUTES</span>
                 </div>
