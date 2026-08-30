@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 const SHOW_DEBUG = process.env.NEXT_PUBLIC_SHOW_DEBUG === "true";
-const CASE_KEY = "knowyourrights_case_id";
 const MAX_TURNS = 2;
 
 type AppState = "EMPTY" | "LOADING" | "CLARIFICATION" | "RESULT";
@@ -16,14 +15,9 @@ type Pathway     = { authority: string; deadlineNote: string; steps: PathwayStep
 type QueryResult = {
   answer: string; citations: Citation[]; evidence: Evidence;
   pathway: Pathway; detectedCategory: string | null; ragDebug?: unknown;
-  case_id?: string; needsClarification?: boolean;
-  clarifyingQuestion?: string; clarifyingReason?: string;
+  needsClarification?: boolean; clarifyingQuestion?: string; clarifyingReason?: string;
   turnCount?: number; maxTurns?: number; hasDirectRecourse?: boolean;
-};
-type CaseState = {
-  case_id: string; status: string; original_query: string;
-  category?: string | null; clarification_round?: number;
-  clarifyingQuestion?: string | null; result?: QueryResult | null;
+  facts?: Record<string, unknown>; clarification_round?: number; asked_facts?: string[]; original_query?: string;
 };
 
 const STATE_LABELS: Record<StateCode, string> = { TN: "Tamil Nadu", MH: "Maharashtra", KA: "Karnataka" };
@@ -172,49 +166,27 @@ export default function Home() {
   const [stateCode, setStateCode] = useState<StateCode>("TN");
   const [query, setQuery] = useState("");
   const [charCount, setCharCount] = useState(0);
-  const [caseId, setCaseId] = useState<string | null>(null);
+  
+  // Stateless clarification tracking
+  const [sessionFacts, setSessionFacts] = useState<Record<string, unknown>>({});
+  const [clarificationRound, setClarificationRound] = useState(0);
+  const [askedFacts, setAskedFacts] = useState<string[]>([]);
+  const [originalQuery, setOriginalQuery] = useState("");
+
   const [clarifyQ, setClarifyQ] = useState("");
   const [clarifyReason, setClarifyReason] = useState("");
   const [clarifyTurn, setClarifyTurn] = useState(1);
   const [clarifyAnswer, setClarifyAnswer] = useState("");
   const [result, setResult] = useState<QueryResult | null>(null);
-  const [originalQuery, setOriginalQuery] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [howModalOpen, setHowModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const stored = localStorage.getItem(CASE_KEY);
-    if (!stored) return;
-    (async () => {
-      try {
-        const res = await fetch(`${API}/api/case/${stored}`);
-        if (!res.ok) { localStorage.removeItem(CASE_KEY); return; }
-        const caseData: CaseState = await res.json();
-        setCaseId(caseData.case_id);
-        if (caseData.status === "resolved" && caseData.result) {
-          setOriginalQuery(caseData.original_query);
-          setResult(caseData.result as QueryResult);
-          setAppState("RESULT");
-        } else if (caseData.status === "awaiting_clarification" && caseData.clarifyingQuestion) {
-          setOriginalQuery(caseData.original_query);
-          setClarifyQ(caseData.clarifyingQuestion);
-          setClarifyTurn(caseData.clarification_round ?? 1);
-          setAppState("CLARIFICATION");
-        }
-      } catch { localStorage.removeItem(CASE_KEY); }
-    })();
-  }, []);
-
-  useEffect(() => {
-    if (caseId) localStorage.setItem(CASE_KEY, caseId);
-  }, [caseId]);
-
   const handleNewQuestion = useCallback(() => {
-    localStorage.removeItem(CASE_KEY);
-    setCaseId(null); setQuery(""); setCharCount(0); setClarifyAnswer("");
+    setQuery(""); setCharCount(0); setClarifyAnswer("");
     setClarifyQ(""); setResult(null); setOriginalQuery(""); setError(null);
+    setSessionFacts({}); setClarificationRound(0); setAskedFacts([]);
     setLoadingStep(0); setAppState("EMPTY");
   }, []);
 
@@ -223,17 +195,34 @@ export default function Home() {
     [400, 900, 1800, 3200, 4400].forEach((d, i) => setTimeout(() => setLoadingStep(i + 1), d));
   }, []);
 
-  const submit = useCallback(async (queryText: string, existingCaseId: string | null) => {
+  const submit = useCallback(async (
+    queryText: string,
+    currentFacts: Record<string, unknown>,
+    currentRound: number,
+    currentAskedFacts: string[],
+    currentOrigQuery: string
+  ) => {
     setError(null); setAppState("LOADING"); advanceLoading();
     try {
       const res = await fetch(`${API}/api/query`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: queryText, state: stateCode, case_id: existingCaseId ?? undefined }),
+        body: JSON.stringify({
+          query: queryText,
+          state: stateCode,
+          facts: currentFacts,
+          clarification_round: currentRound,
+          asked_facts: currentAskedFacts,
+          original_query: currentOrigQuery || queryText,
+        }),
       });
       const data: QueryResult = await res.json();
       if (!res.ok) { setError((data as unknown as { detail?: string }).detail ?? "Request failed."); setAppState("EMPTY"); return; }
-      if (data.case_id) setCaseId(data.case_id);
+      
+      if (data.facts) setSessionFacts(data.facts);
+      if (data.clarification_round !== undefined) setClarificationRound(data.clarification_round);
+      if (data.asked_facts) setAskedFacts(data.asked_facts);
+
       if (data.needsClarification) {
         setClarifyQ(data.clarifyingQuestion ?? "");
         setClarifyReason(data.clarifyingReason ?? "");
@@ -250,13 +239,19 @@ export default function Home() {
   const handleFirstSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!query.trim() || query.trim().length < 10) return;
-    setOriginalQuery(query.trim()); submit(query.trim(), caseId);
+    const initialText = query.trim();
+    setOriginalQuery(initialText);
+    submit(initialText, {}, 0, [], initialText);
   };
 
   const handleClarifySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!clarifyAnswer.trim()) return;
-    submit(`${originalQuery} [Additional context: ${clarifyAnswer.trim()}]`, caseId);
+    submit(clarifyAnswer.trim(), sessionFacts, clarificationRound, askedFacts, originalQuery);
+  };
+
+  const handleSkipClarify = () => {
+    submit("SKIP", sessionFacts, clarificationRound, askedFacts, originalQuery);
   };
 
   const copyLegalBrief = () => {
@@ -468,8 +463,8 @@ export default function Home() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => submit(originalQuery, caseId)}
-                    className="px-5 py-3.5 text-[var(--text-3)] hover:text-[var(--text-1)] border border-[var(--border)]"
+                    onClick={handleSkipClarify}
+                    className="px-5 py-3.5 text-[var(--text-3)] hover:text-[var(--text-1)] border border-[var(--border)] cursor-pointer"
                   >
                     SKIP
                   </button>
