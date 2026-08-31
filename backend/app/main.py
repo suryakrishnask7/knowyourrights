@@ -1,6 +1,8 @@
 import os
 import json
 import logging
+import asyncio
+import urllib.request
 from typing import Optional, List, Dict, Any
 
 from fastapi import FastAPI, HTTPException, status
@@ -44,6 +46,33 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ── Keep-alive self-ping background process (Prevents Render free tier sleep) ──
+
+async def _keep_alive_ping_loop():
+    await asyncio.sleep(15)  # Initial grace period on boot
+    while True:
+        try:
+            url = os.getenv("RENDER_EXTERNAL_URL") or os.getenv("APP_URL")
+            if url:
+                target_url = f"{url.rstrip('/')}/"
+                def _ping():
+                    req = urllib.request.Request(target_url, headers={"User-Agent": "KYR-KeepAlive/1.0"})
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        return resp.getcode()
+
+                loop = asyncio.get_event_loop()
+                status_code = await loop.run_in_executor(None, _ping)
+                logger.info("Keep-alive self-ping to %s returned HTTP %s", target_url, status_code)
+        except Exception as e:
+            logger.debug("Keep-alive self-ping note: %s", e)
+
+        await asyncio.sleep(600)  # Ping every 10 minutes (600 seconds)
+
+@app.on_event("startup")
+def start_keep_alive_task():
+    asyncio.create_task(_keep_alive_ping_loop())
+
 
 # ── Pydantic models ────────────────────────────────────────────────────────────
 
