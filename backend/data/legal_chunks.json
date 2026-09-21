@@ -1,0 +1,3701 @@
+[
+  {
+    "id": "pwa-s1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 1",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "It applies to the payment of wages to persons employed in any factory, railway administration, and industrial or other establishment.",
+    "keywords": [
+      "applicability",
+      "factory",
+      "railway",
+      "industrial establishment",
+      "coverage"
+    ]
+  },
+  {
+    "id": "pwa-s2vi",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 2(vi)",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "'Wages' means all remuneration capable of being expressed in terms of money which would, if the terms of employment were fulfilled, be payable to a person employed in respect of his employment, including remuneration under award or settlement, overtime work, holiday or leave period.",
+    "keywords": [
+      "wages definition",
+      "remuneration",
+      "overtime remuneration",
+      "settlement",
+      "allowances"
+    ]
+  },
+  {
+    "id": "pwa-s3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 3",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "Every employer shall be responsible for the payment of all wages required to be paid under this Act to persons employed by him, including managers and supervisors named by the employer.",
+    "keywords": [
+      "employer responsibility",
+      "manager",
+      "supervision",
+      "liability",
+      "wage payment"
+    ]
+  },
+  {
+    "id": "pwa-s4",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 4",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "Every person responsible for the payment of wages under section 3 shall fix periods in respect of which such wages shall be payable. No wage-period shall exceed one month.",
+    "keywords": [
+      "wage period",
+      "monthly wage cycle",
+      "maximum wage period",
+      "fixation of period"
+    ]
+  },
+  {
+    "id": "pwa-s5-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 5(1)",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "The wages of every person employed in any establishment upon which less than one thousand persons are employed shall be paid before the expiry of the seventh day, and in any other establishment before the expiry of the tenth day, after the last day of the wage-period.",
+    "keywords": [
+      "payment deadline",
+      "7th day",
+      "10th day",
+      "wage cycle",
+      "timely payment"
+    ]
+  },
+  {
+    "id": "pwa-s5-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 5(2)",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "Where the employment of any person is terminated by or on behalf of the employer, the wages earned by him shall be paid before the expiry of the second working day from the day on which his employment is terminated.",
+    "keywords": [
+      "termination wage deadline",
+      "second working day",
+      "final settlement",
+      "resignation dues"
+    ]
+  },
+  {
+    "id": "pwa-s6",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 6",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "All wages shall be paid in current coin or currency notes or by cheque or by crediting the wages in the bank account of the employee.",
+    "keywords": [
+      "mode of payment",
+      "currency",
+      "bank credit",
+      "cheque",
+      "direct deposit"
+    ]
+  },
+  {
+    "id": "pwa-s7-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 7(1)",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "The wages of an employed person shall be paid to him without deductions of any kind except those authorized by or under this Act.",
+    "keywords": [
+      "authorized deductions",
+      "prohibition of unauthorized deductions",
+      "full payment"
+    ]
+  },
+  {
+    "id": "pwa-s7-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 7(2)",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "Deductions from wages may be made only in accordance with the provisions of this Act, namely: fines, deductions for absence from duty, deductions for damage or loss of goods expressly entrusted, deductions for house accommodation, loans, advances and income tax.",
+    "keywords": [
+      "permissible deductions",
+      "fines",
+      "absence",
+      "damage",
+      "house accommodation",
+      "loans"
+    ]
+  },
+  {
+    "id": "pwa-s13a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 13A",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "Every employer shall maintain registers and records giving particulars of persons employed, work performed, wages paid, and deductions made, preserved for at least three years.",
+    "keywords": [
+      "registers",
+      "wage slips",
+      "employment records",
+      "three years preservation"
+    ]
+  },
+  {
+    "id": "pwa-s15-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 15(1)",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "The appropriate Government may appoint an Authority to hear and decide all claims arising out of deductions from wages, or delay in payment of wages of persons employed.",
+    "keywords": [
+      "Payment of Wages Authority",
+      "Labour Commissioner",
+      "claims jurisdiction",
+      "delayed wages hearing"
+    ]
+  },
+  {
+    "id": "pwa-s15-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 15(2)",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "Every such application shall be presented within twelve months from the date on which the deduction from wages was made or from the date on which payment of wages was due. The Authority may admit application after twelve months on sufficient cause.",
+    "keywords": [
+      "12 months limitation",
+      "claim filing deadline",
+      "condonation of delay",
+      "limitation period"
+    ]
+  },
+  {
+    "id": "pwa-s15-3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 15(3)",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": null,
+    "text": "The Authority may direct the refund of the amount deducted or payment of delayed wages together with compensation not exceeding ten times the amount deducted, and up to Rs. 3,000 but not less than Rs. 1,500 for delayed wages.",
+    "keywords": [
+      "statutory compensation",
+      "ten times penalty",
+      "refund order",
+      "delayed wage compensation"
+    ]
+  },
+  {
+    "id": "mwa-s12",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Minimum Wages Act, 1948",
+    "section": "Section 12",
+    "category": "unpaid_wages",
+    "effective_date": "1948-03-15",
+    "superseded_date": null,
+    "text": "Where in respect of any scheduled employment a notification is in force, the employer shall pay to every employee wages at a rate not less than the minimum rate of wages fixed by such notification without unauthorized deductions.",
+    "keywords": [
+      "minimum wages",
+      "statutory rate",
+      "scheduled employment",
+      "mandatory wage floor"
+    ]
+  },
+  {
+    "id": "mwa-s20",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Minimum Wages Act, 1948",
+    "section": "Section 20",
+    "category": "unpaid_wages",
+    "effective_date": "1948-03-15",
+    "superseded_date": null,
+    "text": "The Authority may hear claims arising out of payment of less than minimum wages. Applications must be presented within six months from the date wages became payable. The Authority may award compensation up to ten times the shortfall.",
+    "keywords": [
+      "minimum wage claim",
+      "six months limitation",
+      "ten times compensation",
+      "Labour Authority"
+    ]
+  },
+  {
+    "id": "tn-shops-s32",
+    "domain": "labour",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Shops and Establishments Act, 1947",
+    "section": "Section 32",
+    "category": "unpaid_wages",
+    "effective_date": "1947-02-10",
+    "superseded_date": null,
+    "text": "All wages shall be paid in current coin or currency notes or by cheque or bank credit, and no deductions shall be made from wages except those authorized by this Act.",
+    "keywords": [
+      "Tamil Nadu",
+      "shops wages",
+      "authorized deductions",
+      "bank transfer"
+    ]
+  },
+  {
+    "id": "mh-shops-s15",
+    "domain": "labour",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Shops and Establishments (Regulation of Employment and Conditions of Service) Act, 2017",
+    "section": "Section 15",
+    "category": "unpaid_wages",
+    "effective_date": "2017-09-07",
+    "superseded_date": null,
+    "text": "Every employer shall pay wages to an employee before the expiry of the tenth day of the following month by bank transfer or by cheque.",
+    "keywords": [
+      "Maharashtra",
+      "10th day deadline",
+      "bank transfer",
+      "monthly wage payment"
+    ]
+  },
+  {
+    "id": "ka-shops-s12",
+    "domain": "labour",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Shops and Commercial Establishments Act, 1961",
+    "section": "Section 12",
+    "category": "unpaid_wages",
+    "effective_date": "1961-11-01",
+    "superseded_date": null,
+    "text": "All wages shall be paid in cash, cheque or direct bank credit before the expiry of the seventh day after the last day of the wage period.",
+    "keywords": [
+      "Karnataka",
+      "7th day deadline",
+      "bank credit",
+      "commercial establishment wages"
+    ]
+  },
+  {
+    "id": "cow2019-s1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 1",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "The Code on Wages, 2019 extends to the whole of India and applies to all establishments and employees in organized and unorganized sectors, consolidating the Payment of Wages Act, Minimum Wages Act, Payment of Bonus Act, and Equal Remuneration Act.",
+    "keywords": [
+      "Code on Wages 2019",
+      "applicability",
+      "central law consolidation",
+      "wage code",
+      "all establishments"
+    ]
+  },
+  {
+    "id": "cow2019-s2y",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 2(y)",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "'Wages' under Code on Wages, 2019 means all remuneration including basic pay, dearness allowance, and retaining allowance. If specified exclusions (such as HRA, bonus, statutory provident fund, conveyance) exceed 50% of total remuneration, the excess amount shall be deemed as wages for statutory calculations.",
+    "keywords": [
+      "50 percent wage cap",
+      "basic pay",
+      "dearness allowance",
+      "remuneration definition",
+      "Wages Code definition"
+    ]
+  },
+  {
+    "id": "cow2019-s3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 3",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "There shall be no discrimination among employees on the ground of gender in matters relating to wages by the same employer, in respect of the same work or work of a similar nature.",
+    "keywords": [
+      "equal remuneration",
+      "gender equality",
+      "no discrimination",
+      "equal pay for equal work"
+    ]
+  },
+  {
+    "id": "cow2019-s6",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 6",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "The appropriate Government shall fix the minimum rate of wages for time work or piece work across all employments. No employer shall pay to any employee wages less than the minimum rate of wages notified.",
+    "keywords": [
+      "minimum wages floor",
+      "notified rate",
+      "time work",
+      "piece work",
+      "statutory minimum wage"
+    ]
+  },
+  {
+    "id": "cow2019-s13",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 13",
+    "category": "overtime_hours",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "Where an employee whose minimum rate of wages has been fixed under this Code works on any day in excess of the number of hours constituting a normal working day, the employer shall pay him for every hour or for part of an hour so worked in excess, at the overtime rate which shall not be less than twice the normal rate of wages.",
+    "keywords": [
+      "overtime rate",
+      "twice normal wages",
+      "double rate",
+      "excess working hours",
+      "Code on Wages overtime"
+    ]
+  },
+  {
+    "id": "cow2019-s17",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 17",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "Wages shall be paid on a daily, weekly, fortnightly, or monthly basis before the 7th day of the succeeding month. Where an employee has been removed, dismissed, retrenched, or has resigned, the wages earned by him shall be paid within two working days of such removal, dismissal, retrenchment, or resignation.",
+    "keywords": [
+      "two working days settlement",
+      "resignation payout",
+      "final dues deadline",
+      "monthly 7th day",
+      "Code on Wages 2019 payment deadline"
+    ]
+  },
+  {
+    "id": "cow2019-s18",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 18",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "Deductions from the wages of an employee shall be made only in accordance with the provisions of this Code (fines, absence from duty, accommodation, advances). Total deductions in any wage period shall not exceed 50 per cent of such wages.",
+    "keywords": [
+      "50 percent maximum deduction cap",
+      "permissible deductions",
+      "unauthorized deduction ban",
+      "deduction ceiling"
+    ]
+  },
+  {
+    "id": "cow2019-s26",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 26",
+    "category": "bonus_nonpayment",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "Every employee drawing wages not exceeding notified threshold who has put in not less than thirty working days in an accounting year shall be entitled to an annual minimum bonus of 8.33% of wages earned or one hundred rupees, whichever is higher, payable within eight months from the close of the accounting year.",
+    "keywords": [
+      "annual bonus",
+      "8.33 percent minimum bonus",
+      "30 working days",
+      "eight months deadline",
+      "Code on Wages bonus"
+    ]
+  },
+  {
+    "id": "cow2019-s45",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 45",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "Every claim under this Code (minimum wages, unpaid wages, bonus, unauthorized deductions) may be filed before the Designated Authority (Gazetted Officer) within a limitation period of three years from the date on which the claim arose.",
+    "keywords": [
+      "3 years limitation period",
+      "Designated Authority",
+      "claim limitation extension",
+      "three year claim window"
+    ]
+  },
+  {
+    "id": "cow2019-s54",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 54",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "An employer who pays less than the statutory minimum wages or fails to pay statutory dues under the Code shall be punishable with fine up to fifty thousand rupees. Repeat offences within five years shall be punishable with imprisonment up to three months or fine up to one lakh rupees or both.",
+    "keywords": [
+      "penalties",
+      "fifty thousand fine",
+      "imprisonment up to 3 months",
+      "repeat offence fine",
+      "employer penalty"
+    ]
+  },
+  {
+    "id": "ida-s2oo",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 2(oo)",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "'Retrenchment' means the termination by the employer of the service of a workman for any reason whatsoever, otherwise than as a punishment inflicted by way of disciplinary action, voluntary retirement, superannuation, or continued ill-health.",
+    "keywords": [
+      "retrenchment definition",
+      "termination",
+      "workman",
+      "disciplinary exception"
+    ]
+  },
+  {
+    "id": "ida-s2s",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 2(s)",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "'Workman' means any person employed in an industry to do manual, unskilled, skilled, technical, operational, clerical or supervisory work for hire or reward, but excludes persons employed mainly in a managerial or administrative capacity.",
+    "keywords": [
+      "workman definition",
+      "technical work",
+      "clerical",
+      "supervisory",
+      "manager exclusion"
+    ]
+  },
+  {
+    "id": "ida-s2a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 2A",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "Where an employer discharges, dismisses, retrenches or terminates the services of an individual workman, any dispute connected with such discharge shall be deemed to be an industrial dispute notwithstanding that no union is a party to the dispute.",
+    "keywords": [
+      "individual dispute",
+      "direct petition",
+      "no union required",
+      "termination dispute"
+    ]
+  },
+  {
+    "id": "ida-s10",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 10",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "Where the appropriate Government is of opinion that any industrial dispute exists or is apprehended, it may at any time by order in writing refer the dispute to a Labour Court or Industrial Tribunal for adjudication.",
+    "keywords": [
+      "reference of dispute",
+      "Labour Court",
+      "Tribunal adjudication",
+      "government reference"
+    ]
+  },
+  {
+    "id": "ida-s11a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 11A",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "Where an industrial dispute relating to discharge or dismissal has been referred to a Labour Court or Tribunal, the Court may set aside the discharge or dismissal and direct reinstatement of the workman on such terms as it thinks fit, or award lesser punishment or compensation.",
+    "keywords": [
+      "reinstatement power",
+      "Labour Court",
+      "back wages",
+      "set aside dismissal",
+      "compensation in lieu"
+    ]
+  },
+  {
+    "id": "ida-s25b",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 25B",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "A workman who during a period of twelve calendar months has actually worked under the employer for not less than two hundred and forty days shall be deemed to have completed one year of continuous service.",
+    "keywords": [
+      "continuous service",
+      "240 days rule",
+      "tenure qualification",
+      "one year service"
+    ]
+  },
+  {
+    "id": "ida-s25f",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 25F",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "No workman employed in any industry who has been in continuous service for not less than one year shall be retrenched until: (a) given one month's notice in writing or wages in lieu of notice; (b) paid retrenchment compensation equivalent to fifteen days' average pay for every completed year of continuous service or part in excess of six months; and (c) notice is served on the appropriate Government.",
+    "keywords": [
+      "conditions precedent",
+      "one month notice",
+      "retrenchment compensation",
+      "15 days pay per year",
+      "severance"
+    ]
+  },
+  {
+    "id": "ida-s25g",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 25G",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "Where any workman in an industrial establishment is to be retrenched, the employer shall ordinarily retrench the workman who was the last person to be employed in that category (Principle of 'Last Come, First Go'), unless reasons are recorded in writing.",
+    "keywords": [
+      "last come first go",
+      "seniority rule",
+      "retrenchment order",
+      "arbitrary termination"
+    ]
+  },
+  {
+    "id": "ida-s25h",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 25H",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "Where any workmen are retrenched and the employer proposes to take into his employ any persons, he shall give an opportunity to the retrenched workmen who offer themselves for re-employment to have preference over other persons.",
+    "keywords": [
+      "re employment preference",
+      "retrenched worker priority",
+      "re hiring duty"
+    ]
+  },
+  {
+    "id": "ida-s25n",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 25N",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "In an industrial establishment employing not less than one hundred workmen, no workman in continuous service for one year shall be retrenched without three months' notice in writing and prior permission of the appropriate Government.",
+    "keywords": [
+      "Chapter VB",
+      "100 workmen establishment",
+      "three months notice",
+      "prior government permission"
+    ]
+  },
+  {
+    "id": "ida-s33",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 33",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "During the pendency of any conciliation or adjudication proceeding, no employer shall alter service conditions to the prejudice of workmen or discharge/dismiss any workman concerned in the dispute without express permission in writing of the authority.",
+    "keywords": [
+      "protection during pendency",
+      "status quo",
+      "prohibition on dismissal",
+      "approval application"
+    ]
+  },
+  {
+    "id": "ida-s33a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 33A",
+    "category": "wrongful_termination",
+    "effective_date": "1947-04-01",
+    "superseded_date": null,
+    "text": "Where an employer contravenes the provisions of section 33 during the pendency of proceedings, any employee aggrieved may make a complaint in writing to the Labour Court or Tribunal, which shall adjudicate upon the complaint as if it were a dispute referred to it.",
+    "keywords": [
+      "Section 33A complaint",
+      "victimisation remedy",
+      "direct complaint to Tribunal"
+    ]
+  },
+  {
+    "id": "tn-shops-s41-1",
+    "domain": "labour",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Shops and Establishments Act, 1947",
+    "section": "Section 41(1)",
+    "category": "wrongful_termination",
+    "effective_date": "1947-02-10",
+    "superseded_date": null,
+    "text": "No employer shall dispense with the services of a person employed continuously for not less than six months, except for a reasonable cause and without giving at least one month's notice or wages in lieu of notice, unless dismissed for proven misconduct at a domestic enquiry.",
+    "keywords": [
+      "Tamil Nadu",
+      "6 months service",
+      "reasonable cause",
+      "one month notice",
+      "domestic enquiry",
+      "misconduct"
+    ]
+  },
+  {
+    "id": "tn-shops-s41-2",
+    "domain": "labour",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Shops and Establishments Act, 1947",
+    "section": "Section 41(2)",
+    "category": "wrongful_termination",
+    "effective_date": "1947-02-10",
+    "superseded_date": null,
+    "text": "The person employed shall have a right to appeal to the Appellate Authority within thirty days of service of the order dispensing with his services. The Appellate Authority may set aside the dismissal and order reinstatement or compensation.",
+    "keywords": [
+      "Tamil Nadu",
+      "Appellate Authority",
+      "30 days appeal",
+      "set aside dismissal",
+      "reinstatement",
+      "compensation"
+    ]
+  },
+  {
+    "id": "mh-shops-s66",
+    "domain": "labour",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Shops and Establishments (Regulation of Employment and Conditions of Service) Act, 2017",
+    "section": "Section 66",
+    "category": "wrongful_termination",
+    "effective_date": "2017-09-07",
+    "superseded_date": null,
+    "text": "No employee in continuous employment for not less than one year shall be discharged or dismissed without thirty days' prior notice in writing or wages in lieu of notice, except for proven misconduct following natural justice. Appeals lie within sixty days.",
+    "keywords": [
+      "Maharashtra",
+      "30 days notice",
+      "60 days appeal",
+      "misconduct",
+      "natural justice",
+      "termination"
+    ]
+  },
+  {
+    "id": "mh-mrtu-s28",
+    "domain": "labour",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Recognition of Trade Unions and Prevention of Unfair Labour Practices Act, 1971",
+    "section": "Section 28",
+    "category": "wrongful_termination",
+    "effective_date": "1971-02-01",
+    "superseded_date": null,
+    "text": "Any employee aggrieved by an unfair labour practice under Schedule IV (such as discharge by way of victimisation, false allegations, or in violation of natural justice) may file a complaint before the Labour Court for reinstatement and full back wages.",
+    "keywords": [
+      "Maharashtra",
+      "MRTU PULP",
+      "unfair labour practice",
+      "Schedule IV",
+      "Labour Court",
+      "reinstatement"
+    ]
+  },
+  {
+    "id": "mh-mrtu-s30",
+    "domain": "labour",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Recognition of Trade Unions and Prevention of Unfair Labour Practices Act, 1971",
+    "section": "Section 30",
+    "category": "wrongful_termination",
+    "effective_date": "1971-02-01",
+    "superseded_date": null,
+    "text": "The Court shall have power to direct the employer to cease and desist from unfair labour practice, take affirmative action including reinstatement of employees with or without back wages, and award compensation.",
+    "keywords": [
+      "Maharashtra",
+      "Court powers",
+      "affirmative action",
+      "back wages",
+      "cease and desist"
+    ]
+  },
+  {
+    "id": "ka-shops-s39",
+    "domain": "labour",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Shops and Commercial Establishments Act, 1961",
+    "section": "Section 39",
+    "category": "wrongful_termination",
+    "effective_date": "1961-11-01",
+    "superseded_date": null,
+    "text": "No employer shall remove or dismiss an employee who has been in continuous service for not less than six months, without reasonable cause and without giving at least one month's notice in writing or one month's wages in lieu of notice.",
+    "keywords": [
+      "Karnataka",
+      "6 months service",
+      "one month notice",
+      "reasonable cause",
+      "enquiry",
+      "dismissal"
+    ]
+  },
+  {
+    "id": "ka-shops-s40",
+    "domain": "labour",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Shops and Commercial Establishments Act, 1961",
+    "section": "Section 40",
+    "category": "wrongful_termination",
+    "effective_date": "1961-11-01",
+    "superseded_date": null,
+    "text": "Any employee dismissed may appeal to the Appellate Authority within thirty days from the date of receipt of the order. The Appellate Authority may direct reinstatement with or without back wages or grant compensation.",
+    "keywords": [
+      "Karnataka",
+      "Appellate Authority",
+      "30 days appeal",
+      "reinstatement",
+      "compensation"
+    ]
+  },
+  {
+    "id": "ka-shops-s41",
+    "domain": "labour",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Shops and Commercial Establishments Act, 1961",
+    "section": "Section 41",
+    "category": "wrongful_termination",
+    "effective_date": "1961-11-01",
+    "superseded_date": null,
+    "text": "Where the Appellate Authority directs reinstatement or payment of compensation, and the employer fails to comply within thirty days, the amount may be recovered as an arrear of land revenue through the Magistrate.",
+    "keywords": [
+      "Karnataka",
+      "execution of order",
+      "recovery as land revenue",
+      "Magistrate recovery"
+    ]
+  },
+  {
+    "id": "posh-s2a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 2(a)",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "'Aggrieved woman' means in relation to a workplace, a woman, of any age whether employed or not, who alleges to have been subjected to any act of sexual harassment by the respondent, including regular, contract, intern, ad hoc or daily wage workers.",
+    "keywords": [
+      "aggrieved woman",
+      "posh complainant",
+      "sexual harassment scope",
+      "woman employee"
+    ]
+  },
+  {
+    "id": "posh-s2n",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 2(n)",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "'Sexual harassment' includes any unwelcome acts: physical contact and advances; demand or request for sexual favours; sexually coloured remarks; showing pornography; or any other unwelcome physical, verbal or non-verbal conduct of sexual nature.",
+    "keywords": [
+      "sexual harassment definition",
+      "unwelcome sexual conduct",
+      "physical sexual advances",
+      "sexual remarks",
+      "quid pro quo sexual"
+    ]
+  },
+  {
+    "id": "posh-s3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 3",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "No woman shall be subjected to sexual harassment at any workplace. Hostile work environment, implied/explicit threat of detrimental treatment, or promise of preferential treatment connected to sexual advances constitutes sexual harassment.",
+    "keywords": [
+      "sexual hostile work environment",
+      "threat connected to sexual advance",
+      "preferential sexual treatment",
+      "posh prohibition"
+    ]
+  },
+  {
+    "id": "posh-s4-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 4(1)",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "Every employer of a workplace shall, by an order in writing, constitute a Committee to be known as the 'Internal Complaints Committee' (Internal Committee - IC) at all administrative units or offices employing 10 or more employees.",
+    "keywords": [
+      "Internal Committee",
+      "IC constitution",
+      "posh 10 employees threshold",
+      "posh workplace mandate"
+    ]
+  },
+  {
+    "id": "posh-s4-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 4(2)",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "The Internal Committee shall consist of: (a) a Presiding Officer who shall be a senior woman employee; (b) not less than two Members committed to the cause of women; and (c) one external member from an NGO or association committed to women's rights.",
+    "keywords": [
+      "IC composition",
+      "posh Presiding Officer",
+      "posh external member",
+      "posh NGO representative"
+    ]
+  },
+  {
+    "id": "posh-s6",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 6",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "Every District Officer shall constitute a 'Local Committee' (LC) in the district to receive complaints from establishments having less than ten workers or where the complaint is against the employer himself.",
+    "keywords": [
+      "Local Committee",
+      "posh LC",
+      "posh District Officer",
+      "posh complaint against employer"
+    ]
+  },
+  {
+    "id": "posh-s9-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 9(1)",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "Any aggrieved woman may make, in writing, a complaint of sexual harassment to the Internal Committee or Local Committee within three months from the date of incident, or within three months from the date of last incident in a series.",
+    "keywords": [
+      "posh three months deadline",
+      "posh written complaint",
+      "posh limitation period",
+      "sexual harassment complaint"
+    ]
+  },
+  {
+    "id": "posh-s9-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 9(2)",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "The Internal Committee or Local Committee may, for reasons recorded in writing, extend the time limit by up to another three months if satisfied that circumstances prevented the woman from filing within the initial three months.",
+    "keywords": [
+      "posh time extension",
+      "posh condonation of delay",
+      "posh additional 3 months"
+    ]
+  },
+  {
+    "id": "posh-s10",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 10",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "The IC or LC may, before initiating inquiry and at the request of the aggrieved woman, take steps to settle the matter through conciliation. No monetary settlement shall be made as a basis of conciliation.",
+    "keywords": [
+      "posh conciliation",
+      "posh no monetary settlement",
+      "posh amicable settlement"
+    ]
+  },
+  {
+    "id": "posh-s11",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 11",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "The Committee shall proceed to make inquiry into the complaint in accordance with service rules or principles of natural justice, exercising powers equivalent to a civil court regarding summoning witnesses and discovery of documents.",
+    "keywords": [
+      "posh inquiry powers",
+      "posh civil court powers",
+      "posh summoning witnesses",
+      "posh natural justice"
+    ]
+  },
+  {
+    "id": "posh-s12",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 12",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "During the pendency of inquiry, on a written request by the aggrieved woman, the Committee may recommend to the employer: (a) transfer of complainant or respondent; (b) grant of paid leave up to three months (in addition to normal leave); or (c) restrain respondent from reporting on complainant.",
+    "keywords": [
+      "posh interim relief",
+      "posh three months paid leave",
+      "posh transfer",
+      "posh protection during inquiry"
+    ]
+  },
+  {
+    "id": "posh-s13",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 13",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "On completion of inquiry within 90 days, the Committee shall provide its report within ten days to the employer. Where misconduct is proved, the Committee may recommend disciplinary action and deduction of compensation from respondent's wages.",
+    "keywords": [
+      "posh inquiry report",
+      "posh 90 days completion",
+      "posh misconduct penalty",
+      "posh compensation deduction"
+    ]
+  },
+  {
+    "id": "posh-s15",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 15",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "For determining compensation to be paid to the aggrieved woman, the IC shall consider: mental trauma, pain, suffering and emotional distress; loss in career opportunity; medical expenses; and income and financial status of the respondent.",
+    "keywords": [
+      "posh compensation factors",
+      "posh trauma compensation",
+      "posh career loss damages"
+    ]
+  },
+  {
+    "id": "posh-s18",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 18",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "Any person aggrieved by the recommendations of the IC or non-implementation thereof may prefer an appeal to the appellate authority or tribunal within ninety days from the date of the recommendations.",
+    "keywords": [
+      "posh appeal",
+      "posh 90 days limitation",
+      "challenge IC findings"
+    ]
+  },
+  {
+    "id": "posh-s26",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+    "section": "Section 26",
+    "category": "posh_complaint",
+    "effective_date": "2013-12-09",
+    "superseded_date": null,
+    "text": "Where the employer fails to constitute an Internal Committee or fails to take action on recommendations, he shall be punishable with fine up to fifty thousand rupees. Repeated offence carries double fine and cancellation of business license.",
+    "keywords": [
+      "posh penalty",
+      "posh 50000 fine",
+      "posh license cancellation",
+      "failure to constitute IC"
+    ]
+  },
+  {
+    "id": "ipc-s354a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+    "section": "Section 354A",
+    "category": "posh_complaint",
+    "effective_date": "2013-04-02",
+    "superseded_date": null,
+    "text": "A man committing physical contact and advances involving unwelcome explicit sexual overtures, or demanding sexual favours, or showing pornography, or making sexually coloured remarks shall be guilty of sexual harassment and punishable with rigorous imprisonment up to three years or fine.",
+    "keywords": [
+      "criminal sexual harassment",
+      "Section 354A",
+      "FIR sexual harassment",
+      "police complaint sexual harassment"
+    ]
+  },
+  {
+    "id": "epf-s1-3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 1(3)",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "The Act applies to every factory and every establishment employing twenty or more persons.",
+    "keywords": [
+      "EPF applicability",
+      "20 employees threshold",
+      "statutory coverage",
+      "establishment scope"
+    ]
+  },
+  {
+    "id": "epf-s2b",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 2(b)",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "'Basic wages' means all emoluments which are earned by an employee while on duty or on leave with wages in accordance with the terms of employment, but excludes dearness allowance, house-rent allowance, overtime allowance, bonus and commission.",
+    "keywords": [
+      "basic wages definition",
+      "PF wage base",
+      "allowances exclusion",
+      "emoluments"
+    ]
+  },
+  {
+    "id": "epf-s6",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 6",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "The contribution which shall be paid by the employer shall be ten per cent (or twelve per cent where notified) of basic wages, DA and retaining allowance, and the employee's contribution shall be equal to the contribution payable by the employer.",
+    "keywords": [
+      "contribution rate",
+      "12 percent",
+      "matching employer contribution",
+      "deduction share",
+      "PF fund"
+    ]
+  },
+  {
+    "id": "epf-s6a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 6A",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "The Central Government may frame an Employees' Pension Scheme for employees in establishments to which this Act applies, providing for superannuation pension, retiring pension, permanent total disablement pension, and widow/children pension.",
+    "keywords": [
+      "Employees Pension Scheme",
+      "EPS",
+      "pension fund",
+      "8.33 percent diversion",
+      "pension eligibility"
+    ]
+  },
+  {
+    "id": "epf-s7a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 7A",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "The Regional Provident Fund Commissioner or Assistant PF Commissioner may, by order, determine the amount due from any employer under this Act, conducting quasi-judicial inquiry with powers of a civil court.",
+    "keywords": [
+      "Section 7A inquiry",
+      "RPFC",
+      "determination of dues",
+      "quasi judicial assessment",
+      "unpaid PF dues"
+    ]
+  },
+  {
+    "id": "epf-s7b",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 7B",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "Any person aggrieved by an order made under section 7A may apply for a review of that order within forty-five days to the officer who made the order, on discovery of new evidence or mistake on the face of the record.",
+    "keywords": [
+      "Section 7B review",
+      "45 days review",
+      "review application",
+      "rectification of order"
+    ]
+  },
+  {
+    "id": "epf-s7i",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 7I",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "Any person aggrieved by a notification or order passed under section 7A or 14B may prefer an appeal to the Industrial Tribunal (constituted under Industrial Disputes Act) within sixty days from the date of the order.",
+    "keywords": [
+      "EPF appeal",
+      "Industrial Tribunal",
+      "60 days appeal deadline",
+      "challenge 7A order"
+    ]
+  },
+  {
+    "id": "epf-s7q",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 7Q",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "The employer shall be liable to pay simple interest at the rate of twelve per cent per annum on any amount due from him under this Act from the date on which the amount became due till the date of actual payment.",
+    "keywords": [
+      "12 percent interest",
+      "statutory interest",
+      "delayed remittance",
+      "interest on unpaid PF"
+    ]
+  },
+  {
+    "id": "epf-s8",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 8",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "Any amount due from the employer may be recovered by the CPFC or Recovery Officer in the same manner as an arrear of land revenue through attachment and sale of movable or immovable property, or arrest and detention of the employer.",
+    "keywords": [
+      "recovery of dues",
+      "Recovery Officer",
+      "attachment of property",
+      "arrears of land revenue",
+      "arrest"
+    ]
+  },
+  {
+    "id": "epf-s8b",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 8B",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "Where any amount is in arrear from an employer, the authorized officer may issue to the Recovery Officer a certificate specifying the amount of arrears, and the Recovery Officer shall proceed to recover the amount by attachment of bank accounts and property.",
+    "keywords": [
+      "recovery certificate",
+      "bank account attachment",
+      "garnishee order",
+      "coercive recovery"
+    ]
+  },
+  {
+    "id": "epf-s14-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 14(1)",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "Whoever, for the purpose of avoiding any payment to be made, knowingly makes or causes to be made any false statement or false representation shall be punishable with imprisonment for a term up to one year, or with fine up to five thousand rupees, or both.",
+    "keywords": [
+      "false representation",
+      "avoiding payment",
+      "one year jail",
+      "penalties"
+    ]
+  },
+  {
+    "id": "epf-s14-1a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 14(1A)",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "An employer who defaults in payment of employee's contribution which has been deducted by him from the employee's wages shall be punishable with imprisonment for a term which shall not be less than one year and fine of ten thousand rupees.",
+    "keywords": [
+      "deduction non remittance",
+      "criminal default",
+      "mandatory one year jail",
+      "breach of trust"
+    ]
+  },
+  {
+    "id": "epf-s14b",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds and Miscellaneous Provisions Act, 1952",
+    "section": "Section 14B",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-03-04",
+    "superseded_date": null,
+    "text": "Where an employer makes default in the payment of any contribution to the Fund, the CPFC or authorized officer may recover from the employer by way of penalty such damages, not exceeding the amount of arrears, as specified in the Scheme.",
+    "keywords": [
+      "damages",
+      "penal damages",
+      "Section 14B penalty",
+      "recovery of damages"
+    ]
+  },
+  {
+    "id": "epf-scheme-p26",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds Scheme, 1952",
+    "section": "Paragraph 26",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-09-02",
+    "superseded_date": null,
+    "text": "Every employee employed in or in connection with the work of an establishment to which this Scheme applies shall be entitled and required to become a member of the Fund from the very first day of his employment.",
+    "keywords": [
+      "membership entitlement",
+      "day one eligibility",
+      "mandatory PF enrolment",
+      "contract employee inclusion"
+    ]
+  },
+  {
+    "id": "epf-scheme-p38",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Provident Funds Scheme, 1952",
+    "section": "Paragraph 38",
+    "category": "pf_nonpayment",
+    "effective_date": "1952-09-02",
+    "superseded_date": null,
+    "text": "The employer shall, before paying the member his wages, deduct the employee's contribution, and shall pay to the Fund both the contribution payable by himself and the member within fifteen days of the close of every month.",
+    "keywords": [
+      "15th day monthly deadline",
+      "monthly remittance",
+      "deduction timeline",
+      "passbook credit"
+    ]
+  },
+  {
+    "id": "ipc-s405-epf",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+    "section": "Section 405 (Explanation 1)",
+    "category": "pf_nonpayment",
+    "effective_date": "1973-11-01",
+    "superseded_date": null,
+    "text": "An employer who deducts the employees' contribution from the wages payable to the employee for credit to a Provident Fund or Family Pension Fund shall be deemed to have been entrusted with the amount of the contribution, and if he makes default in payment of such contribution, he shall be deemed to have committed Criminal Breach of Trust under Section 406/409 IPC.",
+    "keywords": [
+      "criminal breach of trust",
+      "Section 405 Explanation",
+      "police FIR",
+      "misappropriation of wages"
+    ]
+  },
+  {
+    "id": "pba-s1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 1",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "The Act applies to every factory and every other establishment in which twenty or more persons are employed on any day during an accounting year.",
+    "keywords": [
+      "bonus applicability",
+      "20 employees",
+      "factory",
+      "accounting year",
+      "scope"
+    ]
+  },
+  {
+    "id": "pba-s2-13",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 2(13)",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "'Employee' means any person (other than an apprentice) employed on a salary or wage not exceeding twenty-one thousand rupees per mensem in any industry to do any skilled, unskilled, manual, supervisory, managerial, administrative, technical or clerical work.",
+    "keywords": [
+      "employee definition",
+      "21000 wage ceiling",
+      "salary threshold",
+      "statutory coverage"
+    ]
+  },
+  {
+    "id": "pba-s8",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 8",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "Every employee shall be entitled to be paid by his employer in an accounting year, bonus, in accordance with the provisions of this Act, provided he has worked in the establishment for not less than thirty working days in that year.",
+    "keywords": [
+      "bonus eligibility",
+      "30 working days",
+      "annual qualification",
+      "statutory right"
+    ]
+  },
+  {
+    "id": "pba-s9",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 9",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "An employee shall be disqualified from receiving bonus under this Act if he is dismissed from service for fraud, riotous or violent behaviour while on the premises of the establishment, or theft, misappropriation or sabotage of any property.",
+    "keywords": [
+      "disqualification",
+      "fraud",
+      "theft",
+      "violence",
+      "forfeiture of bonus"
+    ]
+  },
+  {
+    "id": "pba-s10",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 10",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "Every employer shall be bound to pay to every employee in respect of the accounting year a minimum bonus which shall be 8.33 per cent of the salary or wage earned by the employee or one hundred rupees, whichever is higher, whether or not the employer has any allocable surplus.",
+    "keywords": [
+      "minimum bonus",
+      "8.33 percent",
+      "statutory floor",
+      "mandatory payment",
+      "loss making company"
+    ]
+  },
+  {
+    "id": "pba-s11",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 11",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "Where allocable surplus exceeds the amount of minimum bonus payable, the employer shall pay bonus proportionate to salary, subject to a maximum of twenty per cent of such salary or wage.",
+    "keywords": [
+      "maximum bonus",
+      "20 percent cap",
+      "allocable surplus",
+      "profit linked bonus"
+    ]
+  },
+  {
+    "id": "pba-s12",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 12",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "Where the salary or wage of an employee exceeds seven thousand rupees or the minimum wage for the scheduled employment, whichever is higher, per mensem, the bonus payable to such employee shall be calculated as if his salary or wage were seven thousand rupees or the minimum wage.",
+    "keywords": [
+      "bonus calculation ceiling",
+      "7000 rupees cap",
+      "minimum wage ceiling",
+      "computation formula"
+    ]
+  },
+  {
+    "id": "pba-s15",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 15",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "Where for any accounting year the allocable surplus exceeds the maximum bonus payable (20%), the excess shall, to the extent of 20% of total wages, be carried forward for being set on in succeeding years (up to fourth accounting year). Similarly, deficiencies shall be set off.",
+    "keywords": [
+      "set on and set off",
+      "allocable surplus",
+      "carry forward",
+      "4 years rule"
+    ]
+  },
+  {
+    "id": "pba-s19",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 19",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "All amounts payable to an employee by way of bonus shall be paid in cash by his employer within a period of eight months from the close of the accounting year. Where a dispute is pending before an authority, within one month from the award becoming enforceable.",
+    "keywords": [
+      "8 months deadline",
+      "payment timeline",
+      "accounting year",
+      "cash payment",
+      "delayed bonus"
+    ]
+  },
+  {
+    "id": "pba-s21",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 21",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "Where any money is due to an employee by way of bonus, the employee may make an application to the appropriate Government within one year from the date it became due. The Government shall issue a recovery certificate to the Collector to recover as arrears of land revenue.",
+    "keywords": [
+      "Section 21 recovery",
+      "Collector recovery certificate",
+      "one year limitation",
+      "land revenue recovery"
+    ]
+  },
+  {
+    "id": "pba-s22",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 22",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "Where any dispute arises between an employer and his employees with respect to the bonus payable under this Act, such dispute shall be deemed to be an industrial dispute within the meaning of the Industrial Disputes Act, 1947.",
+    "keywords": [
+      "bonus dispute",
+      "industrial dispute",
+      "Labour Court reference",
+      "conciliation"
+    ]
+  },
+  {
+    "id": "pba-s28",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 28",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "If any person contravenes any of the provisions of this Act or any rule made thereunder, he shall be punishable with imprisonment for a term which may extend to six months, or with fine up to one thousand rupees, or both.",
+    "keywords": [
+      "bonus penalty",
+      "six months jail",
+      "fine",
+      "employer contravention"
+    ]
+  },
+  {
+    "id": "pba-s31a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 31A",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "An agreement or settlement entered into between employees and employer for payment of an annual bonus linked to production or productivity in lieu of bonus based on profits is valid, provided it does not deprive employees of minimum bonus of 8.33%.",
+    "keywords": [
+      "productivity bonus",
+      "settlement agreement",
+      "minimum bonus protection",
+      "Section 31A"
+    ]
+  },
+  {
+    "id": "pba-s34",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Bonus Act, 1965",
+    "section": "Section 34",
+    "category": "bonus_nonpayment",
+    "effective_date": "1965-09-25",
+    "superseded_date": null,
+    "text": "Subject to the provisions of section 31A, the provisions of this Act shall have effect notwithstanding anything inconsistent therewith contained in any other law for the time being in force or in the terms of any award, agreement, settlement or contract of service.",
+    "keywords": [
+      "overriding effect",
+      "non obstante clause",
+      "statutory supremacy",
+      "contract overriding"
+    ]
+  },
+  {
+    "id": "pga-s1-3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 1(3)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "The Act applies to every factory, mine, plantation, port, railway, and every shop or establishment in a State in which ten or more persons are employed on any day of the preceding twelve months.",
+    "keywords": [
+      "gratuity applicability",
+      "10 employees threshold",
+      "shops and establishments",
+      "factory coverage"
+    ]
+  },
+  {
+    "id": "pga-s2e",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 2(e)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "'Employee' means any person (other than an apprentice) employed on wages in any establishment, factory or shop, to do any skilled, semi-skilled, unskilled, manual, technical or clerical work, whether terms of employment be express or implied.",
+    "keywords": [
+      "employee definition",
+      "coverage",
+      "technical",
+      "clerical",
+      "teachers inclusion"
+    ]
+  },
+  {
+    "id": "pga-s2a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 2A",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "An employee shall be said to be in continuous service for a period if he has, for that period, been in uninterrupted service. Working for not less than 240 days in 12 months (or 190 days in mines/underground) constitutes one year continuous service.",
+    "keywords": [
+      "continuous service",
+      "240 days rule",
+      "uninterrupted service",
+      "gratuity qualification"
+    ]
+  },
+  {
+    "id": "pga-s4-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 4(1)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "Gratuity shall be payable to an employee on termination of employment after rendering continuous service for not less than five years: (a) on superannuation, (b) on retirement or resignation, or (c) on death or disablement. The five-year service condition shall not apply in case of death or disablement.",
+    "keywords": [
+      "gratuity eligibility",
+      "5 years continuous service",
+      "resignation",
+      "retirement",
+      "death exception"
+    ]
+  },
+  {
+    "id": "pga-s4-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 4(2)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "For every completed year of service or part in excess of six months, the employer shall pay gratuity at the rate of fifteen days' wages based on last drawn rate of wages (calculated as monthly basic + DA divided by 26 and multiplied by 15).",
+    "keywords": [
+      "gratuity formula",
+      "15 days pay per year",
+      "divided by 26",
+      "last drawn wage",
+      "calculation"
+    ]
+  },
+  {
+    "id": "pga-s4-3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 4(3)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "The amount of gratuity payable to an employee shall not exceed twenty lakh rupees (as notified by Central Government).",
+    "keywords": [
+      "20 lakh cap",
+      "statutory maximum",
+      "gratuity ceiling",
+      "limit"
+    ]
+  },
+  {
+    "id": "pga-s4-5",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 4(5)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "Nothing in this section shall affect the right of an employee to receive better terms of gratuity under any award or agreement or contract with the employer.",
+    "keywords": [
+      "better terms",
+      "contractual gratuity",
+      "higher benefit protection",
+      "contract superiority"
+    ]
+  },
+  {
+    "id": "pga-s4-6",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 4(6)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "Gratuity may be forfeited to the extent of damage or loss caused if terminated for willful omission or negligence causing damage to property; or wholly forfeited if terminated for riotous conduct or moral turpitude committed in course of employment.",
+    "keywords": [
+      "forfeiture",
+      "damage to property",
+      "moral turpitude",
+      "misconduct termination",
+      "forfeiture conditions"
+    ]
+  },
+  {
+    "id": "pga-s7-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 7(1)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "A person eligible for gratuity shall send a written application to the employer within thirty days from the date gratuity became payable, in Form I prescribed under the Rules.",
+    "keywords": [
+      "Form I application",
+      "30 days deadline",
+      "gratuity claim",
+      "application to employer"
+    ]
+  },
+  {
+    "id": "pga-s7-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 7(2)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "As soon as gratuity becomes payable, the employer shall, whether an application has been made or not, determine the amount of gratuity and give notice in writing to the person and to the Controlling Authority specifying the amount.",
+    "keywords": [
+      "employer determination duty",
+      "statutory notice",
+      "notice to Controlling Authority"
+    ]
+  },
+  {
+    "id": "pga-s7-3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 7(3)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "The employer shall arrange to pay the amount of gratuity within thirty days from the date it becomes payable to the person entitled. If not paid within thirty days, simple interest at 10% per annum shall be paid by the employer.",
+    "keywords": [
+      "30 days disbursement",
+      "10 percent statutory interest",
+      "delayed gratuity",
+      "interest on delay"
+    ]
+  },
+  {
+    "id": "pga-s7-4",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 7(4)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "If there is any dispute as to the amount of gratuity payable or admissibility of claim, the employer or employee may make an application in Form N to the Controlling Authority (Assistant Labour Commissioner) for adjudication.",
+    "keywords": [
+      "Controlling Authority",
+      "Form N application",
+      "dispute resolution",
+      "ALC jurisdiction"
+    ]
+  },
+  {
+    "id": "pga-s7-7",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 7(7)",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "Any person aggrieved by an order of the Controlling Authority may prefer an appeal to the Appellate Authority within sixty days from the date of receipt of order, provided the employer deposits the disputed gratuity amount prior to appeal.",
+    "keywords": [
+      "60 days appeal",
+      "Appellate Authority",
+      "mandatory pre deposit",
+      "challenge Controlling Authority"
+    ]
+  },
+  {
+    "id": "pga-s8",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 8",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "If gratuity is not paid within the prescribed time, the Controlling Authority shall issue a certificate for that amount to the Collector, who shall recover the same together with compound interest at fifteen per cent per annum as arrears of land revenue.",
+    "keywords": [
+      "recovery certificate",
+      "Collector recovery",
+      "15 percent compound interest",
+      "land revenue arrears"
+    ]
+  },
+  {
+    "id": "pga-s9",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Gratuity Act, 1972",
+    "section": "Section 9",
+    "category": "gratuity_nonpayment",
+    "effective_date": "1972-09-16",
+    "superseded_date": null,
+    "text": "An employer who defaults in complying with any provision of this Act shall be punishable with imprisonment for a term not less than six months up to two years, or with fine up to twenty thousand rupees.",
+    "keywords": [
+      "gratuity penalty",
+      "jail term",
+      "fine",
+      "employer default"
+    ]
+  },
+  {
+    "id": "mba-s2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 2",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "The Act applies to every factory, mine, plantation, and every shop or establishment in which ten or more persons are employed on any day of the preceding twelve months.",
+    "keywords": [
+      "maternity applicability",
+      "10 employees threshold",
+      "shops and establishments",
+      "coverage"
+    ]
+  },
+  {
+    "id": "mba-s3h",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 3(h)",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "'Maternity benefit' means the payment referred to in sub-section (1) of section 5 payable to a woman at the rate of average daily wage for the period of her actual absence.",
+    "keywords": [
+      "maternity benefit definition",
+      "average daily wage",
+      "wage replacement"
+    ]
+  },
+  {
+    "id": "mba-s4-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 4(1)",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "No employer shall knowingly employ a woman in any establishment during the six weeks immediately following the day of her delivery or her miscarriage.",
+    "keywords": [
+      "prohibition of employment",
+      "6 weeks post delivery",
+      "mandatory rest",
+      "health protection"
+    ]
+  },
+  {
+    "id": "mba-s4-3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 4(3)",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "No pregnant woman shall be required to do any work of an arduous nature, work involving long hours of standing, or work likely to interfere with pregnancy during the one month preceding six weeks before delivery.",
+    "keywords": [
+      "arduous work prohibition",
+      "standing work exemption",
+      "pre natal protection",
+      "safe work"
+    ]
+  },
+  {
+    "id": "mba-s5-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 5(1)",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "Every woman shall be entitled to, and her employer shall be liable for, the payment of maternity benefit at the rate of the average daily wage for the period of her actual absence.",
+    "keywords": [
+      "maternity benefit entitlement",
+      "paid leave",
+      "employer liability",
+      "full wages"
+    ]
+  },
+  {
+    "id": "mba-s5-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 5(2)",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "No woman shall be entitled to maternity benefit unless she has actually worked in an establishment of the employer for a period of not less than eighty days in the twelve months immediately preceding the date of her expected delivery.",
+    "keywords": [
+      "80 days qualifying service",
+      "tenure condition",
+      "12 months preceding delivery",
+      "eligibility test"
+    ]
+  },
+  {
+    "id": "mba-s5-3",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 5(3)",
+    "category": "maternity_benefit",
+    "effective_date": "2017-04-01",
+    "superseded_date": null,
+    "text": "The maximum period for which any woman shall be entitled to maternity benefit shall be twenty-six weeks of which not more than eight weeks shall precede the expected delivery date. For women having two or more surviving children, maximum benefit is twelve weeks (max 6 weeks pre-delivery).",
+    "keywords": [
+      "26 weeks paid leave",
+      "8 weeks pre delivery",
+      "two surviving children 12 weeks",
+      "2017 amendment"
+    ]
+  },
+  {
+    "id": "mba-s5-4",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 5(4)",
+    "category": "maternity_benefit",
+    "effective_date": "2017-04-01",
+    "superseded_date": null,
+    "text": "A woman who legally adopts a child below the age of three months or a commissioning mother shall be entitled to maternity benefit for a period of twelve weeks from the date the child is handed over.",
+    "keywords": [
+      "adoption leave",
+      "commissioning mother",
+      "surrogacy benefit",
+      "12 weeks adoption leave"
+    ]
+  },
+  {
+    "id": "mba-s5-5",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 5(5)",
+    "category": "maternity_benefit",
+    "effective_date": "2017-04-01",
+    "superseded_date": null,
+    "text": "In case where the nature of work assigned to a woman is of such nature that she may work from home, the employer may allow her to do so after availing of the maternity benefit for such period and on such conditions as mutually agreed.",
+    "keywords": [
+      "work from home",
+      "WFH post maternity",
+      "mutual agreement",
+      "2017 amendment"
+    ]
+  },
+  {
+    "id": "mba-s6",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 6",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "Any woman entitled to maternity benefit may give notice in writing to her employer in Form E stating that her maternity benefit be paid to her, and the employer shall permit her to absent herself until the expiry of six weeks after delivery.",
+    "keywords": [
+      "Form E notice",
+      "notice of maternity claim",
+      "advance payment",
+      "absence permission"
+    ]
+  },
+  {
+    "id": "mba-s8",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 8",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "Every woman entitled to maternity benefit shall also be entitled to receive from her employer a medical bonus of three thousand five hundred rupees, if no pre-natal confinement and post-natal care is provided by the employer free of charge.",
+    "keywords": [
+      "medical bonus",
+      "3500 rupees",
+      "pre natal care",
+      "post natal care"
+    ]
+  },
+  {
+    "id": "mba-s9",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 9",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "In case of miscarriage or medical termination of pregnancy, a woman shall, on production of prescribed proof, be entitled to leave with wages at the rate of maternity benefit for a period of six weeks immediately following the day of miscarriage or MTP.",
+    "keywords": [
+      "miscarriage leave",
+      "MTP leave",
+      "6 weeks paid leave",
+      "pregnancy termination"
+    ]
+  },
+  {
+    "id": "mba-s11",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 11",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "Every woman delivered of a child who returns to duty shall, in addition to the interval for rest allowed to her, be allowed two nursing breaks of prescribed duration daily until the child attains the age of fifteen months.",
+    "keywords": [
+      "nursing breaks",
+      "two daily breaks",
+      "15 months infant",
+      "childcare rest"
+    ]
+  },
+  {
+    "id": "mba-s11a",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 11A",
+    "category": "maternity_benefit",
+    "effective_date": "2017-07-01",
+    "superseded_date": null,
+    "text": "Every establishment having fifty or more employees shall have the facility of creche within prescribed distance. The employer shall allow four visits a day to the creche by the woman, including the rest interval.",
+    "keywords": [
+      "creche facility",
+      "50 employees threshold",
+      "four visits daily",
+      "mandatory creche"
+    ]
+  },
+  {
+    "id": "mba-s12",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 12",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "When a woman absents herself from work in accordance with this Act, it shall be unlawful for her employer to discharge or dismiss her during or on account of such absence, or give notice of dismissal expiring during such absence.",
+    "keywords": [
+      "unlawful dismissal",
+      "dismissal during maternity prohibited",
+      "protection from firing",
+      "service conditions"
+    ]
+  },
+  {
+    "id": "mba-s21",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 21",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "If any employer fails to pay maternity benefit or dismisses a woman in contravention of section 12, he shall be punishable with imprisonment not less than three months up to one year and with fine up to five thousand rupees.",
+    "keywords": [
+      "maternity penalty",
+      "imprisonment",
+      "fine",
+      "employer prosecution"
+    ]
+  },
+  {
+    "id": "fa-s51",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 51",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": null,
+    "text": "No adult worker shall be required or allowed to work in a factory for more than forty-eight hours in any week.",
+    "keywords": [
+      "weekly hours limit",
+      "48 hours week",
+      "maximum hours",
+      "factory worker"
+    ]
+  },
+  {
+    "id": "fa-s52",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 52",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": null,
+    "text": "No adult worker shall be required or allowed to work in a factory on the first day of the week (Sunday), unless he has or will have a holiday for a whole day on one of the three days immediately before or after the said day (Compensatory Holiday).",
+    "keywords": [
+      "weekly holiday",
+      "Sunday holiday",
+      "compensatory day off",
+      "rest day"
+    ]
+  },
+  {
+    "id": "fa-s54",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 54",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": null,
+    "text": "Subject to the provisions of section 51, no adult worker shall be required or allowed to work in a factory for more than nine hours in any day.",
+    "keywords": [
+      "daily hours limit",
+      "9 hours day",
+      "maximum daily work",
+      "daily rest"
+    ]
+  },
+  {
+    "id": "fa-s55",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 55",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": null,
+    "text": "The periods of work of adult workers in a factory each day shall be so fixed that no period shall exceed five hours and that no worker shall work for more than five hours before he has had an interval for rest of at least half an hour.",
+    "keywords": [
+      "intervals for rest",
+      "half hour break",
+      "5 hours continuous work max",
+      "rest period"
+    ]
+  },
+  {
+    "id": "fa-s56",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 56",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": null,
+    "text": "The periods of work of an adult worker in a factory shall be so arranged that inclusive of his intervals for rest under section 55, they shall not spread over more than ten and a half hours in any day.",
+    "keywords": [
+      "spread over limit",
+      "10.5 hours spread over",
+      "work shift duration",
+      "daily spread"
+    ]
+  },
+  {
+    "id": "fa-s59-1",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 59(1)",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": null,
+    "text": "Where a worker works in a factory for more than nine hours in any day or for more than forty-eight hours in any week, he shall, in respect of overtime work, be entitled to wages at the rate of twice his ordinary rate of wages.",
+    "keywords": [
+      "overtime wages",
+      "twice ordinary rate",
+      "double wages",
+      "excess hours",
+      "overtime calculation"
+    ]
+  },
+  {
+    "id": "fa-s59-2",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 59(2)",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": null,
+    "text": "'Ordinary rate of wages' means the basic wages plus such allowances, including dearness allowance and cash equivalent of food concessions, as the worker is for the time being entitled to, but does not include bonus or overtime.",
+    "keywords": [
+      "ordinary rate definition",
+      "basic plus DA",
+      "overtime base rate",
+      "cash allowances"
+    ]
+  },
+  {
+    "id": "fa-s64",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 64",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": null,
+    "text": "The total number of hours of overtime work shall not exceed fifty for any one quarter, and total working hours including overtime shall not exceed ten hours on any day and sixty hours in any week.",
+    "keywords": [
+      "quarterly overtime cap",
+      "50 hours quarter limit",
+      "60 hours weekly cap",
+      "maximum overtime limit"
+    ]
+  },
+  {
+    "id": "mwa-s14",
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Minimum Wages Act, 1948",
+    "section": "Section 14",
+    "category": "overtime_hours",
+    "effective_date": "1948-03-15",
+    "superseded_date": null,
+    "text": "Where an employee whose minimum rate of wages is fixed under this Act works on any day in excess of normal working hours, the employer shall pay him for every hour worked in excess at the overtime rate fixed under this Act or State law, whichever is higher.",
+    "keywords": [
+      "minimum wage overtime",
+      "normal working day",
+      "overtime rate",
+      "excess hour pay"
+    ]
+  },
+  {
+    "id": "tn-shops-s14",
+    "domain": "labour",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Shops and Establishments Act, 1947",
+    "section": "Section 14",
+    "category": "overtime_hours",
+    "effective_date": "1947-02-10",
+    "superseded_date": null,
+    "text": "No person employed in any establishment shall be required or allowed to work for more than eight hours in any day and forty-eight hours in any week, subject to maximum overtime of ten hours in a day and fifty-four hours in a week.",
+    "keywords": [
+      "Tamil Nadu",
+      "8 hours day",
+      "48 hours week",
+      "daily overtime cap",
+      "maximum hours"
+    ]
+  },
+  {
+    "id": "tn-shops-s31",
+    "domain": "labour",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Shops and Establishments Act, 1947",
+    "section": "Section 31",
+    "category": "overtime_hours",
+    "effective_date": "1947-02-10",
+    "superseded_date": null,
+    "text": "Where any person employed in any establishment is required to work overtime, he shall be entitled, in respect of such overtime work, to wages at twice the ordinary rate of wages (basic wage plus DA).",
+    "keywords": [
+      "Tamil Nadu",
+      "twice ordinary wages",
+      "overtime pay",
+      "double rate",
+      "commercial establishment"
+    ]
+  },
+  {
+    "id": "mh-shops-s12",
+    "domain": "labour",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Shops and Establishments (Regulation of Employment and Conditions of Service) Act, 2017",
+    "section": "Section 12",
+    "category": "overtime_hours",
+    "effective_date": "2017-09-07",
+    "superseded_date": null,
+    "text": "No worker shall work for more than nine hours in any day and forty-eight hours in any week. Overtime hours shall not exceed one hundred and twenty-five hours in three continuous months.",
+    "keywords": [
+      "Maharashtra",
+      "9 hours day",
+      "48 hours week",
+      "125 hours quarterly limit",
+      "working hours"
+    ]
+  },
+  {
+    "id": "mh-shops-s15-ot",
+    "domain": "labour",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Shops and Establishments (Regulation of Employment and Conditions of Service) Act, 2017",
+    "section": "Section 15(2)",
+    "category": "overtime_hours",
+    "effective_date": "2017-09-07",
+    "superseded_date": null,
+    "text": "Where a worker in any establishment works for more than nine hours in any day or for more than forty-eight hours in any week, he shall, in respect of such overtime work, be entitled to wages at the rate of twice his ordinary rate of wages.",
+    "keywords": [
+      "Maharashtra",
+      "twice ordinary rate",
+      "double overtime pay",
+      "excess work remuneration"
+    ]
+  },
+  {
+    "id": "ka-shops-s7",
+    "domain": "labour",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Shops and Commercial Establishments Act, 1961",
+    "section": "Section 7",
+    "category": "overtime_hours",
+    "effective_date": "1961-11-01",
+    "superseded_date": null,
+    "text": "No employee shall be required or allowed to work for more than eight hours in any day and forty-eight hours in any week. Overtime shall not exceed fifty hours in any quarter.",
+    "keywords": [
+      "Karnataka",
+      "8 hours daily",
+      "48 hours weekly",
+      "50 hours quarterly limit",
+      "overtime ceiling"
+    ]
+  },
+  {
+    "id": "ka-shops-s8",
+    "domain": "labour",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Shops and Commercial Establishments Act, 1961",
+    "section": "Section 8",
+    "category": "overtime_hours",
+    "effective_date": "1961-11-01",
+    "superseded_date": null,
+    "text": "Where an employee is required to work overtime, he shall be entitled to wages at twice the ordinary rate of wages (basic wages plus allowances).",
+    "keywords": [
+      "Karnataka",
+      "twice ordinary rate",
+      "double overtime pay",
+      "commercial establishment overtime"
+    ]
+  },
+  {
+    "id": "ka-shops-s9",
+    "domain": "labour",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Shops and Commercial Establishments Act, 1961",
+    "section": "Section 9",
+    "category": "overtime_hours",
+    "effective_date": "1961-11-01",
+    "superseded_date": null,
+    "text": "The periods of work of an employee shall be so fixed that no period shall exceed five hours without an interval for rest of at least one hour.",
+    "keywords": [
+      "Karnataka",
+      "rest interval",
+      "one hour break",
+      "5 hours work period"
+    ]
+  },
+  {
+    "id": "tpa-s105",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Transfer of Property Act, 1882",
+    "section": "Section 105",
+    "category": "tenant_landlord",
+    "effective_date": "1882-07-01",
+    "superseded_date": null,
+    "text": "A lease of immovable property is a transfer of a right to enjoy such property, made for a certain time, express or implied, or in perpetuity, in consideration of a price paid or promised, or money or crops rendered periodically by the transferee (lessee) to the transferor (lessor).",
+    "keywords": [
+      "lease definition",
+      "lessor",
+      "lessee",
+      "rent",
+      "immovable property",
+      "tenancy agreement"
+    ]
+  },
+  {
+    "id": "tpa-s106",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Transfer of Property Act, 1882",
+    "section": "Section 106",
+    "category": "tenant_landlord",
+    "effective_date": "1882-07-01",
+    "superseded_date": null,
+    "text": "In the absence of a contract or local law to the contrary, a lease of immovable property for residential/commercial purposes shall be deemed to be a lease from month to month, terminable by fifteen days' written notice.",
+    "keywords": [
+      "15 days notice",
+      "notice to quit",
+      "month to month lease",
+      "written notice",
+      "tenancy termination"
+    ]
+  },
+  {
+    "id": "tpa-s107",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Transfer of Property Act, 1882",
+    "section": "Section 107",
+    "category": "tenant_landlord",
+    "effective_date": "1882-07-01",
+    "superseded_date": null,
+    "text": "A lease of immovable property from year to year, or for any term exceeding one year, or reserving a yearly rent, can be made only by a registered instrument. All other leases may be made either by registered instrument or oral agreement with delivery of possession.",
+    "keywords": [
+      "registered instrument",
+      "leases exceeding one year",
+      "registration requirement",
+      "deed validity"
+    ]
+  },
+  {
+    "id": "tpa-s108a",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Transfer of Property Act, 1882",
+    "section": "Section 108(a)-(c)",
+    "category": "tenant_landlord",
+    "effective_date": "1882-07-01",
+    "superseded_date": null,
+    "text": "Rights of lessee and duties of lessor: The lessor is bound to disclose material defects, put lessee in possession, and warrants quiet enjoyment of the property without unlawful interruption during the lease term.",
+    "keywords": [
+      "covenant of quiet enjoyment",
+      "material defect disclosure",
+      "landlord duty",
+      "delivery of possession"
+    ]
+  },
+  {
+    "id": "tpa-s108m",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Transfer of Property Act, 1882",
+    "section": "Section 108(m)-(q)",
+    "category": "tenant_landlord",
+    "effective_date": "1882-07-01",
+    "superseded_date": null,
+    "text": "Duties of lessee: The lessee is bound to pay rent at proper times, maintain property in good condition (reasonable wear and tear excepted), not erect permanent structures without consent, and restore possession on determination of lease.",
+    "keywords": [
+      "wear and tear",
+      "tenant obligations",
+      "rent payment",
+      "restoration of possession",
+      "no permanent structure"
+    ]
+  },
+  {
+    "id": "tpa-s109",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Transfer of Property Act, 1882",
+    "section": "Section 109",
+    "category": "tenant_landlord",
+    "effective_date": "1882-07-01",
+    "superseded_date": null,
+    "text": "If the lessor transfers the property leased, the transferee possesses all the rights and is subject to all the liabilities of the lessor as to the property, and the lessee shall not be liable to pay rent to the new owner until notice of transfer is received.",
+    "keywords": [
+      "transfer of property by landlord",
+      "attornment of tenancy",
+      "new landlord rights",
+      "notice of transfer"
+    ]
+  },
+  {
+    "id": "tpa-s111",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Transfer of Property Act, 1882",
+    "section": "Section 111",
+    "category": "tenant_landlord",
+    "effective_date": "1882-07-01",
+    "superseded_date": null,
+    "text": "A lease of immovable property determines: (a) by efflux of time; (b) where interest of lessor terminates; (c) by merger; (d) by express surrender; (e) by implied surrender; (f) by forfeiture for breach of express condition or denial of landlord's title; (g) on expiration of notice to quit.",
+    "keywords": [
+      "determination of lease",
+      "efflux of time",
+      "surrender",
+      "forfeiture",
+      "expiry of notice"
+    ]
+  },
+  {
+    "id": "mta-s3",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 3",
+    "category": "tenant_landlord",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The provisions of this Act shall apply to premises let out for residential and commercial purposes, but shall not apply to premises owned by Central/State Government, local authority, religious/charitable trusts, or premises let to employees as company quarters.",
+    "keywords": [
+      "Model Tenancy Act scope",
+      "residential",
+      "commercial",
+      "exempted premises"
+    ]
+  },
+  {
+    "id": "mta-s4",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 4",
+    "category": "tenant_landlord",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "No person shall let or take on rent any premises except by an agreement in writing. The tenancy agreement shall be jointly submitted to the Rent Authority within two months from the date of agreement.",
+    "keywords": [
+      "mandatory written agreement",
+      "Rent Authority submission",
+      "two months deadline",
+      "tenancy registration"
+    ]
+  },
+  {
+    "id": "mta-s5",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 5",
+    "category": "tenant_landlord",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "Every tenancy entered into shall be valid for the period agreed upon between landlord and tenant. The tenant may request renewal or extension within agreed notice terms before expiry.",
+    "keywords": [
+      "tenancy period",
+      "fixed term lease",
+      "renewal terms",
+      "extension"
+    ]
+  },
+  {
+    "id": "mta-s8",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 8",
+    "category": "tenant_landlord",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The rent payable shall be the rent agreed upon between landlord and tenant. Every tenant will pay rent and other charges within the time specified in the tenancy agreement, against an immediate written receipt.",
+    "keywords": [
+      "agreed rent",
+      "payment date",
+      "written rent receipt",
+      "rent receipt entitlement"
+    ]
+  },
+  {
+    "id": "mta-s13",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 13",
+    "category": "tenant_landlord",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The landlord or property manager shall not enter the premises without giving twenty-four hours prior notice in writing or electronic mode specifying the reason for entry (between 7:00 AM and 8:00 PM).",
+    "keywords": [
+      "landlord entry restriction",
+      "24 hours prior notice",
+      "tenant privacy",
+      "daytime entry only"
+    ]
+  },
+  {
+    "id": "mta-s14",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 14",
+    "category": "tenant_landlord",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "No landlord or property manager shall, either by himself or through any person, cut off or withhold any essential supply or service in the premises occupied by the tenant.",
+    "keywords": [
+      "prohibition of utility cutoff",
+      "essential supplies",
+      "water electricity protection",
+      "restraining landlord"
+    ]
+  },
+  {
+    "id": "mta-s20",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 20",
+    "category": "tenant_landlord",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The Rent Authority may, on an application made by the tenant, order immediate restoration of essential services and may impose compensation payable by the landlord to the tenant up to two months' rent.",
+    "keywords": [
+      "restoration of essential supplies",
+      "Rent Authority order",
+      "two months rent compensation",
+      "emergency relief"
+    ]
+  },
+  {
+    "id": "mta-s21-1",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 21(1)",
+    "category": "eviction_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "A landlord may apply to the Rent Court for recovery of possession of premises on specific grounds: non-payment of agreed rent; arrears of rent for two consecutive months; unauthorized subletting; substantial damage to premises; or bona fide residential need.",
+    "keywords": [
+      "eviction grounds",
+      "Rent Court",
+      "two consecutive months rent default",
+      "unauthorized subletting",
+      "bona fide need"
+    ]
+  },
+  {
+    "id": "mta-s21-2",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 21(2)",
+    "category": "eviction_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The Rent Court shall not make an order for recovery of possession on the ground of default in payment of rent if the tenant pays to the landlord or deposits with the Rent Court all arrears of rent within one month of notice.",
+    "keywords": [
+      "relief against default",
+      "deposit of rent arrears",
+      "one month grace period",
+      "preventing eviction"
+    ]
+  },
+  {
+    "id": "mta-s22",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 22",
+    "category": "eviction_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "Where a landlord requires the premises for carrying out major repairs, alteration or demolition which cannot be carried out without the premises being vacated, the Rent Court may order eviction subject to re-entry rights upon completion.",
+    "keywords": [
+      "eviction for repairs",
+      "re-entry rights",
+      "building demolition",
+      "Rent Court order"
+    ]
+  },
+  {
+    "id": "mta-s23",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 23",
+    "category": "eviction_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "Where a tenant fails to vacate premises on expiry of tenancy or after eviction order, the tenant shall pay compensation: twice the monthly rent for first two months, and four times monthly rent for subsequent months until vacating.",
+    "keywords": [
+      "enhanced compensation",
+      "overstay penalty",
+      "double rent",
+      "four times rent",
+      "vacating order"
+    ]
+  },
+  {
+    "id": "mta-s35",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 35",
+    "category": "eviction_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The Rent Court shall endeavor to dispose of the application for recovery of possession within ninety days from the date of application.",
+    "keywords": [
+      "90 days fast track disposal",
+      "Rent Court timeline",
+      "summary procedure"
+    ]
+  },
+  {
+    "id": "tnrrlt-s21-1",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 21(1)",
+    "category": "eviction_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "The Rent Court may make an order for recovery of possession on grounds: failure to enter into written agreement; default in payment of rent for two consecutive months; unauthorized subletting; misuse causing nuisance; or landlord's own occupation.",
+    "keywords": [
+      "Tamil Nadu",
+      "TNRRRLT eviction",
+      "Rent Court",
+      "two months rent default",
+      "written agreement failure"
+    ]
+  },
+  {
+    "id": "tnrrlt-s21-2",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 21(2)",
+    "category": "eviction_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "No order for recovery of possession on grounds of rent default shall be passed if tenant deposits all arrears within one month of receiving notice from Rent Court.",
+    "keywords": [
+      "Tamil Nadu",
+      "relief against forfeiture",
+      "one month deposit",
+      "arrears clearance"
+    ]
+  },
+  {
+    "id": "tnrrlt-s22",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 22",
+    "category": "eviction_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "Where possession is sought for demolition or reconstruction, landlord must give undertaking to commence work within three months and complete within specified period.",
+    "keywords": [
+      "Tamil Nadu",
+      "demolition reconstruction",
+      "three months undertaking",
+      "rebuilding eviction"
+    ]
+  },
+  {
+    "id": "tnrrlt-s23",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 23",
+    "category": "eviction_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "Where tenant fails to vacate after expiry or determination, landlord may apply for execution. No civil court shall have jurisdiction over matters within the Rent Court's powers.",
+    "keywords": [
+      "Tamil Nadu",
+      "bar of civil courts",
+      "Rent Court execution",
+      "warrant of possession"
+    ]
+  },
+  {
+    "id": "mh-rca-s15-1",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 15(1)",
+    "category": "eviction_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "A landlord shall not be entitled to recovery of possession so long as the tenant pays, or is ready and willing to pay, standard rent and permitted increases and observes other terms of tenancy.",
+    "keywords": [
+      "Maharashtra",
+      "statutory tenant protection",
+      "standard rent payment",
+      "protection from eviction"
+    ]
+  },
+  {
+    "id": "mh-rca-s15-2",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 15(2)",
+    "category": "eviction_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "No suit for recovery of possession shall be instituted by a landlord on ground of non-payment of rent until the expiration of ninety days next after notice in writing demanding rent has been served upon tenant.",
+    "keywords": [
+      "Maharashtra",
+      "90 days statutory notice",
+      "mandatory notice period",
+      "rent demand notice"
+    ]
+  },
+  {
+    "id": "mh-rca-s15-3",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 15(3)",
+    "category": "eviction_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "No decree for eviction shall be passed in a suit for recovery of possession if within ninety days of service of summons the tenant pays or deposits in court the standard rent and permitted increases then due with interest.",
+    "keywords": [
+      "Maharashtra",
+      "relief against eviction",
+      "90 days deposit in Court",
+      "avoiding eviction decree"
+    ]
+  },
+  {
+    "id": "mh-rca-s16-1",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 16(1)",
+    "category": "eviction_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "A landlord may recover possession if the Court is satisfied: tenant erected permanent structure without consent; tenant guilty of nuisance/annoyance; unlawful subletting; or premises reasonably and bona fide required by landlord.",
+    "keywords": [
+      "Maharashtra",
+      "grounds for possession",
+      "nuisance",
+      "unlawful subletting",
+      "bona fide requirement"
+    ]
+  },
+  {
+    "id": "mh-rca-s22",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 22",
+    "category": "eviction_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "Special provisions for recovery of possession by members of armed forces, scientists, and state/central government employees for bona fide residence upon certificate.",
+    "keywords": [
+      "Maharashtra",
+      "special category landlord",
+      "summary eviction",
+      "armed forces recovery"
+    ]
+  },
+  {
+    "id": "ka-ra-s27-1",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 27(1)",
+    "category": "eviction_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "No order for recovery of possession shall be made by Court against a tenant, except on application for recovery on specified statutory grounds.",
+    "keywords": [
+      "Karnataka",
+      "tenant protection",
+      "statutory grounds requirement",
+      "bar on arbitrary eviction"
+    ]
+  },
+  {
+    "id": "ka-ra-s27-2a",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 27(2)(a)",
+    "category": "eviction_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "Eviction ground: that the tenant has neither paid nor tendered the whole of the arrears of rent legally recoverable from him within two months of service of notice of demand.",
+    "keywords": [
+      "Karnataka",
+      "two months demand notice",
+      "arrears of rent",
+      "rent default eviction"
+    ]
+  },
+  {
+    "id": "ka-ra-s27-2r",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 27(2)(r)",
+    "category": "eviction_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "Eviction ground: that the premises are required, whether in the same form or after reconstruction or rebuilding, by the landlord for occupation for himself or for any member of his family.",
+    "keywords": [
+      "Karnataka",
+      "bona fide occupation",
+      "landlord family need",
+      "own use eviction"
+    ]
+  },
+  {
+    "id": "ka-ra-s30",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 30",
+    "category": "eviction_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "Where the landlord is a senior citizen (aged 65+), widow, or handicapped person, the Court shall pass an order for immediate possession of residential premises required for own residence upon verified application.",
+    "keywords": [
+      "Karnataka",
+      "senior citizen landlord",
+      "summary possession",
+      "special category recovery"
+    ]
+  },
+  {
+    "id": "mta-s11-1",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 11(1)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The security deposit to be paid by the tenant in advance shall: (a) not exceed two months' rent, in case of residential premises; and (b) not exceed six months' rent, in case of non-residential premises.",
+    "keywords": [
+      "security deposit cap",
+      "2 months residential limit",
+      "6 months commercial limit",
+      "statutory ceiling"
+    ]
+  },
+  {
+    "id": "mta-s11-2",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 11(2)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The security deposit shall be refunded to the tenant on the date of taking over vacant possession of the premises from the tenant, after making due deduction of any liability relating to arrears of rent and maintenance charges.",
+    "keywords": [
+      "deposit refund deadline",
+      "vacant possession refund",
+      "permissible deductions",
+      "immediate return"
+    ]
+  },
+  {
+    "id": "mta-s11-3",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 11(3)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "In case of any dispute regarding refund of security deposit or deduction made by landlord, either party may make an application to the Rent Authority for adjudication and recovery.",
+    "keywords": [
+      "Rent Authority deposit claim",
+      "dispute on deductions",
+      "deposit recovery application"
+    ]
+  },
+  {
+    "id": "tnrrlt-s11-1",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 11(1)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "The security deposit to be paid by the tenant in advance shall not exceed three times the monthly rent for residential premises.",
+    "keywords": [
+      "Tamil Nadu",
+      "3 months rent ceiling",
+      "advance rent cap",
+      "residential security deposit"
+    ]
+  },
+  {
+    "id": "tnrrlt-s11-2",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 11(2)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "The security deposit shall be refunded to the tenant within one month of taking over vacant possession of premises, after making due deduction of any liability.",
+    "keywords": [
+      "Tamil Nadu",
+      "one month refund deadline",
+      "vacant possession",
+      "deposit refund"
+    ]
+  },
+  {
+    "id": "tnrrlt-s11-3",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 11(3)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "If landlord fails to refund security deposit within one month, landlord shall be liable to pay simple interest at such rate as may be prescribed on the unpaid deposit.",
+    "keywords": [
+      "Tamil Nadu",
+      "interest on delayed deposit",
+      "landlord penalty",
+      "statutory interest"
+    ]
+  },
+  {
+    "id": "mh-rca-s10-1",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 10(1)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "It shall not be lawful for any landlord to claim or receive on account of the grant, renewal or continuance of a lease any fine, premium or other like sum or deposit exceeding the agreed standard advance.",
+    "keywords": [
+      "Maharashtra",
+      "unlawful premium prohibition",
+      "pagdi prohibition",
+      "advance regulation"
+    ]
+  },
+  {
+    "id": "mh-rca-s10-2",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 10(2)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "Any landlord who receives any fine, premium or deposit in contravention of sub-section (1) shall be punishable with imprisonment up to six months or fine up to twenty-five thousand rupees.",
+    "keywords": [
+      "Maharashtra",
+      "deposit penalty",
+      "six months jail",
+      "illegal premium fine"
+    ]
+  },
+  {
+    "id": "mh-ll-deposit",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999 / Leave and Licence Precedents",
+    "section": "Section 24 / Precedents",
+    "category": "security_deposit_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "In leave and licence agreements, security deposit is held in trust by the licensor and must be refunded immediately on licensee delivering vacant possession. Unjustified withholding attracts 18% interest and consumer compensation.",
+    "keywords": [
+      "Maharashtra",
+      "leave and licence deposit",
+      "security deposit refund",
+      "interest on delayed return"
+    ]
+  },
+  {
+    "id": "ka-ra-s18-1",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 18(1)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "No landlord shall claim, receive or stipulate for payment of any sum as advance or security deposit in excess of one month's rent in case of residential premises, or two months' rent in case of non-residential premises.",
+    "keywords": [
+      "Karnataka",
+      "one month advance cap",
+      "residential deposit ceiling",
+      "two months commercial cap"
+    ]
+  },
+  {
+    "id": "ka-ra-s18-2",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 18(2)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "Any excess amount received by landlord as advance or deposit shall be refundable to the tenant within one month or adjusted towards rent.",
+    "keywords": [
+      "Karnataka",
+      "refund of excess advance",
+      "one month adjustment",
+      "deposit regulation"
+    ]
+  },
+  {
+    "id": "ka-ra-s18-3",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 18(3)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "Landlord who receives advance or deposit in contravention of section 18 shall be punishable with simple imprisonment up to one month or fine up to double the excess amount.",
+    "keywords": [
+      "Karnataka",
+      "penalty for illegal deposit",
+      "one month jail",
+      "double fine"
+    ]
+  },
+  {
+    "id": "cpa-s2-42",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Consumer Protection Act, 2019",
+    "section": "Section 2(42)",
+    "category": "security_deposit_dispute",
+    "effective_date": "2020-07-20",
+    "superseded_date": null,
+    "text": "Landlord or property management service illegally withholding security deposit after handover of vacant possession constitutes 'deficiency in service' and 'unfair trade practice', actionable before the District Consumer Forum.",
+    "keywords": [
+      "Consumer Forum",
+      "deficiency of service",
+      "deposit recovery",
+      "unfair trade practice",
+      "eDaakhil"
+    ]
+  },
+  {
+    "id": "cpa-s39",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Consumer Protection Act, 2019",
+    "section": "Section 39",
+    "category": "security_deposit_dispute",
+    "effective_date": "2020-07-20",
+    "superseded_date": null,
+    "text": "The District Commission may direct the opposite party to return the amount along with interest, award compensation for mental agony, and award litigation costs.",
+    "keywords": [
+      "Consumer Commission powers",
+      "deposit refund order",
+      "mental agony compensation",
+      "costs"
+    ]
+  },
+  {
+    "id": "mta-s9-1",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 9(1)",
+    "category": "rent_increase_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The revision of rent between landlord and tenant shall be in accordance with the terms of the tenancy agreement.",
+    "keywords": [
+      "contractual escalation",
+      "agreed revision",
+      "tenancy terms",
+      "rent hike"
+    ]
+  },
+  {
+    "id": "mta-s9-2",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 9(2)",
+    "category": "rent_increase_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "Where landlord wishes to revise rent, he shall give notice in writing to tenant three months before revised rent becomes due.",
+    "keywords": [
+      "three months notice",
+      "statutory notice for rent hike",
+      "prior written notice"
+    ]
+  },
+  {
+    "id": "mta-s9-3",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 9(3)",
+    "category": "rent_increase_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "If tenant fails to give notice of termination before expiry of three months notice, tenant shall be deemed to have accepted the revised rent.",
+    "keywords": [
+      "deemed acceptance",
+      "tenant termination option",
+      "notice response"
+    ]
+  },
+  {
+    "id": "mta-s10",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 10",
+    "category": "rent_increase_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "Where landlord carried out structural improvement with tenant consent, rent may be revised. In case of dispute, Rent Authority shall determine revised rent.",
+    "keywords": [
+      "structural improvement rent hike",
+      "Rent Authority determination",
+      "fair rent dispute"
+    ]
+  },
+  {
+    "id": "tnrrlt-s9-1",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 9(1)",
+    "category": "rent_increase_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "The rent payable shall be the rent agreed to in the tenancy agreement. Revision shall be in terms of agreement or on three months prior notice.",
+    "keywords": [
+      "Tamil Nadu",
+      "three months notice",
+      "agreed rent",
+      "revision terms"
+    ]
+  },
+  {
+    "id": "tnrrlt-s10",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 10",
+    "category": "rent_increase_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "The Rent Authority shall on application determine revised rent and other charges based on market conditions, condition of premises and amenities provided.",
+    "keywords": [
+      "Tamil Nadu",
+      "Rent Authority revised rent",
+      "market assessment",
+      "fair rent fixation"
+    ]
+  },
+  {
+    "id": "mh-rca-s7-14",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 7(14)",
+    "category": "rent_increase_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "'Standard rent' means the rent fixed by the Court under section 8, or the rent at which the premises were let on the specified date plus permitted increases.",
+    "keywords": [
+      "Maharashtra",
+      "standard rent definition",
+      "statutory rent floor",
+      "court determined rent"
+    ]
+  },
+  {
+    "id": "mh-rca-s8",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 8",
+    "category": "rent_increase_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "The Court may, upon application by landlord or tenant, fix standard rent and permitted increases. It shall not be lawful for landlord to claim any amount in excess of standard rent.",
+    "keywords": [
+      "Maharashtra",
+      "standard rent fixation",
+      "excess rent unlawful",
+      "Court application"
+    ]
+  },
+  {
+    "id": "mh-rca-s11-1",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 11(1)",
+    "category": "rent_increase_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "A landlord shall be entitled to make an increase in rent in respect of improvement or structural alteration not exceeding four per cent per annum of the amount spent.",
+    "keywords": [
+      "Maharashtra",
+      "4 percent increase",
+      "structural improvement",
+      "permitted rent hike"
+    ]
+  },
+  {
+    "id": "mh-rca-s11-2",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 11(2)",
+    "category": "rent_increase_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "A landlord shall also be entitled to make an increase in rent on account of increase in local municipal taxes levied by the local authority.",
+    "keywords": [
+      "Maharashtra",
+      "municipal tax hike",
+      "permitted increase",
+      "tax pass through"
+    ]
+  },
+  {
+    "id": "mh-rca-s12",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 12",
+    "category": "rent_increase_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "Any landlord who receives rent in excess of standard rent shall be punishable with imprisonment up to three months or fine up to five thousand rupees.",
+    "keywords": [
+      "Maharashtra",
+      "excess rent penalty",
+      "three months jail",
+      "fine"
+    ]
+  },
+  {
+    "id": "ka-ra-s7",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 7",
+    "category": "rent_increase_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "The Controller shall on application fix standard rent in accordance with the formula set forth in Second Schedule.",
+    "keywords": [
+      "Karnataka",
+      "Rent Controller",
+      "standard rent formula",
+      "Second Schedule"
+    ]
+  },
+  {
+    "id": "ka-ra-s8",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 8",
+    "category": "rent_increase_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "Where landlord incurs expenditure on improvement or structural alteration with Controller approval or tenant consent, rent may be increased by not exceeding ten per cent per annum of cost.",
+    "keywords": [
+      "Karnataka",
+      "10 percent rent hike",
+      "structural alteration",
+      "permitted increase"
+    ]
+  },
+  {
+    "id": "ka-ra-s9",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 9",
+    "category": "rent_increase_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "Where the amenities or facilities provided with premises are reduced or deteriorated without tenant fault, the Controller may reduce standard rent proportionately.",
+    "keywords": [
+      "Karnataka",
+      "rent reduction",
+      "amenities withdrawal",
+      "Controller power",
+      "rent abatement"
+    ]
+  },
+  {
+    "id": "tpa-s108f",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Transfer of Property Act, 1882",
+    "section": "Section 108(f)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "1882-07-01",
+    "superseded_date": null,
+    "text": "If the lessor neglects to make, within reasonable time after notice, repairs which he is bound to make, the lessee may make the same himself and deduct expenses with interest from rent.",
+    "keywords": [
+      "repair deduction",
+      "tenant right to repair",
+      "reasonable notice",
+      "deduct from rent",
+      "neglect by lessor"
+    ]
+  },
+  {
+    "id": "mta-s15-1",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 15(1)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "The landlord and tenant shall keep premises in good condition. The landlord is responsible for structural repairs, whitewashing, external electricals as per Second Schedule; tenant is responsible for minor repairs.",
+    "keywords": [
+      "division of maintenance",
+      "structural repair landlord duty",
+      "Second Schedule",
+      "minor repairs tenant"
+    ]
+  },
+  {
+    "id": "mta-s15-2",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 15(2)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "If landlord fails to carry out repairs within fifteen days of notice, tenant may carry out repairs and deduct cost from rent, not exceeding one month's rent.",
+    "keywords": [
+      "15 days notice",
+      "one month rent deduction",
+      "tenant repair right",
+      "repair reimbursement"
+    ]
+  },
+  {
+    "id": "mta-s15-3",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 15(3)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "If tenant fails to carry out tenant repairs within fifteen days of notice, landlord may carry out repairs and deduct cost from security deposit.",
+    "keywords": [
+      "tenant repair default",
+      "deduct from deposit",
+      "landlord repair right"
+    ]
+  },
+  {
+    "id": "mta-s15-4",
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Model Tenancy Act, 2021",
+    "section": "Section 15(4)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2021-06-02",
+    "superseded_date": null,
+    "text": "In case premises become uninhabitable without fault of tenant, tenant shall not be liable to pay rent until premises are rendered fit for habitation.",
+    "keywords": [
+      "uninhabitable premises",
+      "rent suspension",
+      "structural failure",
+      "tenant protection"
+    ]
+  },
+  {
+    "id": "tnrrlt-s15-1",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 15(1)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "Every landlord shall be responsible for structural repairs, external whitewashing and internal wiring. Tenant is responsible for drain cleaning and fixture maintenance.",
+    "keywords": [
+      "Tamil Nadu",
+      "structural repairs",
+      "landlord maintenance duty",
+      "TNRRRLT Second Schedule"
+    ]
+  },
+  {
+    "id": "tnrrlt-s15-2",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 15(2)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "If landlord refuses or fails to make necessary repairs after fifteen days written notice, tenant may carry out repairs and deduct expenses from rent, up to one month's rent per year.",
+    "keywords": [
+      "Tamil Nadu",
+      "15 days notice",
+      "deduct one month rent",
+      "tenant execution of repair"
+    ]
+  },
+  {
+    "id": "tnrrlt-s15-3",
+    "domain": "tenancy",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017",
+    "section": "Section 15(3)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2019-02-22",
+    "superseded_date": null,
+    "text": "In case of emergency (seepage, structural danger), tenant may apply to Rent Authority for urgent repair directions.",
+    "keywords": [
+      "Tamil Nadu",
+      "emergency repairs",
+      "Rent Authority directions",
+      "urgent relief"
+    ]
+  },
+  {
+    "id": "mh-rca-s14-1",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 14(1)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "Every landlord shall be bound to keep premises in good and tenantable repair.",
+    "keywords": [
+      "Maharashtra",
+      "tenantable repair mandatory",
+      "landlord statutory duty",
+      "habitability"
+    ]
+  },
+  {
+    "id": "mh-rca-s14-2",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 14(2)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "If landlord neglects to make repairs within fifteen days after notice served, tenant may make repairs and deduct expenses from rent, up to one-fourth of annual rent (three months' rent).",
+    "keywords": [
+      "Maharashtra",
+      "15 days notice",
+      "deduct up to 3 months rent",
+      "tenant right to repair"
+    ]
+  },
+  {
+    "id": "mh-rca-s14-3",
+    "domain": "tenancy",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Rent Control Act, 1999",
+    "section": "Section 14(3)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2000-03-31",
+    "superseded_date": null,
+    "text": "Where tenant carries out repairs under sub-section (2), tenant shall furnish full account of expenses to landlord accompanied by vouchers.",
+    "keywords": [
+      "Maharashtra",
+      "repair account",
+      "vouchers submission",
+      "legitimate deduction proof"
+    ]
+  },
+  {
+    "id": "ka-ra-s13-1",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 13(1)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "Every landlord shall be bound to keep premises in good and tenantable repair.",
+    "keywords": [
+      "Karnataka",
+      "landlord duty",
+      "tenantable repair",
+      "maintenance obligation"
+    ]
+  },
+  {
+    "id": "ka-ra-s13-2",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 13(2)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "If landlord fails to make repairs within thirty days after notice, tenant may apply to Controller for permission to make repairs and deduct cost from rent.",
+    "keywords": [
+      "Karnataka",
+      "30 days notice",
+      "Rent Controller permission",
+      "deduct cost from rent"
+    ]
+  },
+  {
+    "id": "ka-ra-s13-3",
+    "domain": "tenancy",
+    "jurisdiction": "KA",
+    "act_name": "Karnataka Rent Act, 1999",
+    "section": "Section 13(3)",
+    "category": "repairs_maintenance_dispute",
+    "effective_date": "2001-12-05",
+    "superseded_date": null,
+    "text": "The Controller may permit tenant to make repairs subject to such conditions and cost ceilings as the Controller deems fit.",
+    "keywords": [
+      "Karnataka",
+      "Controller order",
+      "repair ceiling",
+      "rent deduction authorization"
+    ]
+  }
+]

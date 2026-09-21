@@ -1,4 +1,4 @@
-﻿-- Run this in the Supabase SQL editor to add the cases table for Phase 2.
+-- Run this in the Supabase SQL editor to add the cases table for Phase 2.
 -- The cases table stores anonymous user sessions for cross-refresh persistence.
 --
 -- CRITICAL: case_id is NEVER part of the response_cache key.
@@ -15,12 +15,16 @@ CREATE TABLE IF NOT EXISTS cases (
   category             TEXT,
   jurisdiction         TEXT,
   original_query       TEXT        NOT NULL,
+  user_name            TEXT,
   facts                JSONB       NOT NULL DEFAULT '{}',
   clarification_round  INT         NOT NULL DEFAULT 0,
   asked_facts          JSONB       NOT NULL DEFAULT '[]',
   -- Full result payload stored on resolve so a refresh restores without rerunning the pipeline
   result               JSONB
 );
+
+-- Schema migration if table already exists
+ALTER TABLE cases ADD COLUMN IF NOT EXISTS user_name TEXT;
 
 CREATE INDEX IF NOT EXISTS cases_status_idx      ON cases (status);
 CREATE INDEX IF NOT EXISTS cases_expires_at_idx  ON cases (expires_at);

@@ -303,6 +303,57 @@ ALL_PATHWAYS = {
   }
 }
 
+ALL_CONFLICTS = [
+  {
+    "topic": "unpaid_wages",
+    "jurisdiction": "TN",
+    "central_rule": "Payment of Wages Act applies only to employees earning up to Rs 24,000 per month.",
+    "state_rule": "Tamil Nadu Amendment applies wage payment protections to all employees in covered establishments regardless of wage threshold.",
+    "outcome": "Tamil Nadu State Amendment applies.",
+    "reason": "State-specific amendment under Article 254(2) of the Constitution prevails for establishments in Tamil Nadu."
+  },
+  {
+    "topic": "overtime_hours",
+    "jurisdiction": "TN",
+    "central_rule": "Overtime is calculated for hours worked beyond 9 hours in any day or 48 hours in any week.",
+    "state_rule": "TN Shops and Establishments Act prescribes overtime for work exceeding 8 hours daily or 48 hours weekly, capped at max 10 hours daily.",
+    "outcome": "TN Shops and Establishments Act overtime thresholds apply.",
+    "reason": "State Shops Act provides more favorable overtime terms for commercial employees in Tamil Nadu."
+  },
+  {
+    "topic": "wrongful_termination",
+    "jurisdiction": "MH",
+    "central_rule": "Industrial Disputes Act Section 25F requires 1 month notice or pay in lieu for retrenchment of workmen with 1 year continuous service.",
+    "state_rule": "Maharashtra Shops and Establishments Act 2017 exempts establishments with under 10 employees from registration but requires 30 days notice for termination after 1 year service.",
+    "outcome": "Maharashtra Shops & Establishments Act 2017 applies.",
+    "reason": "MH Shops Act 2017 governs termination notice requirements for commercial establishments in Maharashtra."
+  },
+  {
+    "topic": "eviction_dispute",
+    "jurisdiction": "MH",
+    "central_rule": "General tenancy rules under Transfer of Property Act allow eviction suit filing after 15 days notice for month-to-month leases.",
+    "state_rule": "Maharashtra Rent Control Act 1999 Section 15(2) bars landlord from filing suit for recovery of possession until 90 days after service of written demand notice.",
+    "outcome": "Maharashtra Rent Control Act 1999 90-day grace period applies.",
+    "reason": "Special rent control statute overrides general tenancy provisions in Maharashtra."
+  },
+  {
+    "topic": "wrongful_termination",
+    "jurisdiction": "KA",
+    "central_rule": "Industrial Employment (Standing Orders) Act 1946 mandates formal standing orders for establishments employing 100+ workers.",
+    "state_rule": "Karnataka State Government notification conditionally exempts IT/ITeS/Software companies from Standing Orders Act provided they maintain internal committees.",
+    "outcome": "Karnataka State IT/ITeS Exemption Notification applies.",
+    "reason": "State notification grants sector-specific exemption for IT/ITeS firms in Karnataka."
+  },
+  {
+    "topic": "overtime_hours",
+    "jurisdiction": "KA",
+    "central_rule": "Standard Factories Act overtime limit of 50 hours total per quarter.",
+    "state_rule": "Karnataka Shops and Commercial Establishments Act limits total overtime to 50 hours per quarter with daily max limit of 10 hours including overtime.",
+    "outcome": "Karnataka Shops and Commercial Establishments Act applies.",
+    "reason": "State legislation governs working hour caps for commercial workers in Karnataka."
+  }
+]
+
 def generate_embedding(text: str) -> List[float]:
     """Generate deterministic 1536-dimensional embedding vector for pgvector seeding."""
     import hashlib
@@ -317,7 +368,8 @@ def seed_database():
 
     chunks = get_all_chunks()
     pathways = ALL_PATHWAYS
-    logger.info(f"Loaded {len(chunks)} legal chunks and {len(pathways)} pathways from python definitions.")
+    conflicts = ALL_CONFLICTS
+    logger.info(f"Loaded {len(chunks)} legal chunks, {len(pathways)} pathways, and {len(conflicts)} statutory conflicts.")
 
     # Audit category coverage
     chunk_categories = set(c["category"] for c in chunks)
@@ -378,8 +430,25 @@ def seed_database():
                 json.dumps(pw["steps"])
             ])
             
-        conn.commit()
         logger.info(f"Successfully inserted {len(pathways)} pathways into pathways table.")
+
+        # 3. Clear & insert conflicts
+        cur.execute("TRUNCATE TABLE conflicts;")
+        for conf in conflicts:
+            cur.execute("""
+                INSERT INTO conflicts (topic, jurisdiction, central_rule, state_rule, outcome, reason)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, [
+                conf["topic"],
+                conf["jurisdiction"],
+                conf["central_rule"],
+                conf["state_rule"],
+                conf["outcome"],
+                conf["reason"]
+            ])
+
+        conn.commit()
+        logger.info(f"Successfully inserted {len(conflicts)} conflicts into conflicts table.")
 
     conn.close()
     logger.info("Database migration & seed completed successfully!")

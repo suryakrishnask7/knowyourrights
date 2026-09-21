@@ -106,6 +106,47 @@ def get_all_chunks():
         "All wages shall be paid in cash, cheque or direct bank credit before the expiry of the seventh day after the last day of the wage period.",
         ["Karnataka", "7th day deadline", "bank credit", "commercial establishment wages"])
 
+    # ── Code on Wages, 2019 (Act No. 29 of 2019) ───────────────────────────
+    add("cow2019-s1", "labour", "central", "Code on Wages, 2019", "Section 1", "unpaid_wages", "2019-08-08",
+        "The Code on Wages, 2019 extends to the whole of India and applies to all establishments and employees in organized and unorganized sectors, consolidating the Payment of Wages Act, Minimum Wages Act, Payment of Bonus Act, and Equal Remuneration Act.",
+        ["Code on Wages 2019", "applicability", "central law consolidation", "wage code", "all establishments"])
+
+    add("cow2019-s2y", "labour", "central", "Code on Wages, 2019", "Section 2(y)", "unpaid_wages", "2019-08-08",
+        "'Wages' under Code on Wages, 2019 means all remuneration including basic pay, dearness allowance, and retaining allowance. If specified exclusions (such as HRA, bonus, statutory provident fund, conveyance) exceed 50% of total remuneration, the excess amount shall be deemed as wages for statutory calculations.",
+        ["50 percent wage cap", "basic pay", "dearness allowance", "remuneration definition", "Wages Code definition"])
+
+    add("cow2019-s3", "labour", "central", "Code on Wages, 2019", "Section 3", "unpaid_wages", "2019-08-08",
+        "There shall be no discrimination among employees on the ground of gender in matters relating to wages by the same employer, in respect of the same work or work of a similar nature.",
+        ["equal remuneration", "gender equality", "no discrimination", "equal pay for equal work"])
+
+    add("cow2019-s6", "labour", "central", "Code on Wages, 2019", "Section 6", "unpaid_wages", "2019-08-08",
+        "The appropriate Government shall fix the minimum rate of wages for time work or piece work across all employments. No employer shall pay to any employee wages less than the minimum rate of wages notified.",
+        ["minimum wages floor", "notified rate", "time work", "piece work", "statutory minimum wage"])
+
+    add("cow2019-s13", "labour", "central", "Code on Wages, 2019", "Section 13", "overtime_hours", "2019-08-08",
+        "Where an employee whose minimum rate of wages has been fixed under this Code works on any day in excess of the number of hours constituting a normal working day, the employer shall pay him for every hour or for part of an hour so worked in excess, at the overtime rate which shall not be less than twice the normal rate of wages.",
+        ["overtime rate", "twice normal wages", "double rate", "excess working hours", "Code on Wages overtime"])
+
+    add("cow2019-s17", "labour", "central", "Code on Wages, 2019", "Section 17", "unpaid_wages", "2019-08-08",
+        "Wages shall be paid on a daily, weekly, fortnightly, or monthly basis before the 7th day of the succeeding month. Where an employee has been removed, dismissed, retrenched, or has resigned, the wages earned by him shall be paid within two working days of such removal, dismissal, retrenchment, or resignation.",
+        ["two working days settlement", "resignation payout", "final dues deadline", "monthly 7th day", "Code on Wages 2019 payment deadline"])
+
+    add("cow2019-s18", "labour", "central", "Code on Wages, 2019", "Section 18", "unpaid_wages", "2019-08-08",
+        "Deductions from the wages of an employee shall be made only in accordance with the provisions of this Code (fines, absence from duty, accommodation, advances). Total deductions in any wage period shall not exceed 50 per cent of such wages.",
+        ["50 percent maximum deduction cap", "permissible deductions", "unauthorized deduction ban", "deduction ceiling"])
+
+    add("cow2019-s26", "labour", "central", "Code on Wages, 2019", "Section 26", "bonus_nonpayment", "2019-08-08",
+        "Every employee drawing wages not exceeding notified threshold who has put in not less than thirty working days in an accounting year shall be entitled to an annual minimum bonus of 8.33% of wages earned or one hundred rupees, whichever is higher, payable within eight months from the close of the accounting year.",
+        ["annual bonus", "8.33 percent minimum bonus", "30 working days", "eight months deadline", "Code on Wages bonus"])
+
+    add("cow2019-s45", "labour", "central", "Code on Wages, 2019", "Section 45", "unpaid_wages", "2019-08-08",
+        "Every claim under this Code (minimum wages, unpaid wages, bonus, unauthorized deductions) may be filed before the Designated Authority (Gazetted Officer) within a limitation period of three years from the date on which the claim arose.",
+        ["3 years limitation period", "Designated Authority", "claim limitation extension", "three year claim window"])
+
+    add("cow2019-s54", "labour", "central", "Code on Wages, 2019", "Section 54", "unpaid_wages", "2019-08-08",
+        "An employer who pays less than the statutory minimum wages or fails to pay statutory dues under the Code shall be punishable with fine up to fifty thousand rupees. Repeat offences within five years shall be punishable with imprisonment up to three months or fine up to one lakh rupees or both.",
+        ["penalties", "fifty thousand fine", "imprisonment up to 3 months", "repeat offence fine", "employer penalty"])
+
     # =========================================================================
     # 2. WRONGFUL TERMINATION (domain: labour) — 20 chunks
     # =========================================================================

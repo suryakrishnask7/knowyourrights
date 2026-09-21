@@ -93,3 +93,76 @@ body {
   border-left: 2px solid rgba(239, 68, 68, 0.35);
   padding-left: 1.25rem;
 }
+
+/* PDF Export / Print Styles */
+@media print {
+  @page {
+    margin: 1.5cm;
+    size: auto;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+
+  /* Hide interactive/non-printable elements */
+  .no-print,
+  header,
+  footer,
+  button {
+    display: none !important;
+  }
+
+  /* Convert dark theme variables to clean printable document colors */
+  :root,
+  [data-theme="dark"] {
+    --bg: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-subtle: #f9f9fb;
+    --bg-muted: #f1f1f5;
+    --border: #d1d5db;
+    --border-strong: #111827;
+    --text-1: #111827;
+    --text-2: #374151;
+    --text-3: #6b7280;
+    --text-4: #9ca3af;
+    --accent-crimson: #dc2626;
+    --accent-gold: #d97706;
+    --accent-navy: #2563eb;
+    --rule: #e5e7eb;
+  }
+
+  /* Reset layout constraints for print */
+  .min-h-screen {
+    min-height: auto !important;
+  }
+
+  /* Ensure legal sheet takes full printable page width */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Force background colors and borders to print properly */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .border {
+    border-color: #d1d5db !important;
+  }
+
+  /* Legal stamp printing style */
+  .legal-stamp {
+    border-color: #dc2626 !important;
+    color: #dc2626 !important;
+  }
+
+  .paper-rule-margin {
+    border-left-color: #dc2626 !important;
+  }
+}
+
