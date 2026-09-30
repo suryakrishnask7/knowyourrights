@@ -21,35 +21,34 @@ export default function EntryGate({
   buttonLabel = "PROCEED TO INQUIRY",
   compact = false,
 }: EntryGateProps) {
+  const isReady = termsAccepted && userName.trim().length > 0;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!termsAccepted) return;
+    if (!isReady) return;
     onContinue();
   };
 
   return (
     <form onSubmit={handleSubmit} className={`w-full ${compact ? "space-y-4" : "space-y-6"}`}>
-      {/* Optional Name Intake Field */}
+      {/* Name Intake Field */}
       <div>
         <label
           htmlFor="kyr-user-name"
           className="block text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase mb-2"
         >
-          WHAT SHOULD WE CALL YOU?{" "}
-          <span className="text-[10px] text-[var(--text-4)] font-normal tracking-normal">(OPTIONAL)</span>
+          WHAT SHOULD WE CALL YOU?
         </label>
-        <div className="w-full border border-[var(--border)] bg-[var(--bg-surface)] p-4 focus-within:border-[var(--text-1)] transition-colors">
-          <input
-            id="kyr-user-name"
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            placeholder="e.g. Priya or Rahul"
-            maxLength={50}
-            className="w-full bg-transparent text-[var(--text-1)] text-base sm:text-lg placeholder:text-[var(--text-4)] focus:outline-none font-sans"
-          />
-        </div>
-        <p className="text-[11px] text-[var(--text-3)] mt-2 font-sans">
+        <input
+          id="kyr-user-name"
+          type="text"
+          suppressHydrationWarning
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          maxLength={50}
+          className="w-full border border-[var(--border)] bg-[var(--bg-surface)] px-4 py-3 text-[var(--text-1)] text-base focus:outline-none focus:border-[var(--text-1)] font-sans transition-colors"
+        />
+        <p className="text-[11px] text-[var(--text-3)] mt-1.5 font-sans">
           Used solely to address you and draft formal notices. Never shared or sold.
         </p>
       </div>
@@ -60,6 +59,7 @@ export default function EntryGate({
           <input
             type="checkbox"
             id="kyr-terms-checkbox"
+            suppressHydrationWarning
             checked={termsAccepted}
             onChange={(e) => setTermsAccepted(e.target.checked)}
             className="mt-1 h-4 w-4 rounded-none border border-[var(--border-strong)] bg-[var(--bg-surface)] accent-[var(--text-1)] cursor-pointer shrink-0"
@@ -77,9 +77,10 @@ export default function EntryGate({
       <div>
         <button
           type="submit"
-          disabled={!termsAccepted}
+          suppressHydrationWarning
+          disabled={!isReady}
           className={`w-full py-4 px-6 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase transition-all border ${
-            termsAccepted
+            isReady
               ? "bg-[var(--text-1)] text-[var(--bg)] border-[var(--text-1)] hover:opacity-90 cursor-pointer shadow-sm active:scale-[0.99]"
               : "bg-[var(--bg-subtle)] text-[var(--text-4)] border-[var(--border)] cursor-not-allowed"
           }`}

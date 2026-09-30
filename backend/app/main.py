@@ -5,7 +5,7 @@ import asyncio
 import urllib.request
 from typing import Optional, List, Dict, Any
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
@@ -27,7 +27,7 @@ from app.clarify import get_next_clarifying_question, try_cheap_extraction
 from app.generate import call_llm
 from app.pathway import get_pathway
 from app.cache import make_cache_key, get_cached_response, set_cached_response, get_corpus_version
-from app.letter import LetterFields, is_letter_eligible, render_letter
+from app.letter import LetterFields, is_letter_eligible, render_letter, render_letter_docx
 
 MAX_CLARIFICATION_ROUNDS = 2
 
@@ -445,4 +445,27 @@ def handle_letter_render(req: LetterRenderRequest):
         today_str=req.today_str
     )
     return LetterRenderResponse(text=rendered["text"], html=rendered["html"])
+
+
+@app.post("/api/letter/docx")
+def handle_letter_docx(req: LetterRenderRequest):
+    bio = render_letter_docx(
+        category=req.category,
+        act=req.act,
+        section=req.section,
+        authority=req.authority,
+        ask_text=req.ask_text,
+        fields=req.fields,
+        today_str=req.today_str
+    )
+    safe_filename = f"Legal_Notice_{req.category.upper()}.docx"
+    return Response(
+        content=bio.getvalue(),
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={
+            "Content-Disposition": f'attachment; filename="{safe_filename}"',
+            "Access-Control-Expose-Headers": "Content-Disposition",
+        }
+    )
+
 

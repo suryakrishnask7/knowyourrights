@@ -208,12 +208,6 @@ export default function Home() {
   const [showLetterForm, setShowLetterForm] = useState(false);
   const [letterFields, setLetterFields] = useState({
     employee_name: "",
-    employee_address: "",
-    counterparty_name: "",
-    counterparty_address: "",
-    joining_date: "",
-    designation: "",
-    amount_claimed: "",
   });
   const [generatedLetter, setGeneratedLetter] = useState<{ text: string; html: string } | null>(null);
   const [letterLoading, setLetterLoading] = useState(false);
@@ -369,7 +363,9 @@ export default function Home() {
           section: firstCitation?.section || "Statutory Section",
           authority: result.pathway?.authority || "District Legal Services Authority (DLSA)",
           ask_text: result.pathway?.steps[0]?.title || "resolve the outstanding claim",
-          fields: letterFields,
+          fields: {
+            employee_name: letterFields.employee_name.trim() || result.user_name || userName || undefined,
+          },
         }),
       });
       if (!res.ok) {
@@ -386,27 +382,35 @@ export default function Home() {
     }
   };
 
-  const printNoticeLetter = () => {
-    if (!generatedLetter) return;
-    const printWindow = window.open("", "_blank");
-    if (!printWindow) return;
-    printWindow.document.write(generatedLetter.html);
-    printWindow.document.close();
-    printWindow.focus();
-    setTimeout(() => {
-      printWindow.print();
-    }, 350);
-  };
-
-  const downloadLetterText = () => {
-    if (!generatedLetter) return;
-    const blob = new Blob([generatedLetter.text], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `Legal_Notice_${(result?.detectedCategory || "claim").toUpperCase()}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleDownloadDocx = async () => {
+    if (!result) return;
+    try {
+      const firstCitation = result.citations[0];
+      const res = await fetch(`${API}/api/letter/docx`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: result.detectedCategory || "unpaid_wages",
+          act: firstCitation?.act || "Applicable Indian Statute",
+          section: firstCitation?.section || "Statutory Section",
+          authority: result.pathway?.authority || "District Legal Services Authority (DLSA)",
+          ask_text: result.pathway?.steps[0]?.title || "resolve the outstanding claim",
+          fields: {
+            employee_name: letterFields.employee_name.trim() || result.user_name || userName || undefined,
+          },
+        }),
+      });
+      if (!res.ok) throw new Error("Failed to download docx");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Legal_Notice_${(result?.detectedCategory || "claim").toUpperCase()}.docx`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      setLetterError("Failed to download .docx notice letter file.");
+    }
   };
 
   return (
@@ -862,91 +866,19 @@ export default function Home() {
 
                   {showLetterForm && (
                     <div className="space-y-4 pt-2">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                        <div>
-                          <label className="block text-[10px] uppercase font-bold text-[var(--text-3)] mb-1">
-                            YOUR FULL NAME *
-                          </label>
-                          <input
-                            type="text"
-                            value={letterFields.employee_name}
-                            onChange={e => setLetterFields({ ...letterFields, employee_name: e.target.value })}
-                            placeholder="e.g. Priya Sundaram"
-                            className="w-full p-2.5 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] focus:outline-none focus:border-[var(--text-1)]"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[10px] uppercase font-bold text-[var(--text-3)] mb-1">
-                            YOUR POSTAL ADDRESS *
-                          </label>
-                          <input
-                            type="text"
-                            value={letterFields.employee_address}
-                            onChange={e => setLetterFields({ ...letterFields, employee_address: e.target.value })}
-                            placeholder="e.g. No. 14, Anna Nagar, Chennai"
-                            className="w-full p-2.5 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] focus:outline-none focus:border-[var(--text-1)]"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[10px] uppercase font-bold text-[var(--text-3)] mb-1">
-                            EMPLOYER / LANDLORD NAME *
-                          </label>
-                          <input
-                            type="text"
-                            value={letterFields.counterparty_name}
-                            onChange={e => setLetterFields({ ...letterFields, counterparty_name: e.target.value })}
-                            placeholder="e.g. Apex Technologies Pvt Ltd"
-                            className="w-full p-2.5 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] focus:outline-none focus:border-[var(--text-1)]"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[10px] uppercase font-bold text-[var(--text-3)] mb-1">
-                            EMPLOYER / LANDLORD ADDRESS *
-                          </label>
-                          <input
-                            type="text"
-                            value={letterFields.counterparty_address}
-                            onChange={e => setLetterFields({ ...letterFields, counterparty_address: e.target.value })}
-                            placeholder="e.g. OMR IT Corridor, Chennai"
-                            className="w-full p-2.5 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] focus:outline-none focus:border-[var(--text-1)]"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[10px] uppercase font-bold text-[var(--text-3)] mb-1">
-                            JOINING / LEASE START DATE (OPTIONAL)
-                          </label>
-                          <input
-                            type="text"
-                            value={letterFields.joining_date}
-                            onChange={e => setLetterFields({ ...letterFields, joining_date: e.target.value })}
-                            placeholder="e.g. January 2024"
-                            className="w-full p-2.5 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] focus:outline-none focus:border-[var(--text-1)]"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[10px] uppercase font-bold text-[var(--text-3)] mb-1">
-                            DESIGNATION / ROLE (OPTIONAL)
-                          </label>
-                          <input
-                            type="text"
-                            value={letterFields.designation}
-                            onChange={e => setLetterFields({ ...letterFields, designation: e.target.value })}
-                            placeholder="e.g. Senior Associate"
-                            className="w-full p-2.5 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] focus:outline-none focus:border-[var(--text-1)]"
-                          />
-                        </div>
-                        <div className="sm:col-span-2">
-                          <label className="block text-[10px] uppercase font-bold text-[var(--text-3)] mb-1">
-                            AMOUNT OR PERIOD CLAIMED (OPTIONAL)
-                          </label>
-                          <input
-                            type="text"
-                            value={letterFields.amount_claimed}
-                            onChange={e => setLetterFields({ ...letterFields, amount_claimed: e.target.value })}
-                            placeholder="e.g. 2 months salary (₹95,000) or 50,000 security deposit"
-                            className="w-full p-2.5 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] focus:outline-none focus:border-[var(--text-1)]"
-                          />
-                        </div>
+                      <div>
+                        <label className="block text-[10px] uppercase font-bold text-[var(--text-3)] mb-1.5 font-mono">
+                          YOUR FULL LEGAL NAME
+                        </label>
+                        <input
+                          type="text"
+                          value={letterFields.employee_name}
+                          onChange={e => setLetterFields({ employee_name: e.target.value })}
+                          className="w-full p-3 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] text-sm sm:text-base focus:outline-none focus:border-[var(--text-1)] font-sans transition-colors"
+                        />
+                        <p className="text-[11px] text-[var(--text-3)] mt-1.5 font-sans">
+                          All other fields in the letter (recipient, addresses, claim amounts) are populated with standard bracketed placeholders for you to fill in or review.
+                        </p>
                       </div>
 
                       {letterError && (
@@ -955,42 +887,33 @@ export default function Home() {
                         </div>
                       )}
 
-                      <div className="flex gap-3 pt-2">
+                      <div className="flex gap-3 pt-1">
                         <button
                           type="button"
                           onClick={handleGenerateLetter}
                           disabled={letterLoading}
-                          className="px-5 py-2.5 bg-[var(--text-1)] text-[var(--bg)] font-mono text-xs font-bold hover:opacity-90 transition-opacity cursor-pointer"
+                          className="px-5 py-2.5 bg-[var(--text-1)] text-[var(--bg)] font-mono text-xs font-bold hover:opacity-90 transition-opacity cursor-pointer shadow-sm"
                         >
-                          {letterLoading ? "GENERATING..." : "PREVIEW & GENERATE NOTICE LETTER"}
+                          {letterLoading ? "GENERATING..." : "PREVIEW NOTICE LETTER"}
                         </button>
                       </div>
 
-                      {/* Rendered Letter Preview & Dual Export Buttons */}
+                      {/* Rendered Letter Preview & .DOCX Download */}
                       {generatedLetter && (
                         <div className="mt-6 pt-6 border-t border-[var(--border)]">
                           <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
                             <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-[var(--text-3)]">
-                              GENERATED NOTICE LETTER PREVIEW
+                              NOTICE LETTER PREVIEW
                             </span>
-                            <div className="flex items-center gap-2">
-                              <button
-                                type="button"
-                                onClick={downloadLetterText}
-                                className="px-3 py-1.5 border border-[var(--border)] bg-[var(--bg-surface)] hover:border-[var(--text-1)] text-[var(--text-1)] text-xs font-mono transition-colors cursor-pointer"
-                              >
-                                DOWNLOAD .TXT
-                              </button>
-                              <button
-                                type="button"
-                                onClick={printNoticeLetter}
-                                className="px-3 py-1.5 border border-[var(--border-strong)] bg-[var(--text-1)] text-[var(--bg)] text-xs font-mono font-bold hover:opacity-90 transition-opacity cursor-pointer"
-                              >
-                                DOWNLOAD NOTICE LETTER (PDF)
-                              </button>
-                            </div>
+                            <button
+                              type="button"
+                              onClick={handleDownloadDocx}
+                              className="px-4 py-2 border border-[var(--border-strong)] bg-[var(--text-1)] text-[var(--bg)] text-xs font-mono font-bold hover:opacity-90 transition-opacity cursor-pointer flex items-center gap-2 shadow-sm"
+                            >
+                              <span>⬇</span> DOWNLOAD NOTICE LETTER (.DOCX)
+                            </button>
                           </div>
-                          <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border)] text-xs font-mono text-[var(--text-1)] whitespace-pre-wrap leading-relaxed max-h-96 overflow-y-auto">
+                          <pre className="p-5 bg-[var(--bg-surface)] border border-[var(--border)] text-xs sm:text-sm font-mono text-[var(--text-1)] whitespace-pre-wrap leading-relaxed max-h-[480px] overflow-y-auto">
                             {generatedLetter.text}
                           </pre>
                         </div>

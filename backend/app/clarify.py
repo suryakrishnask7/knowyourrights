@@ -8,6 +8,9 @@ from app.fact_requirements import (
     REASON_TEMPLATES,
     DEFAULT_REASON,
     YES_NO_FACTS,
+    COMBINABLE_FACT_GROUPS,
+    COMBINED_QUESTION_TEMPLATES,
+    COMBINED_REASON_TEMPLATES,
 )
 
 YES_PATTERNS = {"yes", "yeah", "yep", "yup", "correct", "true", "i do", "we do", "female", "woman"}
@@ -16,11 +19,28 @@ NO_PATTERNS = {"no", "nope", "nah", "false", "don't", "dont", "i don't", "we don
 
 def get_next_clarifying_question(category: str, missing_facts: List[str]) -> Optional[Dict[str, Any]]:
     """
-    Determines the single highest priority missing fact to ask about.
-    Prioritizes blocking facts first, followed by refining facts.
+    Determines the clarifying question to ask.
+    Checks COMBINABLE_FACT_GROUPS first: if two-or-more still-missing blocking facts
+    for the category form a known combinable pair, ask the combined question.
+    Otherwise, prioritizes blocking facts first, followed by refining facts.
     """
     if not missing_facts or not category or category not in REQUIRED_FACTS:
         return None
+
+    # Check COMBINABLE_FACT_GROUPS first
+    combinable_pairs = COMBINABLE_FACT_GROUPS.get(category, [])
+    for pair in combinable_pairs:
+        f1, f2 = pair
+        if f1 in missing_facts and f2 in missing_facts:
+            q_template = COMBINED_QUESTION_TEMPLATES.get(pair)
+            r_template = COMBINED_REASON_TEMPLATES.get(pair, DEFAULT_REASON)
+            if q_template:
+                return {
+                    "fact_being_requested": f"{f1}+{f2}",
+                    "facts_being_requested": [f1, f2],
+                    "clarifying_question": q_template,
+                    "reason_shown_to_user": r_template,
+                }
 
     blocking = REQUIRED_FACTS[category]["blocking"]
     ordered = [f for f in blocking if f in missing_facts] + [
@@ -32,6 +52,7 @@ def get_next_clarifying_question(category: str, missing_facts: List[str]) -> Opt
     next_fact = ordered[0]
     return {
         "fact_being_requested": next_fact,
+        "facts_being_requested": [next_fact],
         "clarifying_question": QUESTION_TEMPLATES.get(
             next_fact, f"Could you provide more details regarding: {next_fact}?"
         ),

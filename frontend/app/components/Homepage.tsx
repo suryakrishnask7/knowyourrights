@@ -230,9 +230,9 @@ export default function Homepage({
       </section>
 
       {/* ── Section: Start Here (Entry Gate) ─────────────────────────────── */}
-      <section id="start" className="scroll-mt-12 pb-16">
-        <div className="border-t border-[var(--border)] pt-12">
-          <div className="max-w-3xl mb-8">
+      <section id="start" className="scroll-mt-12 pb-16 w-full">
+        <div className="border-t border-[var(--border)] pt-12 w-full">
+          <div className="w-full mb-8">
             <div className="flex items-center gap-2 mb-2">
               <span className="font-mono text-xs font-bold text-[var(--accent-crimson)]">§ 5</span>
               <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[var(--text-3)]">
@@ -243,7 +243,7 @@ export default function Homepage({
               Begin your legal inquiry
             </h2>
             <p className="text-sm sm:text-base font-serif text-[var(--text-2)] mt-2 leading-relaxed">
-              Provide your name (optional) and acknowledge statutory terms to enter the query workspace.
+              Provide your name and acknowledge statutory terms to enter the query workspace.
             </p>
           </div>
 

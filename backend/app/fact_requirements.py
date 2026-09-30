@@ -55,6 +55,21 @@ REQUIRED_FACTS = {
     },
 }
 
+COMBINABLE_FACT_GROUPS = {
+    "wrongful_termination": [("tenure_length", "reason_given")],
+    "unpaid_wages": [("unpaid_period", "monthly_wage_bracket")],
+}
+
+COMBINED_QUESTION_TEMPLATES = {
+    ("tenure_length", "reason_given"): "How long had you worked there, and did your employer give you a reason for the termination?",
+    ("unpaid_period", "monthly_wage_bracket"): "How many months of salary are unpaid, and roughly what is your monthly salary?",
+}
+
+COMBINED_REASON_TEMPLATES = {
+    ("tenure_length", "reason_given"): "since length of service and the termination reason determine which statutory retrenchment and notice protections apply.",
+    ("unpaid_period", "monthly_wage_bracket"): "so I can check if you're within the 12-month filing window and which statutory wage ceiling applies.",
+}
+
 QUESTION_TEMPLATES = {
     "unpaid_period": "How many months of salary are unpaid, and when was it last paid on time?",
     "monthly_wage_bracket": "Roughly what is your monthly salary — this affects which wage protections apply under the Payment of Wages Act / Code on Wages.",
