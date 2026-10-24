@@ -3,6 +3,19 @@
 from typing import List, Dict, Any, Optional
 from app.fact_requirements import REQUIRED_FACTS
 
+# Categories with enacted state-level statutes in TN, MH, KA
+# (State Shops & Establishments Acts for labour; State Rent / Tenancy Acts for tenancy)
+STATE_EXPECTED_CATEGORIES = {
+    "wrongful_termination",
+    "unpaid_wages",
+    "overtime_hours",
+    "eviction_dispute",
+    "security_deposit_dispute",
+    "rent_increase_dispute",
+    "repairs_maintenance_dispute",
+    "tenant_landlord",
+}
+
 
 def evidence_sufficiency(
     chunks: List[Dict[str, Any]],
@@ -29,7 +42,6 @@ def evidence_sufficiency(
     reasons: List[str] = []
     top_score = chunks[0]["score"] if chunks and "score" in chunks[0] else 0
     has_state_chunk = any(c.get("jurisdiction") == state for c in chunks)
-    has_missing_facts = len(missing_facts) > 0
     chunk_count = len(chunks)
 
     points = 0
@@ -50,24 +62,21 @@ def evidence_sufficiency(
         points += 1
         reasons.append("Moderate keyword match with retrieved provisions.")
 
-    is_wrongful_term = (
-        detected_category == "wrongful_termination" or
-        any(c.get("category") == "wrongful_termination" for c in chunks)
-    )
-    if is_wrongful_term:
+    # State law coverage check across all categories that have state legislation
+    state_expected = bool(detected_category) and (detected_category in STATE_EXPECTED_CATEGORIES) and state in ("TN", "MH", "KA")
+    if state_expected:
         if has_state_chunk:
             points += 2
             reasons.append(f"State-specific provision for {state} retrieved — answer is jurisdiction-specific.")
         else:
-            points -= 1
-            reasons.append(f"No {state}-specific provision found; answer relies on central law only.")
+            reasons.append(f"No {state}-specific provision found; answer relies on central/model law only.")
 
-    if not has_missing_facts:
+    # Missing facts here are purely optional/refining because blocking facts already passed above
+    if not missing_facts:
         points += 1
         reasons.append("No additional facts needed to answer this question.")
     else:
-        points -= 1
-        reasons.append(f"Missing information: {'; '.join(missing_facts)}.")
+        reasons.append(f"Optional details that would sharpen this answer: {', '.join(sorted(missing_facts))}.")
 
     if points >= 5:
         level = "High"
@@ -76,7 +85,12 @@ def evidence_sufficiency(
     else:
         level = "Low"
 
+    # Never award 'High' on central/model law alone when binding state law exists for this topic & jurisdiction
+    if state_expected and not has_state_chunk and level == "High":
+        level = "Medium"
+
     return {
         "level": level,
         "reasons": reasons
     }
+

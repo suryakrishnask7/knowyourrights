@@ -5,6 +5,7 @@ import asyncio
 import urllib.request
 from typing import Optional, List, Dict, Any
 
+# pyrefly: ignore[missing-import]
 from fastapi import FastAPI, HTTPException, status, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -28,8 +29,9 @@ from app.generate import call_llm
 from app.pathway import get_pathway
 from app.cache import make_cache_key, get_cached_response, set_cached_response, get_corpus_version
 from app.letter import LetterFields, is_letter_eligible, render_letter, render_letter_docx
+from app.translate import SUPPORTED_LANGUAGES, translate_legal_content
 
-MAX_CLARIFICATION_ROUNDS = 2
+MAX_CLARIFICATION_ROUNDS = 3
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("knowyourrights-backend")
@@ -78,7 +80,7 @@ def start_keep_alive_task():
 # ── Pydantic models ────────────────────────────────────────────────────────────
 
 class QueryRequest(BaseModel):
-    query: str = Field(..., min_length=5)
+    query: str = Field(..., min_length=1)
     state: str = Field(..., description="TN | MH | KA")
     facts: Optional[Dict[str, Any]] = Field(default_factory=dict)
     clarification_round: int = 0
@@ -136,10 +138,33 @@ class LetterRenderRequest(BaseModel):
     ask_text: str
     fields: LetterFields
     today_str: Optional[str] = None
+    language: Optional[str] = "en"
 
 class LetterRenderResponse(BaseModel):
     text: str
     html: str
+
+class TranslateRequest(BaseModel):
+    model_config = {"extra": "allow"}
+
+    target_language: str
+    answer: str = ""
+    answerSimple: Optional[str] = None
+    evidence_reasons: Optional[List[Any]] = None
+    pathway_authority: Optional[str] = None
+    pathway_deadline: Optional[str] = None
+    pathway_steps: Optional[List[Any]] = None
+
+class TranslateResponse(BaseModel):
+    model_config = {"extra": "allow"}
+
+    target_language: str
+    answer: str = ""
+    answerSimple: Optional[str] = None
+    evidence_reasons: Optional[List[Any]] = None
+    pathway_authority: Optional[str] = None
+    pathway_deadline: Optional[str] = None
+    pathway_steps: Optional[List[Any]] = None
 
 
 # ── Personalization Helpers ───────────────────────────────────────────────────
@@ -285,7 +310,10 @@ async def handle_query(req: QueryRequest):
 
     if not chunks:
         fallback_pathway = get_pathway(None)
-        fallback_msg = "I wasn't able to find specific legal provisions matching your situation. Please provide more context or rephrase your situation."
+        if classification.get("error"):
+            fallback_msg = "We encountered a temporary processing interruption with the statutory analysis service. Please try submitting your query again."
+        else:
+            fallback_msg = "I wasn't able to find specific legal provisions matching your situation. Please provide more context or rephrase your situation."
         return QueryResponse(
             answer=personalize_text(fallback_msg, user_name),
             answerSimple=personalize_simple_text(fallback_msg, user_name),
@@ -442,7 +470,8 @@ def handle_letter_render(req: LetterRenderRequest):
         authority=req.authority,
         ask_text=req.ask_text,
         fields=req.fields,
-        today_str=req.today_str
+        today_str=req.today_str,
+        language=req.language or "en",
     )
     return LetterRenderResponse(text=rendered["text"], html=rendered["html"])
 
@@ -456,9 +485,11 @@ def handle_letter_docx(req: LetterRenderRequest):
         authority=req.authority,
         ask_text=req.ask_text,
         fields=req.fields,
-        today_str=req.today_str
+        today_str=req.today_str,
+        language=req.language or "en",
     )
-    safe_filename = f"Legal_Notice_{req.category.upper()}.docx"
+    lang_suffix = f"_{req.language.upper()}" if req.language and req.language != "en" else ""
+    safe_filename = f"Legal_Notice_{req.category.upper()}{lang_suffix}.docx"
     return Response(
         content=bio.getvalue(),
         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -467,5 +498,62 @@ def handle_letter_docx(req: LetterRenderRequest):
             "Access-Control-Expose-Headers": "Content-Disposition",
         }
     )
+
+
+# ── Translation Endpoints ─────────────────────────────────────────────────────
+
+@app.get("/api/languages")
+def get_languages():
+    return {"languages": SUPPORTED_LANGUAGES}
+
+
+@app.post("/api/translate", response_model=TranslateResponse)
+def handle_translate(req: TranslateRequest):
+    if req.target_language not in SUPPORTED_LANGUAGES:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Unsupported language '{req.target_language}'. Supported: {list(SUPPORTED_LANGUAGES.keys())}"
+        )
+
+    if req.target_language == "en":
+        return TranslateResponse(
+            target_language="en",
+            answer=req.answer,
+            answerSimple=req.answerSimple,
+            evidence_reasons=req.evidence_reasons,
+            pathway_authority=req.pathway_authority,
+            pathway_deadline=req.pathway_deadline,
+            pathway_steps=req.pathway_steps
+        )
+
+    payload_to_translate: Dict[str, Any] = {
+        "answer": req.answer,
+    }
+    if req.answerSimple:
+        payload_to_translate["answerSimple"] = req.answerSimple
+    if req.evidence_reasons:
+        payload_to_translate["evidence_reasons"] = req.evidence_reasons
+    if req.pathway_authority:
+        payload_to_translate["pathway_authority"] = req.pathway_authority
+    if req.pathway_deadline:
+        payload_to_translate["pathway_deadline"] = req.pathway_deadline
+    if req.pathway_steps:
+        payload_to_translate["pathway_steps"] = req.pathway_steps
+
+    try:
+        translated = translate_legal_content(payload_to_translate, req.target_language)
+        return TranslateResponse(
+            target_language=req.target_language,
+            answer=translated.get("answer", req.answer),
+            answerSimple=translated.get("answerSimple", req.answerSimple),
+            evidence_reasons=translated.get("evidence_reasons", req.evidence_reasons),
+            pathway_authority=translated.get("pathway_authority", req.pathway_authority),
+            pathway_deadline=translated.get("pathway_deadline", req.pathway_deadline),
+            pathway_steps=translated.get("pathway_steps", req.pathway_steps)
+        )
+    except Exception as e:
+        logger.error("Translation failed: %s", e)
+        raise HTTPException(status_code=500, detail=f"Translation failed: {str(e)}")
+
 
 

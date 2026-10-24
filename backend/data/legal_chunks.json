@@ -2573,7 +2573,9 @@
       "residential",
       "commercial",
       "exempted premises"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s4",
@@ -2590,7 +2592,9 @@
       "Rent Authority submission",
       "two months deadline",
       "tenancy registration"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s5",
@@ -2607,7 +2611,9 @@
       "fixed term lease",
       "renewal terms",
       "extension"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s8",
@@ -2624,7 +2630,9 @@
       "payment date",
       "written rent receipt",
       "rent receipt entitlement"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s13",
@@ -2641,7 +2649,9 @@
       "24 hours prior notice",
       "tenant privacy",
       "daytime entry only"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s14",
@@ -2658,7 +2668,9 @@
       "essential supplies",
       "water electricity protection",
       "restraining landlord"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s20",
@@ -2675,7 +2687,9 @@
       "Rent Authority order",
       "two months rent compensation",
       "emergency relief"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s21-1",
@@ -2693,7 +2707,9 @@
       "two consecutive months rent default",
       "unauthorized subletting",
       "bona fide need"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s21-2",
@@ -2710,7 +2726,9 @@
       "deposit of rent arrears",
       "one month grace period",
       "preventing eviction"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s22",
@@ -2727,7 +2745,9 @@
       "re-entry rights",
       "building demolition",
       "Rent Court order"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s23",
@@ -2745,7 +2765,9 @@
       "double rent",
       "four times rent",
       "vacating order"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s35",
@@ -2761,7 +2783,9 @@
       "90 days fast track disposal",
       "Rent Court timeline",
       "summary procedure"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "tnrrlt-s21-1",
@@ -3001,7 +3025,9 @@
       "2 months residential limit",
       "6 months commercial limit",
       "statutory ceiling"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s11-2",
@@ -3018,7 +3044,9 @@
       "vacant possession refund",
       "permissible deductions",
       "immediate return"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s11-3",
@@ -3034,7 +3062,9 @@
       "Rent Authority deposit claim",
       "dispute on deductions",
       "deposit recovery application"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "tnrrlt-s11-1",
@@ -3239,7 +3269,9 @@
       "agreed revision",
       "tenancy terms",
       "rent hike"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s9-2",
@@ -3255,7 +3287,9 @@
       "three months notice",
       "statutory notice for rent hike",
       "prior written notice"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s9-3",
@@ -3271,7 +3305,9 @@
       "deemed acceptance",
       "tenant termination option",
       "notice response"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s10",
@@ -3287,7 +3323,9 @@
       "structural improvement rent hike",
       "Rent Authority determination",
       "fair rent dispute"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "tnrrlt-s9-1",
@@ -3493,7 +3531,9 @@
       "structural repair landlord duty",
       "Second Schedule",
       "minor repairs tenant"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s15-2",
@@ -3510,7 +3550,9 @@
       "one month rent deduction",
       "tenant repair right",
       "repair reimbursement"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s15-3",
@@ -3526,7 +3568,9 @@
       "tenant repair default",
       "deduct from deposit",
       "landlord repair right"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "mta-s15-4",
@@ -3543,7 +3587,9 @@
       "rent suspension",
       "structural failure",
       "tenant protection"
-    ]
+    ],
+    "binding": false,
+    "is_model_law": true
   },
   {
     "id": "tnrrlt-s15-1",

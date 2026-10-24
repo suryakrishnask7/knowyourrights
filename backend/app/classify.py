@@ -51,47 +51,53 @@ def extract_json_from_llm(raw_text: str) -> dict:
     return json.loads(cleaned)
 
 
+def _classify_heuristic(query_text: str, known_facts: Optional[dict] = None) -> Dict[str, Any]:
+    """Deterministic rule-based keyword classifier as primary fallback."""
+    known_facts = known_facts or {}
+    q_lower = query_text.lower()
+    cat: Optional[str] = None
+    missing: List[str] = []
+
+    # Priority order matching for specific disputes
+    if any(w in q_lower for w in ["pf", "provident fund", "epfo", "uan", "passbook"]):
+        cat = "pf_nonpayment"
+    elif any(w in q_lower for w in ["gratuity", "5 years", "service completion", "retirement dues"]):
+        cat = "gratuity_nonpayment"
+    elif any(w in q_lower for w in ["bonus", "diwali bonus", "annual bonus", "8.33%"]):
+        cat = "bonus_nonpayment"
+    elif any(w in q_lower for w in ["maternity", "pregnant", "pregnancy", "creche", "delivery", "miscarriage"]):
+        cat = "maternity_benefit"
+    elif any(w in q_lower for w in ["overtime", "extra hours", "double pay", "48 hours", "9 hours", "late night"]):
+        cat = "overtime_hours"
+    elif any(w in q_lower for w in ["deposit", "advance", "refund deposit", "security advance", "security deposit"]):
+        cat = "security_deposit_dispute"
+    elif any(w in q_lower for w in ["evict", "eviction", "vacate", "throw out", "forceful possession", "lockout"]):
+        cat = "eviction_dispute"
+    elif any(w in q_lower for w in ["increase rent", "rent hike", "revision", "escalation", "higher rent"]):
+        cat = "rent_increase_dispute"
+    elif any(w in q_lower for w in ["repair", "maintenance", "seepage", "leakage", "whitewash", "painting"]):
+        cat = "repairs_maintenance_dispute"
+    elif any(w in q_lower for w in ["posh", "sexual harass", "sexual advance", "sexual assault", "internal complaints committee"]):
+        cat = "posh_complaint"
+    elif any(w in q_lower for w in ["fire", "fired", "terminat", "retrench", "dismiss", "resign", "notice period", "severance"]):
+        cat = "wrongful_termination"
+    elif any(w in q_lower for w in ["salary", "wage", "unpaid", "due", "pay", "deduction", "delayed", "stipend"]):
+        cat = "unpaid_wages"
+    elif any(w in q_lower for w in ["rent", "landlord", "tenant", "lease", "agreement"]):
+        cat = "tenant_landlord"
+
+    if cat and cat in REQUIRED_FACTS:
+        allowed = REQUIRED_FACTS[cat]["blocking"] + REQUIRED_FACTS[cat]["refining"]
+        missing = [f for f in allowed if f not in known_facts]
+
+    return {"category": cat, "missingFacts": missing}
+
+
 def classify_query(query_text: str, known_facts: Optional[dict] = None) -> Dict[str, Any]:
     known_facts = known_facts or {}
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key or api_key.startswith("mock_"):
-        # Heuristic fallback if GROQ_API_KEY is not configured
-        q_lower = query_text.lower()
-        cat: Optional[str] = None
-        missing: List[str] = []
-
-        if any(w in q_lower for w in ["pf", "provident fund", "epfo", "uan", "passbook"]):
-            cat = "pf_nonpayment"
-        elif any(w in q_lower for w in ["gratuity", "5 years", "service completion", "retirement dues"]):
-            cat = "gratuity_nonpayment"
-        elif any(w in q_lower for w in ["bonus", "diwali bonus", "annual bonus", "8.33%"]):
-            cat = "bonus_nonpayment"
-        elif any(w in q_lower for w in ["maternity", "pregnant", "pregnancy", "creche", "delivery", "miscarriage"]):
-            cat = "maternity_benefit"
-        elif any(w in q_lower for w in ["overtime", "extra hours", "double pay", "48 hours", "9 hours", "late night"]):
-            cat = "overtime_hours"
-        elif any(w in q_lower for w in ["deposit", "advance", "refund deposit", "security advance"]):
-            cat = "security_deposit_dispute"
-        elif any(w in q_lower for w in ["evict", "eviction", "vacate", "throw out", "forceful possession"]):
-            cat = "eviction_dispute"
-        elif any(w in q_lower for w in ["increase rent", "rent hike", "revision", "escalation", "higher rent"]):
-            cat = "rent_increase_dispute"
-        elif any(w in q_lower for w in ["repair", "maintenance", "seepage", "leakage", "whitewash", "painting"]):
-            cat = "repairs_maintenance_dispute"
-        elif any(w in q_lower for w in ["posh", "sexual harass", "sexual advance", "sexual assault", "internal complaints committee"]):
-            cat = "posh_complaint"
-        elif any(w in q_lower for w in ["fire", "fired", "terminat", "retrench", "dismiss", "resign", "notice"]):
-            cat = "wrongful_termination"
-        elif any(w in q_lower for w in ["rent", "landlord", "tenant", "lease", "agreement"]):
-            cat = "tenant_landlord"
-        elif any(w in q_lower for w in ["salary", "wage", "unpaid", "due", "pay", "deduction", "delayed"]):
-            cat = "unpaid_wages"
-
-        if cat and cat in REQUIRED_FACTS:
-            allowed = REQUIRED_FACTS[cat]["blocking"] + REQUIRED_FACTS[cat]["refining"]
-            missing = [f for f in allowed if f not in known_facts]
-
-        return {"category": cat, "missingFacts": missing}
+        return _classify_heuristic(query_text, known_facts)
 
     try:
         client = Groq(api_key=api_key)
@@ -116,10 +122,35 @@ def classify_query(query_text: str, known_facts: Optional[dict] = None) -> Dict[
             allowed = set(REQUIRED_FACTS[cat]["blocking"] + REQUIRED_FACTS[cat]["refining"])
             filtered_missing = [f for f in raw_missing if f in allowed and f not in known_facts]
 
+        # If LLM classified successfully
+        if cat is not None:
+            return {
+                "category": cat,
+                "missingFacts": filtered_missing
+            }
+
+        # If LLM returned None, double check heuristic before declaring unsupported
+        heuristic_res = _classify_heuristic(query_text, known_facts)
+        if heuristic_res.get("category"):
+            logger.info("LLM returned None, but heuristic matched category %s", heuristic_res["category"])
+            return heuristic_res
+
         return {
-            "category": cat,
-            "missingFacts": filtered_missing
+            "category": None,
+            "missingFacts": []
         }
     except Exception as e:
-        logger.error(f"Classification error: {e}")
-        return {"category": None, "missingFacts": []}
+        logger.warning(f"Classification LLM exception: {e}. Executing graceful heuristic fallback.")
+        # Graceful fallback to heuristic classification
+        heuristic_res = _classify_heuristic(query_text, known_facts)
+        if heuristic_res.get("category"):
+            return heuristic_res
+        
+        # Truly failed with exception and heuristic found nothing
+        return {
+            "category": None,
+            "missingFacts": [],
+            "error": True,
+            "error_message": str(e)
+        }
+

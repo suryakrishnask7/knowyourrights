@@ -15,6 +15,7 @@ from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 from app.letter_templates import CLAIM_SENTENCE_TEMPLATES, TENANCY_CATEGORIES
+from app.translate import translate_notice_letter
 
 
 class LetterFields(BaseModel):
@@ -25,6 +26,23 @@ class LetterFields(BaseModel):
     joining_date: Optional[str] = Field(default=None, description="Joining date or lease commencement date")
     designation: Optional[str] = Field(default=None, description="Job title or role")
     amount_claimed: Optional[str] = Field(default=None, description="Unpaid salary, deposit amount, or claim value")
+
+
+CATEGORY_SUBJECT_TITLES = {
+    "unpaid_wages": "Non-Payment of Statutory Wages and Outstanding Dues",
+    "wrongful_termination": "Unlawful Retrenchment and Wrongful Termination of Employment",
+    "posh_complaint": "Formal Grievance under POSH Act / Workplace Protection",
+    "tenant_landlord": "Violation of Statutory Tenancy Obligations and Lease Terms",
+    "security_deposit_dispute": "Unlawful Withholding and Demand for Immediate Refund of Tenancy Security Deposit",
+    "eviction_dispute": "Unlawful Eviction Notice and Violation of Tenant Protections",
+    "rent_increase_dispute": "Arbitrary Rent Escalation in Violation of Agreed Tenancy Terms",
+    "repairs_maintenance_dispute": "Default on Landlord Statutory Maintenance and Repair Obligations",
+    "pf_nonpayment": "Non-Deposit of Employee Provident Fund (EPF) Contributions",
+    "bonus_nonpayment": "Non-Disbursement of Statutory Annual Bonus Entitlement",
+    "gratuity_nonpayment": "Withholding and Non-Payment of Statutory Gratuity Entitlement",
+    "maternity_benefit": "Denial of Statutory Maternity Benefits and Paid Leave Protections",
+    "overtime_hours": "Non-Payment of Mandatory Overtime Wages and Working Hours Violation",
+}
 
 
 def is_letter_eligible(
@@ -38,7 +56,7 @@ def is_letter_eligible(
     A case is eligible for an auto-generated formal notice letter ONLY if:
     1. Status is fully resolved (no clarification pending, no error).
     2. hasDirectRecourse is True (the provisions directly cover the scenario).
-    3. Evidence level is NOT Low.
+    3. Evidence level is NOT Low (High or Medium with verified statutory citations).
     4. Category has a verified statutory claim template.
     5. At least one verified statutory citation exists to cite.
     """
@@ -46,7 +64,7 @@ def is_letter_eligible(
         return False
     if has_direct_recourse is not True:
         return False
-    if evidence_level and evidence_level.strip().lower() == "low":
+    if not evidence_level or evidence_level.strip().lower() == "low":
         return False
     if not category or category not in CLAIM_SENTENCE_TEMPLATES:
         return False
@@ -94,7 +112,7 @@ def _build_letter_context(
     else:
         clean_ask = "the outstanding statutory dues and grievances"
 
-    subject_category = category.replace("_", " ").title()
+    subject_category = CATEGORY_SUBJECT_TITLES.get(category, category.replace("_", " ").title())
     is_tenancy = category in TENANCY_CATEGORIES
 
     if is_tenancy:
@@ -131,7 +149,8 @@ def render_letter(
     authority: str,
     ask_text: str,
     fields: LetterFields,
-    today_str: Optional[str] = None
+    today_str: Optional[str] = None,
+    language: str = "en"
 ) -> Dict[str, str]:
     """
     Renders both a plain text notice letter and a printable HTML document.
@@ -269,6 +288,36 @@ Yours sincerely,
 </body>
 </html>"""
 
+    if language and language != "en":
+        translated_text = translate_notice_letter(text_content.strip(), language)
+        html_content = f"""<!DOCTYPE html>
+<html lang="{language}">
+<head>
+  <meta charset="utf-8" />
+  <title>Formal Statutory Notice — {ctx['subject_category']}</title>
+  <style>
+    @page {{
+      size: A4 portrait;
+      margin: 25mm 20mm;
+    }}
+    body {{
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 12pt;
+      line-height: 1.6;
+      color: #111;
+      margin: 0;
+      padding: 24px;
+      white-space: pre-wrap;
+    }}
+  </style>
+</head>
+<body>{translated_text}</body>
+</html>"""
+        return {
+            "text": translated_text.strip(),
+            "html": html_content.strip()
+        }
+
     return {
         "text": text_content.strip(),
         "html": html_content.strip()
@@ -282,11 +331,12 @@ def render_letter_docx(
     authority: str,
     ask_text: str,
     fields: LetterFields,
-    today_str: Optional[str] = None
+    today_str: Optional[str] = None,
+    language: str = "en"
 ) -> io.BytesIO:
     """
     Renders a formatted Microsoft Word (.docx) document with proper margins,
-    typography, and legal notice structure.
+    typography, and legal notice structure. Supports regional languages.
     """
     ctx = _build_letter_context(category, act, section, authority, ask_text, fields, today_str)
 
@@ -304,6 +354,49 @@ def render_letter_docx(
     normal_style.font.name = 'Times New Roman'
     normal_style.font.size = Pt(12)
     normal_style.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
+
+    if language and language != "en":
+        eng_text = f"""Date: {ctx['current_date']}
+
+To,
+{ctx['cp_name']}
+{ctx['cp_addr']}
+
+Subject: Formal Statutory Notice regarding {ctx['subject_category']} under Section {ctx['section']} of {ctx['act']}
+
+Dear Sir / Madam,
+
+{ctx['relationship_sentence']}
+
+{ctx['claim_sentence']}
+
+I hereby formally request that {ctx['clean_ask']} be completely settled and resolved within fifteen (15) days from the receipt of this notice, failing which I shall be constrained to initiate formal proceedings before the {ctx['authority']} for enforcement of statutory rights, compensation, interest, and costs without further reference to you.
+
+Please treat this communication as formal written statutory notice under the law.
+
+Yours sincerely,
+
+{ctx['emp_name']}
+{ctx['emp_addr']}
+[Contact Number & Email ID]
+"""
+        translated_letter = translate_notice_letter(eng_text.strip(), language)
+        paras = [p.strip() for p in translated_letter.split("\n\n") if p.strip()]
+        for p_text in paras:
+            p = doc.add_paragraph(p_text)
+            p.paragraph_format.space_after = Pt(12)
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+
+        p_foot = doc.add_paragraph(f"KnowYourRights Statutory Notice Draft · Reference: {ctx['act']} §{ctx['section']} · Legal Recourse Forum: {ctx['authority']}")
+        p_foot.paragraph_format.space_before = Pt(24)
+        if p_foot.runs:
+            p_foot.runs[0].font.size = Pt(8.5)
+            p_foot.runs[0].font.color.rgb = RGBColor(0x77, 0x77, 0x77)
+
+        bio = io.BytesIO()
+        doc.save(bio)
+        bio.seek(0)
+        return bio
 
     # Date (right-aligned)
     p_date = doc.add_paragraph()

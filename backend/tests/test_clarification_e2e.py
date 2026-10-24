@@ -9,7 +9,8 @@ def test_full_clarification_flow():
     E2E simulation of query -> clarification question -> answer -> resolution / cap-out.
     Stateless flow: state is passed in request payload without any database cases table.
     """
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
 
     # Step 1: Initial query missing blocking facts (e.g. unpaid salary)
     req1 = QueryRequest(query="My employer has not paid my salary.", state="TN")
@@ -17,7 +18,7 @@ def test_full_clarification_flow():
 
     assert res1.needsClarification is True
     assert res1.turnCount == 1
-    assert res1.maxTurns == 2
+    assert res1.maxTurns == 3
     assert res1.clarifyingQuestion is not None
     assert res1.clarifyingReason is not None
 
@@ -34,7 +35,7 @@ def test_full_clarification_flow():
 
     if res2.needsClarification:
         assert res2.turnCount == 2
-        assert res2.maxTurns == 2
+        assert res2.maxTurns == 3
 
         # Step 3: User answers turn 2 (Cap-out test)
         req3 = QueryRequest(

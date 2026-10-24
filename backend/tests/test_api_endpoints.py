@@ -13,9 +13,9 @@ class TestApiEndpoints(unittest.TestCase):
             "query": "My employer has not paid my salary for two months. I have an employment contract and salary slips.",
             "state": "TN",
             "user_name": "Priya",
-            "facts": {"unpaid_period": "2 months", "employment_contract": True},
-            "clarification_round": 2,
-            "asked_facts": ["unpaid_period", "employment_contract"]
+            "facts": {"unpaid_period": "2 months", "monthly_wage_bracket": "under_24k", "has_written_contract": True},
+            "clarification_round": 3,
+            "asked_facts": ["unpaid_period", "monthly_wage_bracket", "has_written_contract"]
         }
         res = client.post("/api/query", json=payload)
         self.assertEqual(res.status_code, 200)
