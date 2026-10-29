@@ -16,7 +16,7 @@ def check_conflicts(category: Optional[str], state: str) -> List[Dict[str, Any]]
         return []
         
     try:
-        conn = psycopg2.connect(db_url, cursor_factory=RealDictCursor)
+        conn = psycopg2.connect(db_url, cursor_factory=RealDictCursor, connect_timeout=5)
         with conn.cursor() as cur:
             cur.execute("""
                 SELECT id, topic, jurisdiction, central_rule, state_rule, outcome, reason

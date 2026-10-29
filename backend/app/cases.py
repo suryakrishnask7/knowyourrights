@@ -18,7 +18,7 @@ def _get_conn():
     if not db_url or "localhost:5432/postgres" in db_url:
         return None
     try:
-        return psycopg2.connect(db_url, cursor_factory=RealDictCursor)
+        return psycopg2.connect(db_url, cursor_factory=RealDictCursor, connect_timeout=5)
     except Exception as e:
         logger.warning("cases DB connect failed: %s", e)
         return None

@@ -92,13 +92,21 @@ def _build_letter_context(
     designation_str = (fields.designation or "").strip() or "[Your Designation / Job Title / Department]"
     period_or_amount = (fields.amount_claimed or "").strip() or "[Claim Amount in INR, e.g., Rs. ________ / Duration of Non-Payment]"
 
+    clean_section = (section or "Statutory Section").strip()
+    if clean_section.lower().startswith("section "):
+        clean_section = clean_section[8:].strip()
+    elif clean_section.lower().startswith("sec. "):
+        clean_section = clean_section[5:].strip()
+    elif clean_section.lower().startswith("sec "):
+        clean_section = clean_section[4:].strip()
+
     template = CLAIM_SENTENCE_TEMPLATES.get(
         category,
         "My statutory rights under Section {section} of the {act} have been violated."
     )
     claim_sentence = template.format(
         act=act or "Applicable Indian Statute",
-        section=section or "Statutory Section",
+        section=clean_section,
         period_or_amount=period_or_amount,
         unpaid_period=period_or_amount,
         amount_claimed=period_or_amount
@@ -137,7 +145,7 @@ def _build_letter_context(
         "clean_ask": clean_ask,
         "subject_category": subject_category,
         "act": act,
-        "section": section,
+        "section": clean_section,
         "authority": authority,
     }
 

@@ -11,15 +11,51 @@ from app.fact_requirements import (
     COMBINABLE_FACT_GROUPS,
     COMBINED_QUESTION_TEMPLATES,
     COMBINED_REASON_TEMPLATES,
+    LOCALIZED_DEFAULT_REASON,
+    LOCALIZED_COMBINED_QUESTIONS,
+    LOCALIZED_COMBINED_REASONS,
+    LOCALIZED_QUESTIONS,
+    LOCALIZED_REASONS,
 )
 
-YES_PATTERNS = {"yes", "yeah", "yep", "yup", "correct", "true", "i do", "we do", "female", "woman"}
-NO_PATTERNS = {"no", "nope", "nah", "false", "don't", "dont", "i don't", "we don't", "do not", "does not", "male", "man"}
+YES_PATTERNS = {
+    # English
+    "yes", "yeah", "yep", "yup", "correct", "true", "i do", "we do", "female", "woman",
+    # Tamil
+    "ஆம்", "ஆமாம்", "சரி", "உண்மை", "உண்டு", "பெண்", "சரியானது", "ஆம் உண்டு",
+    # Hindi
+    "हाँ", "हां", "हाँजी", "जी हाँ", "जी हां", "सही", "सत्य", "महिला", "स्त्री",
+    # Kannada
+    "ಹೌದು", "ಸರಿ", "ನಿಜ", "ಮಹಿಳೆ",
+    # Telugu
+    "అవును", "సరే", "నిజం", "మహిళ",
+    # Marathi
+    "होय", "हो", "बरोबर", "सत्य", "स्त्री", "महिला",
+}
+
+NO_PATTERNS = {
+    # English
+    "no", "nope", "nah", "false", "don't", "dont", "i don't", "we don't", "do not", "does not", "male", "man",
+    # Tamil
+    "இல்லை", "இல்ல", "இல்லவே இல்லை", "தவறு", "கிடையாது", "ஆண்", "இல்லை இல்லை",
+    # Hindi
+    "नहीं", "ना", "नाहीं", "गलत", "अयोग्य", "पुरुष",
+    # Kannada
+    "ಇಲ್ಲ", "ತಪ್ಪು", "ಪುರುಷ",
+    # Telugu
+    "కాదు", "లేదు", "తప్పు", "పురుషుడు",
+    # Marathi
+    "नाही", "नाहीत", "चूक", "पुरुष",
+}
 
 
-def get_next_clarifying_question(category: str, missing_facts: List[str]) -> Optional[Dict[str, Any]]:
+def get_next_clarifying_question(
+    category: str,
+    missing_facts: List[str],
+    language: str = "en"
+) -> Optional[Dict[str, Any]]:
     """
-    Determines the clarifying question to ask.
+    Determines the clarifying question to ask in the citizen's native language.
     Checks COMBINABLE_FACT_GROUPS first: if two-or-more still-missing blocking facts
     for the category form a known combinable pair, ask the combined question.
     Otherwise, prioritizes blocking facts first, followed by refining facts.
@@ -27,13 +63,23 @@ def get_next_clarifying_question(category: str, missing_facts: List[str]) -> Opt
     if not missing_facts or not category or category not in REQUIRED_FACTS:
         return None
 
+    lang = language.lower() if language else "en"
+
     # Check COMBINABLE_FACT_GROUPS first
     combinable_pairs = COMBINABLE_FACT_GROUPS.get(category, [])
     for pair in combinable_pairs:
         f1, f2 = pair
         if f1 in missing_facts and f2 in missing_facts:
-            q_template = COMBINED_QUESTION_TEMPLATES.get(pair)
-            r_template = COMBINED_REASON_TEMPLATES.get(pair, DEFAULT_REASON)
+            # Check localized combined questions first
+            q_template = (
+                LOCALIZED_COMBINED_QUESTIONS.get(lang, {}).get(pair)
+                or COMBINED_QUESTION_TEMPLATES.get(pair)
+            )
+            r_template = (
+                LOCALIZED_COMBINED_REASONS.get(lang, {}).get(pair)
+                or COMBINED_REASON_TEMPLATES.get(pair)
+                or LOCALIZED_DEFAULT_REASON.get(lang, DEFAULT_REASON)
+            )
             if q_template:
                 return {
                     "fact_being_requested": f"{f1}+{f2}",
@@ -50,13 +96,22 @@ def get_next_clarifying_question(category: str, missing_facts: List[str]) -> Opt
         return None
 
     next_fact = ordered[0]
+    default_r = LOCALIZED_DEFAULT_REASON.get(lang, DEFAULT_REASON)
+
+    question_text = (
+        LOCALIZED_QUESTIONS.get(lang, {}).get(next_fact)
+        or QUESTION_TEMPLATES.get(next_fact, f"Could you provide more details regarding: {next_fact}?")
+    )
+    reason_text = (
+        LOCALIZED_REASONS.get(lang, {}).get(next_fact)
+        or REASON_TEMPLATES.get(next_fact, default_r)
+    )
+
     return {
         "fact_being_requested": next_fact,
         "facts_being_requested": [next_fact],
-        "clarifying_question": QUESTION_TEMPLATES.get(
-            next_fact, f"Could you provide more details regarding: {next_fact}?"
-        ),
-        "reason_shown_to_user": REASON_TEMPLATES.get(next_fact, DEFAULT_REASON),
+        "clarifying_question": question_text,
+        "reason_shown_to_user": reason_text,
     }
 
 

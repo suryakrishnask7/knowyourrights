@@ -69,7 +69,7 @@ def get_db_connection():
     if not db_url or "localhost:5432/postgres" in db_url and "postgres:postgres" in db_url:
         return None
     try:
-        conn = psycopg2.connect(db_url, cursor_factory=RealDictCursor)
+        conn = psycopg2.connect(db_url, cursor_factory=RealDictCursor, connect_timeout=5)
         return conn
     except Exception as e:
         logger.warning(f"Could not connect to Supabase Postgres: {e}")

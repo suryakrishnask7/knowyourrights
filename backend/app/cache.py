@@ -31,7 +31,7 @@ def get_db_connection():
     if not db_url or "localhost:5432/postgres" in db_url:
         return None
     try:
-        return psycopg2.connect(db_url, cursor_factory=RealDictCursor)
+        return psycopg2.connect(db_url, cursor_factory=RealDictCursor, connect_timeout=5)
     except Exception as e:
         logger.warning(f"Could not connect to database for cache: {e}")
         return None

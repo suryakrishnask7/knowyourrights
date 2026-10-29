@@ -4,6 +4,7 @@ import logging
 import asyncio
 import urllib.request
 from typing import Optional, List, Dict, Any
+from contextlib import asynccontextmanager
 
 # pyrefly: ignore[missing-import]
 from fastapi import FastAPI, HTTPException, status, Response
@@ -29,26 +30,17 @@ from app.generate import call_llm
 from app.pathway import get_pathway
 from app.cache import make_cache_key, get_cached_response, set_cached_response, get_corpus_version
 from app.letter import LetterFields, is_letter_eligible, render_letter, render_letter_docx
-from app.translate import SUPPORTED_LANGUAGES, translate_legal_content
+from app.translate import (
+    SUPPORTED_LANGUAGES,
+    translate_legal_content,
+    translate_to_english,
+    detect_language,
+)
 
 MAX_CLARIFICATION_ROUNDS = 3
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("knowyourrights-backend")
-
-app = FastAPI(
-    title="KnowYourRights RAG Backend API",
-    version="2.0.0",
-    description="FastAPI service for Indian labour & tenancy rights RAG pipeline",
-)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # ── Keep-alive self-ping background process (Prevents Render free tier sleep) ──
 
@@ -58,7 +50,7 @@ async def _keep_alive_ping_loop():
         try:
             url = os.getenv("RENDER_EXTERNAL_URL") or os.getenv("APP_URL")
             if url:
-                target_url = f"{url.rstrip('/')}/"
+                target_url = f"{url.rstrip('/')}/api/health"
                 def _ping():
                     req = urllib.request.Request(target_url, headers={"User-Agent": "KYR-KeepAlive/1.0"})
                     with urllib.request.urlopen(req, timeout=10) as resp:
@@ -70,23 +62,41 @@ async def _keep_alive_ping_loop():
         except Exception as e:
             logger.debug("Keep-alive self-ping note: %s", e)
 
-        await asyncio.sleep(600)  # Ping every 10 minutes (600 seconds)
+        await asyncio.sleep(480)  # Ping every 8 minutes (Render free sleeps after 15m)
 
-@app.on_event("startup")
-def start_keep_alive_task():
-    asyncio.create_task(_keep_alive_ping_loop())
+@asynccontextmanager
+async def lifespan(fastapi_app: FastAPI):
+    task = asyncio.create_task(_keep_alive_ping_loop())
+    yield
+    task.cancel()
+
+app = FastAPI(
+    title="KnowYourRights RAG Backend API",
+    version="2.0.0",
+    description="FastAPI service for Indian labour & tenancy rights RAG pipeline",
+    lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # ── Pydantic models ────────────────────────────────────────────────────────────
 
 class QueryRequest(BaseModel):
-    query: str = Field(..., min_length=1)
+    query: str = Field(default="")
     state: str = Field(..., description="TN | MH | KA")
     facts: Optional[Dict[str, Any]] = Field(default_factory=dict)
     clarification_round: int = 0
     asked_facts: Optional[List[str]] = Field(default_factory=list)
     original_query: Optional[str] = None
     user_name: Optional[str] = None
+    language: Optional[str] = "en"
 
 class Citation(BaseModel):
     act: str
@@ -129,6 +139,8 @@ class QueryResponse(BaseModel):
     clarification_round: int = 0
     asked_facts: List[str] = Field(default_factory=list)
     original_query: Optional[str] = None
+    detected_language: Optional[str] = "en"
+    translated: Optional[Dict[str, Any]] = None
 
 class LetterRenderRequest(BaseModel):
     category: str
@@ -154,6 +166,7 @@ class TranslateRequest(BaseModel):
     pathway_authority: Optional[str] = None
     pathway_deadline: Optional[str] = None
     pathway_steps: Optional[List[Any]] = None
+    citations: Optional[List[Any]] = None
 
 class TranslateResponse(BaseModel):
     model_config = {"extra": "allow"}
@@ -165,6 +178,7 @@ class TranslateResponse(BaseModel):
     pathway_authority: Optional[str] = None
     pathway_deadline: Optional[str] = None
     pathway_steps: Optional[List[Any]] = None
+    citations: Optional[List[Any]] = None
 
 
 # ── Personalization Helpers ───────────────────────────────────────────────────
@@ -201,7 +215,7 @@ def record_query_log(query_text, state, retrieved_chunk_ids, llm_response, evide
                 valid_uuids.append(str(_uuid.UUID(str(cid))))
             except (ValueError, TypeError):
                 pass
-        conn = psycopg2.connect(db_url)
+        conn = psycopg2.connect(db_url, connect_timeout=5)
         with conn.cursor() as cur:
             cur.execute(
                 """
@@ -222,18 +236,46 @@ def record_query_log(query_text, state, retrieved_chunk_ids, llm_response, evide
 def read_root():
     return {"status": "ok", "service": "KnowYourRights FastAPI Backend", "version": "2.0.0"}
 
+@app.get("/health")
+@app.get("/api/health")
+def health_check():
+    return {"status": "ok", "service": "knowyourrights-backend", "version": "2.0.0"}
+
 
 # ── POST /api/query — main pipeline ───────────────────────────────────────────
 
 @app.post("/api/query", response_model=QueryResponse)
 async def handle_query(req: QueryRequest):
-    query_text = req.query.strip()
+    raw_query = (req.query or "").strip()
     state = req.state.upper()
-    prior_facts: Dict[str, Any] = dict(req.facts or {})
     clarification_round: int = req.clarification_round
+    user_lang = (req.language or "en").lower()
+
+    if not raw_query:
+        if clarification_round > 0:
+            raw_query = "SKIP"
+        else:
+            raise HTTPException(status_code=400, detail="Initial query statement cannot be empty.")
+
+    # ── Ingress Translation to English Internal Hub ──────────────────────────
+    query_text = raw_query
+    detected_lang = user_lang
+    if raw_query and raw_query != "SKIP":
+        english_text, detected_lang = translate_to_english(raw_query, source_lang=user_lang)
+        query_text = english_text
+
+    prior_facts: Dict[str, Any] = dict(req.facts or {})
     asked_facts: List[str] = list(req.asked_facts or [])
-    original_query: str = req.original_query or query_text
+    original_query: str = req.original_query or raw_query
     user_name: Optional[str] = req.user_name.strip() if req.user_name and req.user_name.strip() else None
+
+    # Inherit language from original_query if raw_query was SKIP, numbers, or English clarification answer
+    if (detected_lang == "en" or user_lang == "en") and original_query:
+        orig_detected = detect_language(original_query)
+        if orig_detected != "en":
+            detected_lang = orig_detected
+
+    effective_lang = detected_lang if detected_lang != "en" else user_lang
 
     if state not in ("TN", "MH", "KA"):
         raise HTTPException(status_code=400, detail="State must be one of: TN, MH, KA.")
@@ -246,7 +288,12 @@ async def handle_query(req: QueryRequest):
         resolved_via_cheap = False
 
         if most_recent_asked_fact in YES_NO_FACTS:
-            cheap_val = try_cheap_extraction(most_recent_asked_fact, query_text)
+            # Check cheap extraction on raw query (e.g. 'ஆம்', 'हाँ', 'சரி')
+            cheap_val = try_cheap_extraction(most_recent_asked_fact, raw_query)
+            if cheap_val is None and query_text != raw_query:
+                # Also check on English translation
+                cheap_val = try_cheap_extraction(most_recent_asked_fact, query_text)
+
             if cheap_val is not None:
                 prior_facts[most_recent_asked_fact] = cheap_val
                 resolved_via_cheap = True
@@ -286,7 +333,27 @@ async def handle_query(req: QueryRequest):
                     evidence_level=cached_ev_lvl
                 )
 
-            return QueryResponse(
+            cached_trans = None
+            if effective_lang != "en":
+                try:
+                    cached_cits_list = [
+                        {"act": c.get("act", ""), "section": c.get("section", ""), "jurisdiction": c.get("jurisdiction", "")}
+                        if isinstance(c, dict) else {"act": getattr(c, "act", ""), "section": getattr(c, "section", ""), "jurisdiction": getattr(c, "jurisdiction", "")}
+                        for c in cached_cits
+                    ]
+                    cached_trans = translate_legal_content({
+                        "answer": cached_ans,
+                        "answerSimple": cached_simple,
+                        "evidence_reasons": cached["evidence"].get("reasons", []),
+                        "pathway_authority": cached["pathway"].get("authority", ""),
+                        "pathway_deadline": cached["pathway"].get("deadlineNote", ""),
+                        "pathway_steps": cached["pathway"].get("steps", []),
+                        "citations": cached_cits_list,
+                    }, target_lang=effective_lang)
+                except Exception as e:
+                    logger.warning("Cached translation failed: %s", e)
+
+            cached_resp = QueryResponse(
                 answer=personalize_text(cached_ans, user_name),
                 answerSimple=personalize_simple_text(cached_simple, user_name),
                 citations=cached_cits,
@@ -302,7 +369,10 @@ async def handle_query(req: QueryRequest):
                 clarification_round=clarification_round,
                 asked_facts=asked_facts,
                 original_query=original_query,
+                detected_language=effective_lang,
+                translated=cached_trans,
             )
+            return cached_resp
 
     # ── Step 3: Retrieve chunks ──────────────────────────────────────────────
     retrieve_query = original_query if not asked_facts else f"{original_query} {query_text}"
@@ -330,6 +400,7 @@ async def handle_query(req: QueryRequest):
             clarification_round=clarification_round,
             asked_facts=asked_facts,
             original_query=original_query,
+            detected_language=effective_lang,
         )
 
     # ── Step 4: Check conflicts ──────────────────────────────────────────────
@@ -348,7 +419,7 @@ async def handle_query(req: QueryRequest):
     )
 
     if should_clarify and category:
-        next_question_dict = get_next_clarifying_question(category, missing_facts)
+        next_question_dict = get_next_clarifying_question(category, missing_facts, language=effective_lang)
         if next_question_dict:
             new_round = clarification_round + 1
             asked_fact = next_question_dict["fact_being_requested"]
@@ -375,6 +446,7 @@ async def handle_query(req: QueryRequest):
                 clarification_round=new_round,
                 asked_facts=new_asked_facts,
                 original_query=original_query,
+                detected_language=effective_lang,
             )
 
     # ── Step 7: Generate answer ──────────────────────────────────────────────
@@ -436,13 +508,37 @@ async def handle_query(req: QueryRequest):
         except Exception as e:
             logger.warning("Failed to cache: %s", e)
 
-    # ── Step 10: Log query ───────────────────────────────────────────────────
+    # ── Step 10: Log query & Auto-translate if regional language ─────────────
     chunk_ids = [c.get("id", str(c.get("act", ""))) for c in chunks]
     record_query_log(retrieve_query, state, chunk_ids, llm_output, evidence["level"])
 
+    final_answer = personalize_text(raw_answer, user_name)
+    final_simple = personalize_simple_text(raw_simple, user_name)
+    translated_payload = None
+
+    if effective_lang != "en":
+        try:
+            logger.info("Auto-translating resolved result to %s", effective_lang)
+            citations_list = [
+                {"act": c.get("act", ""), "section": c.get("section", ""), "jurisdiction": c.get("jurisdiction", "")}
+                if isinstance(c, dict) else {"act": getattr(c, "act", ""), "section": getattr(c, "section", ""), "jurisdiction": getattr(c, "jurisdiction", "")}
+                for c in llm_output.get("citations", [])
+            ]
+            translated_payload = translate_legal_content({
+                "answer": final_answer,
+                "answerSimple": final_simple,
+                "evidence_reasons": evidence["reasons"],
+                "pathway_authority": pathway_dict.get("authority", ""),
+                "pathway_deadline": pathway_dict.get("deadlineNote", ""),
+                "pathway_steps": pathway_dict.get("steps", []),
+                "citations": citations_list,
+            }, target_lang=effective_lang)
+        except Exception as e:
+            logger.warning("Auto-translation of resolved response failed: %s", e)
+
     return QueryResponse(
-        answer=personalize_text(raw_answer, user_name),
-        answerSimple=personalize_simple_text(raw_simple, user_name),
+        answer=final_answer,
+        answerSimple=final_simple,
         citations=llm_output.get("citations", []),
         evidence=Evidence(**evidence),
         pathway=Pathway(**pathway_dict),
@@ -456,6 +552,8 @@ async def handle_query(req: QueryRequest):
         clarification_round=clarification_round,
         asked_facts=asked_facts,
         original_query=original_query,
+        detected_language=effective_lang,
+        translated=translated_payload,
     )
 
 
@@ -539,6 +637,8 @@ def handle_translate(req: TranslateRequest):
         payload_to_translate["pathway_deadline"] = req.pathway_deadline
     if req.pathway_steps:
         payload_to_translate["pathway_steps"] = req.pathway_steps
+    if req.citations:
+        payload_to_translate["citations"] = req.citations
 
     try:
         translated = translate_legal_content(payload_to_translate, req.target_language)
@@ -549,7 +649,8 @@ def handle_translate(req: TranslateRequest):
             evidence_reasons=translated.get("evidence_reasons", req.evidence_reasons),
             pathway_authority=translated.get("pathway_authority", req.pathway_authority),
             pathway_deadline=translated.get("pathway_deadline", req.pathway_deadline),
-            pathway_steps=translated.get("pathway_steps", req.pathway_steps)
+            pathway_steps=translated.get("pathway_steps", req.pathway_steps),
+            citations=translated.get("citations", req.citations)
         )
     except Exception as e:
         logger.error("Translation failed: %s", e)

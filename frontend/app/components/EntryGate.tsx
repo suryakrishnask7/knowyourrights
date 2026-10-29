@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { UI_TRANSLATIONS } from "../translations";
 
 interface EntryGateProps {
   userName: string;
@@ -10,6 +11,7 @@ interface EntryGateProps {
   onContinue: () => void;
   buttonLabel?: string;
   compact?: boolean;
+  lang?: string;
 }
 
 export default function EntryGate({
@@ -18,16 +20,20 @@ export default function EntryGate({
   termsAccepted,
   setTermsAccepted,
   onContinue,
-  buttonLabel = "PROCEED TO INQUIRY",
+  buttonLabel,
   compact = false,
+  lang = "en",
 }: EntryGateProps) {
   const isReady = termsAccepted && userName.trim().length > 0;
+  const t = (UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.en).entryGate;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isReady) return;
     onContinue();
   };
+
+  const finalButtonLabel = buttonLabel || t.proceedBtn;
 
   return (
     <form onSubmit={handleSubmit} className={`w-full ${compact ? "space-y-4" : "space-y-6"}`}>
@@ -37,7 +43,7 @@ export default function EntryGate({
           htmlFor="kyr-user-name"
           className="block text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase mb-2"
         >
-          WHAT SHOULD WE CALL YOU?
+          {t.nameLabel}
         </label>
         <input
           id="kyr-user-name"
@@ -46,15 +52,15 @@ export default function EntryGate({
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
           maxLength={50}
-          className="w-full border border-[var(--border)] bg-[var(--bg-surface)] px-4 py-3 text-[var(--text-1)] text-base focus:outline-none focus:border-[var(--text-1)] font-sans transition-colors"
+          className="w-full border border-[var(--border)] bg-[var(--bg-surface)] px-4 py-3 text-[var(--text-1)] text-base focus:outline-none focus:border-[var(--text-1)] font-sans transition-colors rounded-none"
         />
         <p className="text-[11px] text-[var(--text-3)] mt-1.5 font-sans">
-          Used solely to address you and draft formal notices. Never shared or sold.
+          {t.nameHint}
         </p>
       </div>
 
       {/* Statutory Terms & Legal Disclaimer Checkbox */}
-      <div className="w-full border border-[var(--border)] bg-[var(--bg-surface)] p-4 sm:p-5">
+      <div className="w-full border border-[var(--border)] bg-[var(--bg-surface)] p-4 sm:p-5 rounded-none">
         <label className="flex items-start gap-3.5 cursor-pointer select-none group">
           <input
             type="checkbox"
@@ -66,9 +72,9 @@ export default function EntryGate({
           />
           <div className="text-xs sm:text-sm text-[var(--text-2)] leading-relaxed font-sans">
             <span className="text-[var(--text-1)] font-semibold block mb-1">
-              Statutory Research & Non-Representation Acknowledgment
+              {t.termsHeading}
             </span>
-            I understand that KnowYourRights provides statutory legal information and procedural guidance based on Indian law, not individualized legal advice or attorney representation. I agree to the terms of service and statutory research methodology.
+            {t.termsText}
           </div>
         </label>
       </div>
@@ -79,17 +85,17 @@ export default function EntryGate({
           type="submit"
           suppressHydrationWarning
           disabled={!isReady}
-          className={`w-full py-4 px-6 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase transition-all border ${
+          className={`w-full py-4 px-6 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase transition-all border rounded-none ${
             isReady
               ? "bg-[var(--text-1)] text-[var(--bg)] border-[var(--text-1)] hover:opacity-90 cursor-pointer shadow-sm active:scale-[0.99]"
               : "bg-[var(--bg-subtle)] text-[var(--text-4)] border-[var(--border)] cursor-not-allowed"
           }`}
         >
-          [ {buttonLabel} ]
+          [ {finalButtonLabel} ]
         </button>
         {!termsAccepted && (
           <p className="text-[10px] font-mono text-[var(--text-4)] mt-2">
-            * Check the statutory research acknowledgment above to proceed.
+            {t.termsWarning}
           </p>
         )}
       </div>

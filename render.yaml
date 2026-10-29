@@ -5,7 +5,8 @@ services:
     env: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips "*"
+    healthCheckPath: /api/health
     envVars:
       - key: DATABASE_URL
         sync: false
@@ -13,25 +14,30 @@ services:
         sync: false
       - key: CORPUS_VERSION
         value: "1"
+      - key: PYTHONUNBUFFERED
+        value: "1"
 
   # 2. Next.js Frontend Web Service
   - type: web
     name: knowyourrights-frontend
     env: node
     rootDir: frontend
-    buildCommand: npm install && npm run build
-    startCommand: npm run start
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start -- -p $PORT
+    healthCheckPath: /
     envVars:
       - key: NEXT_PUBLIC_API_URL
         sync: false
       - key: NEXT_PUBLIC_SHOW_DEBUG
         value: "false"
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=460"
 
-  # 3. Render Cron Job (Secondary Keep-Alive Ping every 10 mins)
+  # 3. Render Cron Job (Keep-Alive Ping every 8 mins to prevent free tier spin-down)
   - type: cron
     name: knowyourrights-keepalive-cron
     env: python
     rootDir: backend
-    schedule: "*/10 * * * *"
+    schedule: "*/8 * * * *"
     buildCommand: pip install requests
-    startCommand: python -c "import os, requests; url = os.getenv('RENDER_EXTERNAL_URL', 'https://knowyourrights-backend.onrender.com/'); requests.get(url)"
+    startCommand: python -c "import os, requests; url = os.getenv('RENDER_EXTERNAL_URL', 'https://knowyourrights-backend.onrender.com'); requests.get(f'{url.rstrip(\"/\")}/api/health', timeout=10)"

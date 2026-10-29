@@ -2,6 +2,8 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import Homepage from "./components/Homepage";
+import LanguageDropdown from "./components/LanguageDropdown";
+import { UI_TRANSLATIONS, LOCALIZED_EXAMPLES } from "./translations";
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 const SHOW_DEBUG = process.env.NEXT_PUBLIC_SHOW_DEBUG === "true";
@@ -20,6 +22,54 @@ type QueryResult = {
   turnCount?: number; maxTurns?: number; hasDirectRecourse?: boolean;
   letterEligible?: boolean; user_name?: string;
   facts?: Record<string, unknown>; clarification_round?: number; asked_facts?: string[]; original_query?: string;
+  detected_language?: string;
+  translated?: {
+    answer: string;
+    answerSimple?: string;
+    evidence_reasons?: string[];
+    pathway_authority?: string;
+    pathway_deadline?: string;
+    pathway_steps?: PathwayStep[];
+    citations?: Citation[];
+  };
+};
+
+function detectClientLanguage(text: string): string {
+  if (!text) return "en";
+  let ta = 0, kn = 0, te = 0, dev = 0;
+  for (let i = 0; i < text.length; i++) {
+    const cp = text.charCodeAt(i);
+    if (cp >= 0x0B80 && cp <= 0x0BFF) ta++;
+    else if (cp >= 0x0C80 && cp <= 0x0CFF) kn++;
+    else if (cp >= 0x0C00 && cp <= 0x0C7F) te++;
+    else if (cp >= 0x0900 && cp <= 0x097F) dev++;
+  }
+  const max = Math.max(ta, kn, te, dev);
+  if (max >= 2 || (max >= 1 && text.trim().length <= 15)) {
+    if (max === ta) return "ta";
+    if (max === kn) return "kn";
+    if (max === te) return "te";
+    if (max === dev) return "hi";
+  }
+  return "en";
+}
+
+const SECTION_WORD: Record<string, string> = {
+  en: "Section",
+  ta: "பிரிவு",
+  hi: "धारा",
+  kn: "ವಿಭಾಗ",
+  mr: "कलम",
+  te: "విభాగం",
+};
+
+const JURISDICTION_WORD: Record<string, Record<string, string>> = {
+  en: { central: "CENTRAL", state: "STATE", tn: "TAMIL NADU", mh: "MAHARASHTRA", ka: "KARNATAKA" },
+  ta: { central: "மத்திய அரசு", state: "மாநில அரசு", tn: "தமிழ்நாடு", mh: "மகாராஷ்டிரா", ka: "கர்நாடகா" },
+  hi: { central: "केन्द्रीय", state: "राज्य", tn: "तमिलनाडु", mh: "महाराष्ट्र", ka: "कर्नाटक" },
+  kn: { central: "ಕೇಂದ್ರ", state: "ರಾಜ್ಯ", tn: "ತಮಿಳುನಾಡು", mh: "ಮಹಾರಾಷ್ಟ್ರ", ka: "ಕರ್ನಾಟಕ" },
+  mr: { central: "केंद्रीय", state: "राज्य", tn: "तमिळनाडू", mh: "महाराष्ट्र", ka: "कर्नाटक" },
+  te: { central: "కేంద్ర", state: "రాష్ట్ర", tn: "తమిళనాడు", mh: "మహారాష్ట్ర", ka: "కర్ణాటక" },
 };
 
 const STATE_LABELS: Record<StateCode, string> = { TN: "Tamil Nadu", MH: "Maharashtra", KA: "Karnataka" };
@@ -35,11 +85,11 @@ const LANGUAGES = [
 
 const STATUTORY_RECORDS_LABELS: Record<string, string> = {
   en: "REQUIRED STATUTORY RECORDS",
-  ta: "தேவையான சட்ட ஆவணங்கள் (STATUTORY RECORDS)",
-  hi: "आवश्यक वैधानिक दस्तावेज (STATUTORY RECORDS)",
-  kn: "ಅಗತ್ಯವಿರುವ ಶಾಸನಬದ್ಧ ದಾಖಲೆಗಳು (STATUTORY RECORDS)",
-  mr: "आवश्यक वैधानिक कागदपत्रे (STATUTORY RECORDS)",
-  te: "అవసరమైన చట్టబద్ధమైన రಿಕార్డులు (STATUTORY RECORDS)",
+  ta: "தேவையான சட்ட ஆவணங்கள்",
+  hi: "आवश्यक वैधानिक दस्तावेज",
+  kn: "ಅಗತ್ಯವಿರುವ ಶಾಸನಬದ್ಧ ದಾಖಲೆಗಳು",
+  mr: "आवश्यक वैधानिक कागदपत्रे",
+  te: "అవసరమైన చట్టబద్ధమైన రికార్డులు",
 };
 
 const NOTICE_UI: Record<string, {
@@ -69,65 +119,65 @@ const NOTICE_UI: Record<string, {
     generating: "GENERATING..."
   },
   ta: {
-    badge: "§ அதிகாரப்பூர்வ சட்ட அறிவிப்பு வரைவு (FORMAL NOTICE DRAFT)",
+    badge: "§ அதிகாரப்பூர்வ சட்ட அறிவிப்பு வரைவு",
     heading: "உடனடியாக அனுப்பக்கூடிய சட்ட அறிவிப்பு கடிதம் வேண்டுமா?",
     desc: "சரிபார்க்கப்பட்ட சட்டப் பிரிவுகளைக் குறிப்பிட்டு அதிகாரப்பூர்வ சட்ட அறிவிப்பை உருவாக்கவும். உங்கள் விவரங்கள் உள்ளூரிலேயே செயலாக்கப்படும்.",
-    nameLabel: "உங்கள் முழுமையான சட்டப்பூர்வ பெயர் (YOUR FULL LEGAL NAME)",
+    nameLabel: "உங்கள் முழுமையான சட்டப்பூர்வ பெயர்",
     nameSub: "கடிதத்தில் உள்ள பிற அனைத்து புலங்களும் (பெறுநர், முகவரிகள், கோரிக்கை தொகைகள்) நீங்கள் மதிப்பாய்வு செய்ய நிலையான அடைப்புக்குறி ஒதுக்கிடங்களுடன் நிரப்பப்படும்.",
-    previewBtn: "அறிவிப்பு கடிதத்தை பார்க்கவும் (PREVIEW NOTICE LETTER)",
-    previewHeading: "சட்ட அறிவிப்பு கடித முன்னோட்டம் (NOTICE LETTER PREVIEW)",
+    previewBtn: "அறிவிப்பு கடிதத்தை பார்க்கவும்",
+    previewHeading: "சட்ட அறிவிப்பு கடித முன்னோட்டம்",
     downloadBtn: "சட்ட அறிவிப்பை பதிவிறக்கவும் (.DOCX)",
     hideForm: "படிவத்தை மறைக்கவும் [-]",
     createBtn: "+ சட்ட அறிவிப்பு கடிதம் உருவாக்கவும்",
     generating: "உருவாக்குகிறது..."
   },
   hi: {
-    badge: "§ औपचारिक कानूनी नोटिस प्रारूप (FORMAL NOTICE DRAFT)",
+    badge: "§ औपचारिक कानूनी नोटिस प्रारूप",
     heading: "क्या आप तैयार कानूनी नोटिस पत्र चाहते हैं?",
     desc: "सत्यापित कानूनों का हवाला देते हुए एक आधिकारिक कानूनी नोटिस तैयार करें। व्यक्तिगत विवरण स्थानीय रूप से संसाधित होते हैं।",
-    nameLabel: "आपका पूरा कानूनी नाम (YOUR FULL LEGAL NAME)",
+    nameLabel: "आपका पूरा कानूनी नाम",
     nameSub: "पत्र के अन्य सभी क्षेत्र मानक कोष्ठक प्लेसहोल्डर्स के साथ भरे जाते हैं ताकि आप उनकी समीक्षा कर सकें।",
-    previewBtn: "नोटिस पत्र पूर्वावलोकन देखें (PREVIEW NOTICE LETTER)",
-    previewHeading: "कानूनी नोटिस पत्र पूर्वावलोकन (NOTICE LETTER PREVIEW)",
+    previewBtn: "नोटिस पत्र पूर्वावलोकन देखें",
+    previewHeading: "कानूनी नोटिस पत्र पूर्वावलोकन",
     downloadBtn: "नोटिस पत्र डाउनलोड करें (.DOCX)",
     hideForm: "फॉर्म छुपाएं [-]",
     createBtn: "+ कानूनी नोटिस पत्र बनाएं",
     generating: "तैयार हो रहा है..."
   },
   kn: {
-    badge: "§ ಅಧಿಕೃತ ಕಾನೂನು ನೋಟಿಸ್ ಕರಡು (FORMAL NOTICE DRAFT)",
+    badge: "§ ಅಧಿಕೃತ ಕಾನೂನು ನೋಟಿಸ್ ಕರಡು",
     heading: "ಕಳುಹಿಸಲು ಸಿದ್ಧವಾಗಿರುವ ನೋಟಿಸ್ ಪತ್ರ ಬೇಕೇ?",
     desc: "ಪರಿಶೀಲಿಸಿದ ಕಾನೂನುಗಳನ್ನು ಉಲ್ಲೇಖಿಸಿ ಅಧಿಕೃತ ಕಾನೂನು ನೋಟಿಸ್ ರಚಿಸಿ. ವೈಯಕ್ತಿಕ ವಿವರಗಳನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಸಂಸ್ಕರಿಸಲಾಗುತ್ತದೆ.",
-    nameLabel: "ನಿಮ್ಮ ಪೂರ್ಣ ಕಾನೂನು ಹೆಸರು (YOUR FULL LEGAL NAME)",
+    nameLabel: "ನಿಮ್ಮ ಪೂರ್ಣ ಕಾನೂನು ಹೆಸರು",
     nameSub: "ಪತ್ರದಲ್ಲಿನ ಎಲ್ಲಾ ಇತರ ಕ್ಷೇತ್ರಗಳನ್ನು ನೀವು ಪರಿಶೀಲಿಸಲು ಮಾನದಂಡದ ಬ್ರಾಕೆಟ್ ಪ್ಲೇಸ್‌ಹೋಲ್ಡರ್‌ಗಳೊಂದಿಗೆ ಭರ್ತಿ ಮಾಡಲಾಗುತ್ತದೆ.",
-    previewBtn: "ನೋಟಿಸ್ ಪತ್ರ ಮುನ್ನೋಟ ವೀಕ್ಷಿಸಿ (PREVIEW NOTICE LETTER)",
-    previewHeading: "ಕಾನೂನು ನೋಟಿಸ್ ಪತ್ರ ಮುನ್ನೋಟ (NOTICE LETTER PREVIEW)",
+    previewBtn: "ನೋಟಿಸ್ ಪತ್ರ ಮುನ್ನೋಟ ವೀಕ್ಷಿಸಿ",
+    previewHeading: "ಕಾನೂನು ನೋಟಿಸ್ ಪತ್ರ ಮುನ್ನೋಟ",
     downloadBtn: "ನೋಟಿಸ್ ಪತ್ರ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ (.DOCX)",
     hideForm: "ಫಾರ್ಮ್ ಮರೆಮಾಡಿ [-]",
     createBtn: "+ ಕಾನೂನು ನೋಟಿಸ್ ಪತ್ರ ರಚಿಸಿ",
     generating: "ರಚಿಸಲಾಗುತ್ತಿದೆ..."
   },
   mr: {
-    badge: "§ औपचारिक कायदेशीर नोटीस मसुदा (FORMAL NOTICE DRAFT)",
+    badge: "§ औपचारिक कायदेशीर नोटीस मसुदा",
     heading: "पाठवण्यासाठी तयार कायदेशीर नोटीस हवी आहे का?",
     desc: "पडताळणी केलेल्या कायद्यांचा संदर्भ देऊन अधिकृत कायदेशीर नोटीस तयार करा. वैयक्तिक तपशील स्थानिक पातळीवर प्रक्रिया केले जातात.",
-    nameLabel: "आपले पूर्ण कायदेशीर नाव (YOUR FULL LEGAL NAME)",
+    nameLabel: "आपले पूर्ण कायदेशीर नाव",
     nameSub: "पत्रातील इतर सर्व माहिती आपण पुनरावलोकन करण्यासाठी मानक कंसामध्ये भरली जाते.",
-    previewBtn: "नोटीस पत्राचे पूर्वावलोकन पहा (PREVIEW NOTICE LETTER)",
-    previewHeading: "कायदेशीर नोटीस पूर्वावलोकन (NOTICE LETTER PREVIEW)",
+    previewBtn: "नोटीस पत्राचे पूर्वावलोकन पहा",
+    previewHeading: "कायदेशीर नोटीस पूर्वावलोकन",
     downloadBtn: "नोटीस पत्र डाउनलोड करा (.DOCX)",
     hideForm: "फॉर्म लपवा [-]",
     createBtn: "+ कायदेशीर नोटीस पत्र तयार करा",
     generating: "तयार होत आहे..."
   },
   te: {
-    badge: "§ అధికారిక చట్టపరమైన నోటీసు చిత్తుప్రతి (FORMAL NOTICE DRAFT)",
+    badge: "§ అధికారిక చట్టపరమైన నోటీసు చిత్తుప్రతి",
     heading: "పంపడానికి సిద్ధంగా ఉన్న నోటీసు లేఖ కావాలా?",
     desc: "ధృవీకరించబడిన చట్టాలను ప్రస్తావిస్తూ అధికారిక చట్టపరమైన నోటీసును రూపొందించండి. వ్యక్తిగత వివరాలు స్థానికంగా ప్రాసెస్ చేయబడతాయి.",
-    nameLabel: "మీ పూర్తి చట్టపరమైన పేరు (YOUR FULL LEGAL NAME)",
+    nameLabel: "మీ పూర్తి చట్టపరమైన పేరు",
     nameSub: "లేఖలోని ఇతర అన్ని వివరాలు మీరు సమీక్షించడానికి ప్రామాణిక బ్రాకెట్ ప్లేస్‌హోల్డర్‌లతో నింపబడతాయి.",
-    previewBtn: "నోటీసు లేఖ ముందస్తు వీక్షణ (PREVIEW NOTICE LETTER)",
-    previewHeading: "చట్టపరమైన నోటీసు లేఖ ముందస్తు వీక్షణ (NOTICE LETTER PREVIEW)",
+    previewBtn: "నోటీసు లేఖ ముందస్తు వీక్షణ",
+    previewHeading: "చట్టపరమైన నోటీసు లేఖ ముందస్తు వీక్షణ",
     downloadBtn: "నోటీసు లేఖను డౌన్‌లోడ్ చేయండి (.DOCX)",
     hideForm: "ఫారమ్‌ను దాచండి [-]",
     createBtn: "+ చట్టపరమైన నోటీసు లేఖను సృష్టించండి",
@@ -142,6 +192,18 @@ const SECTION_HEADERS: Record<string, {
   authority: string;
   deadline: string;
   actionSteps: string;
+  reportedFacts: string;
+  legalPosition: string;
+  detailedMode: string;
+  simpleMode: string;
+  caseSheet: string;
+  verifiedBadge: string;
+  exportPdf: string;
+  newQuery: string;
+  confidence: string;
+  home: string;
+  howItWorks: string;
+  history: string;
 }> = {
   en: {
     provisions: "APPLICABLE STATUTORY PROVISIONS",
@@ -150,46 +212,118 @@ const SECTION_HEADERS: Record<string, {
     authority: "AUTHORITY TO APPROACH",
     deadline: "STATUTORY DEADLINE",
     actionSteps: "ACTION STEPS",
+    reportedFacts: "WHAT YOU REPORTED",
+    legalPosition: "LEGAL POSITION & STATUTORY SUMMARY",
+    detailedMode: "DETAILED STATUTORY",
+    simpleMode: "SIMPLER WORDING",
+    caseSheet: "LEGAL CASE SHEET",
+    verifiedBadge: "VERIFIED STATUTES",
+    exportPdf: "EXPORT TO PDF",
+    newQuery: "+ NEW QUERY",
+    confidence: "CONFIDENCE",
+    home: "Home",
+    howItWorks: "How it works",
+    history: "History",
   },
   ta: {
-    provisions: "பொருந்தக்கூடிய சட்ட விதிகள் (STATUTORY PROVISIONS)",
-    evidence: "சான்றுகள் மற்றும் நிபந்தனைகள் பகுப்பாய்வு (EVIDENCE ANALYSIS)",
-    pathway: "அடுத்த கட்ட சட்ட நடைமுறைகள் (PROCEDURAL PATHWAY)",
-    authority: "அணுக வேண்டிய சட்ட அதிகாரம் (AUTHORITY TO APPROACH)",
-    deadline: "சட்டரீதியான காலக்கெடு (STATUTORY DEADLINE)",
-    actionSteps: "செயல்பாட்டு படிகள் (ACTION STEPS)",
+    provisions: "பொருந்தக்கூடிய சட்ட விதிகள்",
+    evidence: "சான்றுகள் மற்றும் நிபந்தனைகள் பகுப்பாய்வு",
+    pathway: "அடுத்த கட்ட சட்ட நடைமுறைகள்",
+    authority: "அணுக வேண்டிய சட்ட அதிகாரம்",
+    deadline: "சட்டரீதியான காலக்கெடு",
+    actionSteps: "செயல்பாட்டு படிகள்",
+    reportedFacts: "நீங்கள் தெரிவித்தது",
+    legalPosition: "சட்ட நிலைப்பாடு & சட்டரீதியான சுருக்கம்",
+    detailedMode: "விரிவான சட்ட விளக்கம்",
+    simpleMode: "எளிய வார்த்தைகள்",
+    caseSheet: "சட்ட வழக்கு தாள்",
+    verifiedBadge: "சரிபார்க்கப்பட்ட சட்டங்கள்",
+    exportPdf: "PDF ஆக ஏற்றுமதி",
+    newQuery: "+ புதிய கேள்வி",
+    confidence: "நம்பகத்தன்மை",
+    home: "முகப்பு",
+    howItWorks: "எவ்வாறு செயல்படுகிறது",
+    history: "வரலாறு",
   },
   hi: {
-    provisions: "लागू होने वाले वैधानिक प्रावधान (STATUTORY PROVISIONS)",
-    evidence: "साक्ष्य एवं पूर्वशर्त विश्लेषण (EVIDENCE ANALYSIS)",
-    pathway: "अगले कदम एवं प्रक्रियात्मक मार्ग (PROCEDURAL PATHWAY)",
-    authority: "संपर्क करने योग्य कानूनी प्राधिकरण (AUTHORITY TO APPROACH)",
-    deadline: "वैधानिक समय सीमा (STATUTORY DEADLINE)",
-    actionSteps: "कार्रवाई के कदम (ACTION STEPS)",
+    provisions: "लागू होने वाले वैधानिक प्रावधान",
+    evidence: "साक्ष्य एवं पूर्वशर्त विश्लेषण",
+    pathway: "अगले कदम एवं प्रक्रियात्मक मार्ग",
+    authority: "संपर्क करने योग्य कानूनी प्राधिकरण",
+    deadline: "वैधानिक समय सीमा",
+    actionSteps: "कार्रवाई के कदम",
+    reportedFacts: "आपने क्या बताया",
+    legalPosition: "कानूनी स्थिति एवं वैधानिक सारांश",
+    detailedMode: "विस्तृत वैधानिक",
+    simpleMode: "सरल भाषा",
+    caseSheet: "कानूनी केस शीट",
+    verifiedBadge: "सत्यापित क़ानून",
+    exportPdf: "PDF में निर्यात",
+    newQuery: "+ नई क्वेरी",
+    confidence: "साक्ष्य स्तर",
+    home: "मुख्य पृष्ठ",
+    howItWorks: "यह कैसे काम करता है",
+    history: "इतिहास",
   },
   kn: {
-    provisions: "ಅನ್ವಯವಾಗುವ ಶಾಸನಬದ್ಧ ನಿಬಂಧನೆಗಳು (STATUTORY PROVISIONS)",
-    evidence: "ಪುರಾವೆ ಪೂರ್ವಾಪೇಕ್ಷಿತ ವಿಶ್ಲೇಷಣೆ (EVIDENCE ANALYSIS)",
-    pathway: "ಮುಂದಿನ ಹಂತಗಳು ಮತ್ತು ಕಾರ್ಯವಿಧಾನದ ಮಾರ್ಗ (PROCEDURAL PATHWAY)",
-    authority: "ಸಂಪರ್ಕಿಸಬೇಕಾದ ಪ್ರಾಧಿಕಾರ (AUTHORITY TO APPROACH)",
-    deadline: "ಶಾಸನಬದ್ಧ ಗಡುವು (STATUTORY DEADLINE)",
-    actionSteps: "ಕ್ರಮದ ಹಂತಗಳು (ACTION STEPS)",
+    provisions: "ಅನ್ವಯವಾಗುವ ಶಾಸನಬದ್ಧ ನಿಬಂಧನೆಗಳು",
+    evidence: "ಪುರಾವೆ ಪೂರ್ವಾಪೇಕ್ಷಿತ ವಿಶ್ಲೇಷಣೆ",
+    pathway: "ಮುಂದಿನ ಹಂತಗಳು ಮತ್ತು ಕಾರ್ಯವಿಧಾನದ ಮಾರ್ಗ",
+    authority: "ಸಂಪರ್ಕಿಸಬೇಕಾದ ಪ್ರಾಧಿಕಾರ",
+    deadline: "ಶಾಸನಬದ್ಧ ಗಡುವು",
+    actionSteps: "ಕ್ರಮದ ಹಂತಗಳು",
+    reportedFacts: "ನೀವು ವರದಿ ಮಾಡಿದ್ದು",
+    legalPosition: "ಕಾನೂನು ನಿಲುವು & ಶಾಸನಬದ್ಧ ಸಾರಾಂಶ",
+    detailedMode: "ವಿವರವಾದ ಶಾಸನಬದ್ಧ",
+    simpleMode: "ಸರಳ ಭಾಷೆ",
+    caseSheet: "ಕಾನೂನು ಪ್ರಕರಣ ಹಾಳೆ",
+    verifiedBadge: "ಪರಿಶೀಲಿಸಿದ ಕಾನೂನುಗಳು",
+    exportPdf: "PDF ಗೆ ರಫ್ತು",
+    newQuery: "+ ಹೊಸ ಪ್ರಶ್ನೆ",
+    confidence: "ಸಾಕ್ಷ್ಯ ಮಟ್ಟ",
+    home: "ಮುಖಪುಟ",
+    howItWorks: "ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
+    history: "ಇತಿಹಾಸ",
   },
   mr: {
-    provisions: "लागू कायदेशीर तरतुदी (STATUTORY PROVISIONS)",
-    evidence: "पुरावा पूर्वअट विश्लेषण (EVIDENCE ANALYSIS)",
-    pathway: "पुढील पावले आणि प्रक्रियात्मक मार्ग (PROCEDURAL PATHWAY)",
-    authority: "संपर्क साधण्याचे प्राधिकरण (AUTHORITY TO APPROACH)",
-    deadline: "कायदेशीर अंतिम मुदत (STATUTORY DEADLINE)",
-    actionSteps: "कृतीची पावले (ACTION STEPS)",
+    provisions: "लागू कायदेशीर तरतुदी",
+    evidence: "पुराव्याची पूर्वअट विश्लेषण",
+    pathway: "पुढील पावले आणि प्रक्रियात्मक मार्ग",
+    authority: "संपर्क साधण्याचे प्राधिकरण",
+    deadline: "कायदेशीर अंतिम मुदत",
+    actionSteps: "कृतीची पावले",
+    reportedFacts: "तुम्ही काय सांगितले",
+    legalPosition: "कायदेशीर स्थिती आणि वैधानिक सारांश",
+    detailedMode: "तपशीलवार वैधानिक",
+    simpleMode: "सोप्या शब्दांत",
+    caseSheet: "कायदेशीर केस शीट",
+    verifiedBadge: "सत्यापित कायदे",
+    exportPdf: "PDF म्हणून निर्यात",
+    newQuery: "+ नवीन प्रश्न",
+    confidence: "पुरावा पातळी",
+    home: "मुख्यपृष्ठ",
+    howItWorks: "हे कसे कार्य करते",
+    history: "इतिहास",
   },
   te: {
-    provisions: "వర్తించే చట్టబద్ధమైన నిబంధనలు (STATUTORY PROVISIONS)",
-    evidence: "సాక్ష్యాల పూర్వపరిస్థితి విశ్లేషణ (EVIDENCE ANALYSIS)",
-    pathway: "తదుపరి దశలు & విధానపరమైన మార్గం (PROCEDURAL PATHWAY)",
-    authority: "సంప్రదించాల్సిన అధికారం (AUTHORITY TO APPROACH)",
-    deadline: "చట్టబద్ధమైన గడువు (STATUTORY DEADLINE)",
-    actionSteps: "చర్య దశలు (ACTION STEPS)",
+    provisions: "వర్తించే చట్టబద్ధమైన నిబంధనలు",
+    evidence: "సాక్ష్యాల పూర్వపరిస్థితి విశ్లేషణ",
+    pathway: "తదుపరి దశలు & విధానపరమైన మార్గం",
+    authority: "సంప్రదించాల్సిన అధికారం",
+    deadline: "చట్టబద్ధమైన గడువు",
+    actionSteps: "చర్య దశలు",
+    reportedFacts: "మీరు నివేదించింది",
+    legalPosition: "చట్టపరమైన స్థితి & చట్టబద్ధమైన సారాంశం",
+    detailedMode: "వివరణాత్మక చట్టబద్ధమైన",
+    simpleMode: "సరళమైన పదాలు",
+    caseSheet: "చట్టపరమైన కేసు షీట్",
+    verifiedBadge: "ధృవీకరించిన చట్టాలు",
+    exportPdf: "PDF కి ఎగుమతి",
+    newQuery: "+ కొత్త ప్రశ్న",
+    confidence: "సాక్ష్య స్థాయి",
+    home: "హోమ్",
+    howItWorks: "ఇది ఎలా పని చేస్తుంది",
+    history: "చరిత్ర",
   },
 };
 
@@ -202,10 +336,10 @@ const PIPELINE_STEPS = [
 ];
 
 const EXAMPLE_QUERIES = [
-  { ref: "EXAMPLE 01", label: "UNPAID WAGES", text: "My employer hasn't paid my salary for two months." },
-  { ref: "EXAMPLE 02", label: "PF NON-DEPOSIT", text: "PF was deducted but not credited to my EPFO account." },
-  { ref: "EXAMPLE 03", label: "WRONGFUL TERMINATION", text: "I was terminated immediately without notice or severance pay." },
-  { ref: "EXAMPLE 04", label: "TENANCY DEPOSIT REFUND", text: "My landlord is refusing to refund my security deposit after I vacated." },
+  { ref: "EXAMPLE 01", label: "UNPAID OVERTIME", text: "My company makes me work 12 hours every day, but refuses to pay overtime wages." },
+  { ref: "EXAMPLE 02", label: "GRATUITY WITHHELD", text: "I resigned after 5 years of continuous service, but my company is refusing to pay my gratuity." },
+  { ref: "EXAMPLE 03", label: "UNLAWFUL EVICTION", text: "My landlord disconnected our electricity and water to force us out without a court order." },
+  { ref: "EXAMPLE 04", label: "MATERNITY BENEFIT", text: "My employer dismissed me after I applied for statutory 26-week paid maternity leave." },
 ];
 
 function renderText(val: unknown): string {
@@ -227,25 +361,20 @@ function renderText(val: unknown): string {
   return String(val);
 }
 
-function HowItWorksModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+function HowItWorksModal({ open, onClose, lang = "en" }: { open: boolean; onClose: () => void; lang?: string }) {
   if (!open) return null;
+  const t = (UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.en).howItWorksModal;
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" onClick={onClose}>
-      <div className="w-full max-w-2xl bg-[var(--bg-surface)] border border-[var(--border)] p-5 sm:p-6 relative animate-fade-up shadow-xl" onClick={e => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute top-4 right-4 text-[var(--text-3)] hover:text-[var(--text-1)] text-xs font-mono">✕ CLOSE</button>
+      <div className="w-full max-w-2xl bg-[var(--bg-surface)] border border-[var(--border)] p-5 sm:p-6 relative animate-fade-up shadow-xl rounded-none" onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 right-4 text-[var(--text-3)] hover:text-[var(--text-1)] text-xs font-mono cursor-pointer">{t.close}</button>
         <div className="border-b border-[var(--border)] pb-3 mb-4">
-          <p className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[var(--text-3)] mb-0.5">SYSTEM ARCHITECTURE</p>
-          <h3 className="text-xl font-serif font-bold text-[var(--text-1)]">How KnowYourRights Works</h3>
+          <p className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[var(--text-3)] mb-0.5">{t.subtitle}</p>
+          <h3 className="text-xl font-serif font-bold text-[var(--text-1)]">{t.title}</h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-sans">
-          {[
-            { num: "01", title: "TELL US WHAT HAPPENED", desc: "Describe your situation in your own words. We identify the important details, such as what happened, when it happened, and what you are claiming." },
-            { num: "02", title: "UNDERSTAND YOUR LEGAL ISSUE", desc: "We identify what kind of legal problem you're facing and determine which areas of law may apply." },
-            { num: "03", title: "FIND THE RELEVANT LAW", desc: "We search Indian laws and relevant state-specific provisions to find the rules that apply to your situation." },
-            { num: "04", title: "CHECK WHETHER THE LAW FITS", desc: "We check the legal requirements against the facts you provided to see whether there is enough evidence to support an answer." },
-            { num: "05", title: "BUILD YOUR CASE SUMMARY", desc: "We bring the relevant laws, sections, evidence, and practical next steps together into a clear legal information summary." },
-          ].map((item, idx) => (
-            <div key={item.num} className={`p-3.5 border border-[var(--border)] bg-[var(--bg-subtle)] ${idx === 4 ? "sm:col-span-2" : ""}`}>
+          {t.steps.map((item, idx) => (
+            <div key={item.num} className={`p-3.5 border border-[var(--border)] bg-[var(--bg-subtle)] rounded-none ${idx === 4 ? "sm:col-span-2" : ""}`}>
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-mono text-xs font-bold text-[var(--accent-crimson)]">{item.num}</span>
                 <span className="text-xs font-bold text-[var(--text-1)] uppercase tracking-wide font-sans">{item.title}</span>
@@ -259,27 +388,28 @@ function HowItWorksModal({ open, onClose }: { open: boolean; onClose: () => void
   );
 }
 
-function LoadingChecklist({ step }: { step: number }) {
+function LoadingChecklist({ step, lang = "en" }: { step: number; lang?: string }) {
+  const t = (UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.en).loading;
   return (
-    <div className="w-full max-w-md mx-auto py-10 px-8 border border-[var(--border)] bg-[var(--bg-surface)] animate-fade-up shadow-sm">
+    <div className="w-full max-w-md mx-auto py-10 px-8 border border-[var(--border)] bg-[var(--bg-surface)] animate-fade-up shadow-sm rounded-none">
       <div className="border-b border-[var(--border)] pb-4 mb-6">
         <div className="flex items-center gap-2 mb-1">
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+          <span className="w-2 h-2 bg-amber-500 animate-ping" />
           <p className="text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase">
-            STATUTORY ENGINE ACTIVE
+            {t.activeBadge}
           </p>
         </div>
         <h3 className="text-xl font-serif font-bold text-[var(--text-1)] mt-1">
-          Analyzing Legal Situation
+          {t.heading}
         </h3>
       </div>
       <div className="space-y-4 font-sans">
-        {PIPELINE_STEPS.map((s, i) => {
+        {t.steps.map((s, i) => {
           const done = i < step;
           const active = i === step;
           return (
             <div key={i} className="flex items-center gap-3.5">
-              <div className={`w-6 h-6 flex items-center justify-center text-xs font-mono font-bold border transition-all ${
+              <div className={`w-6 h-6 flex items-center justify-center text-xs font-mono font-bold border transition-all rounded-none ${
                 done
                   ? "bg-[var(--text-1)] text-[var(--bg)] border-[var(--text-1)]"
                   : active
@@ -349,6 +479,135 @@ function DebugPanel({ data }: { data: unknown }) {
   );
 }
 
+
+type HistoryItem = {
+  id: string;
+  timestamp: number;
+  originalQuery: string;
+  stateCode: StateCode;
+  category: string | null;
+  language: string;
+  result: QueryResult;
+  translations?: Record<string, unknown>;
+};
+
+function HistoryModal({
+  open,
+  onClose,
+  history,
+  onSelectHistory,
+  onClearHistory,
+  onDeleteHistoryItem,
+  lang = "en",
+}: {
+  open: boolean;
+  onClose: () => void;
+  history: HistoryItem[];
+  onSelectHistory: (item: HistoryItem) => void;
+  onClearHistory: () => void;
+  onDeleteHistoryItem: (id: string) => void;
+  lang?: string;
+}) {
+  if (!open) return null;
+  const t = (UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.en).historyModal;
+  return (
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" onClick={onClose}>
+      <div className="w-full max-w-2xl bg-[var(--bg-surface)] border border-[var(--border)] p-5 sm:p-6 relative animate-fade-up shadow-xl flex flex-col max-h-[85vh] rounded-none" onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 right-4 text-[var(--text-3)] hover:text-[var(--text-1)] text-xs font-mono cursor-pointer">
+          {t.close}
+        </button>
+        <div className="border-b border-[var(--border)] pb-3 mb-4">
+          <p className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[var(--text-3)] mb-0.5">
+            {t.subtitle}
+          </p>
+          <div className="flex items-center justify-between gap-2">
+            <h3 className="text-xl font-serif font-bold text-[var(--text-1)]">
+              {t.title}
+            </h3>
+            {history.length > 0 && (
+              <button
+                type="button"
+                onClick={onClearHistory}
+                className="text-[10px] font-mono text-[var(--accent-crimson)] hover:underline cursor-pointer"
+              >
+                {t.clearAll}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {history.length === 0 ? (
+          <div className="py-12 text-center font-sans">
+            <p className="font-serif italic text-base text-[var(--text-3)]">{t.emptyTitle}</p>
+            <p className="text-xs text-[var(--text-4)] mt-1 font-mono">{t.emptyDesc}</p>
+          </div>
+        ) : (
+          <div className="overflow-y-auto space-y-3 font-sans pr-1">
+            {history.map((item) => {
+              const formattedDate = new Date(item.timestamp).toLocaleString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+              const categoryTitle = (item.category || item.result?.detectedCategory || "General Legal Query")
+                .replace(/_/g, " ")
+                .toUpperCase();
+              return (
+                <div
+                  key={item.id}
+                  className="p-3.5 border border-[var(--border)] bg-[var(--bg-subtle)] hover:border-[var(--text-2)] transition-colors group relative rounded-none"
+                >
+                  <div className="flex items-center justify-between font-mono text-[10px] text-[var(--text-3)] mb-1.5 flex-wrap gap-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-[var(--accent-crimson)]">{categoryTitle}</span>
+                      <span>·</span>
+                      <span>{item.stateCode}</span>
+                      <span>·</span>
+                      <span className="uppercase text-[9px] px-1 bg-[var(--bg-surface)] border border-[var(--border)]">
+                        {item.result?.evidence?.level || "CONFIRMED"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span>{formattedDate}</span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onDeleteHistoryItem(item.id);
+                        }}
+                        className="text-[var(--text-4)] hover:text-[var(--accent-crimson)] text-xs cursor-pointer ml-1"
+                        title="Delete this query from history"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-xs text-[var(--text-1)] font-serif italic line-clamp-2 mb-2 leading-relaxed">
+                    &ldquo;{item.originalQuery}&rdquo;
+                  </p>
+                  <div className="flex items-center justify-between text-right">
+                    <span className="text-[10px] font-mono text-[var(--text-3)]">
+                      {item.result?.citations?.length || 0} cited section(s)
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => onSelectHistory(item)}
+                      className="text-xs font-mono font-bold text-[var(--text-1)] hover:text-[var(--accent-crimson)] cursor-pointer"
+                    >
+                      {t.openBrief}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [appState, setAppState] = useState<AppState>("HOME");
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -372,6 +631,9 @@ export default function Home() {
   const [result, setResult] = useState<QueryResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [howModalOpen, setHowModalOpen] = useState(false);
+  const [historyModalOpen, setHistoryModalOpen] = useState(false);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [isHydrated, setIsHydrated] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
 
   // Notice letter state
@@ -380,11 +642,15 @@ export default function Home() {
     employee_name: "",
   });
   const [generatedLetter, setGeneratedLetter] = useState<{ text: string; html: string } | null>(null);
+  const [hasTriggeredLetterPreview, setHasTriggeredLetterPreview] = useState(false);
+  const letterTranslationsRef = useRef<Record<string, { text: string; html: string }>>({});
   const [letterLoading, setLetterLoading] = useState(false);
   const [letterError, setLetterError] = useState<string | null>(null);
 
   // Translation state (supports English + 5 Indic languages)
   const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const currentUi = UI_TRANSLATIONS[selectedLanguage] || UI_TRANSLATIONS.en;
+  const activeExamples = LOCALIZED_EXAMPLES[selectedLanguage] || LOCALIZED_EXAMPLES.en;
   const [translations, setTranslations] = useState<Record<string, {
     answer: string;
     answerSimple?: string;
@@ -392,16 +658,141 @@ export default function Home() {
     pathway_authority?: string;
     pathway_deadline?: string;
     pathway_steps?: PathwayStep[];
+    citations?: Citation[];
   }>>({});
   const [isTranslating, setIsTranslating] = useState(false);
   const [translationError, setTranslationError] = useState<string | null>(null);
 
+  // Restore session & history on initial mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("kyr_simple_wording");
-      if (saved === "true") setSimpleWording(true);
+      const savedSimple = localStorage.getItem("kyr_simple_wording");
+      if (savedSimple === "true") setSimpleWording(true);
+
+      const savedTerms = localStorage.getItem("kyr_terms_accepted");
+      if (savedTerms === "true") setTermsAccepted(true);
+
+      const savedUser = localStorage.getItem("kyr_user_name");
+      if (savedUser) setUserName(savedUser);
+
+      const savedHist = localStorage.getItem("kyr_session_history");
+      if (savedHist) {
+        try {
+          const parsed = JSON.parse(savedHist);
+          if (Array.isArray(parsed)) setHistory(parsed);
+        } catch {}
+      }
+
+      const savedActive = localStorage.getItem("kyr_active_session");
+      if (savedActive) {
+        try {
+          const sess = JSON.parse(savedActive);
+          if (sess.appState && sess.appState !== "LOADING") {
+            setAppState(sess.appState);
+          }
+          if (sess.stateCode) setStateCode(sess.stateCode);
+          if (sess.query) { setQuery(sess.query); setCharCount(sess.query.length); }
+          if (sess.originalQuery) setOriginalQuery(sess.originalQuery);
+          if (sess.result) setResult(sess.result);
+          if (sess.sessionFacts) setSessionFacts(sess.sessionFacts);
+          if (sess.clarificationRound !== undefined) setClarificationRound(sess.clarificationRound);
+          if (sess.askedFacts) setAskedFacts(sess.askedFacts);
+          if (sess.clarifyQ) setClarifyQ(sess.clarifyQ);
+          if (sess.clarifyReason) setClarifyReason(sess.clarifyReason);
+          if (sess.clarifyTurn) setClarifyTurn(sess.clarifyTurn);
+          if (sess.selectedLanguage) setSelectedLanguage(sess.selectedLanguage);
+          if (sess.translations) setTranslations(sess.translations);
+          if (sess.letterFields) setLetterFields(sess.letterFields);
+          if (sess.generatedLetter) setGeneratedLetter(sess.generatedLetter);
+          if (sess.hasTriggeredLetterPreview !== undefined) setHasTriggeredLetterPreview(sess.hasTriggeredLetterPreview);
+        } catch (e) {
+          console.error("Failed to restore active session", e);
+        }
+      }
     } catch {}
+    setIsHydrated(true);
   }, []);
+
+  // Save active session whenever state updates
+  useEffect(() => {
+    if (!isHydrated) return;
+    try {
+      const activeSession = {
+        appState: appState === "LOADING" ? "EMPTY" : appState,
+        termsAccepted,
+        stateCode,
+        query,
+        userName,
+        originalQuery,
+        result,
+        sessionFacts,
+        clarificationRound,
+        askedFacts,
+        clarifyQ,
+        clarifyReason,
+        clarifyTurn,
+        selectedLanguage,
+        translations,
+        letterFields,
+        generatedLetter,
+        hasTriggeredLetterPreview,
+      };
+      localStorage.setItem("kyr_active_session", JSON.stringify(activeSession));
+      if (termsAccepted) localStorage.setItem("kyr_terms_accepted", "true");
+      if (userName) localStorage.setItem("kyr_user_name", userName);
+    } catch {}
+  }, [
+    isHydrated,
+    appState,
+    termsAccepted,
+    stateCode,
+    query,
+    userName,
+    originalQuery,
+    result,
+    sessionFacts,
+    clarificationRound,
+    askedFacts,
+    clarifyQ,
+    clarifyReason,
+    clarifyTurn,
+    selectedLanguage,
+    translations,
+    letterFields,
+    generatedLetter,
+    hasTriggeredLetterPreview,
+  ]);
+
+  const handleSelectHistoryItem = (item: HistoryItem) => {
+    setResult(item.result);
+    setOriginalQuery(item.originalQuery);
+    setQuery(item.originalQuery);
+    setStateCode(item.stateCode);
+    if (item.language) setSelectedLanguage(item.language);
+    if (item.translations) {
+      setTranslations((prev) => ({ ...prev, ...(item.translations as typeof prev) }));
+    }
+    setAppState("RESULT");
+    setHistoryModalOpen(false);
+    setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  };
+
+  const handleClearHistory = () => {
+    setHistory([]);
+    try {
+      localStorage.removeItem("kyr_session_history");
+    } catch {}
+  };
+
+  const handleDeleteHistoryItem = (id: string) => {
+    setHistory((prev) => {
+      const updated = prev.filter(item => item.id !== id);
+      try {
+        localStorage.setItem("kyr_session_history", JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+  };
 
   const handleToggleSimple = (val: boolean) => {
     setSimpleWording(val);
@@ -435,7 +826,7 @@ export default function Home() {
     setQuery(""); setCharCount(0); setClarifyAnswer("");
     setClarifyQ(""); setResult(null); setOriginalQuery(""); setError(null);
     setSessionFacts({}); setClarificationRound(0); setAskedFacts([]);
-    setShowLetterForm(false); setGeneratedLetter(null); setLetterError(null);
+    setShowLetterForm(false); setGeneratedLetter(null); setLetterError(null); setHasTriggeredLetterPreview(false); letterTranslationsRef.current = {};
     setSelectedLanguage("en"); setTranslations({}); setIsTranslating(false); setTranslationError(null);
     setLoadingStep(0); setAppState("EMPTY");
   }, []);
@@ -450,10 +841,12 @@ export default function Home() {
     currentFacts: Record<string, unknown>,
     currentRound: number,
     currentAskedFacts: string[],
-    currentOrigQuery: string
+    currentOrigQuery: string,
+    overrideLang?: string
   ) => {
     setError(null); setAppState("LOADING"); advanceLoading();
     try {
+      const activeLang = overrideLang || selectedLanguage;
       const res = await fetch(`${API}/api/query`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -465,6 +858,7 @@ export default function Home() {
           asked_facts: currentAskedFacts,
           original_query: currentOrigQuery || queryText,
           user_name: userName.trim() || undefined,
+          language: activeLang,
         }),
       });
       const data: QueryResult = await res.json();
@@ -482,6 +876,20 @@ export default function Home() {
         setAppState("EMPTY");
         return;
       }
+
+      // Sync detected language into selector if returned
+      const effectiveLang = data.detected_language || overrideLang || selectedLanguage;
+      if (effectiveLang && effectiveLang !== selectedLanguage) {
+        setSelectedLanguage(effectiveLang);
+      }
+
+      // If backend attached translated case sheet, store in cache immediately
+      if (data.translated && effectiveLang && effectiveLang !== "en") {
+        setTranslations((prev) => ({
+          ...prev,
+          [effectiveLang]: data.translated!,
+        }));
+      }
       
       if (data.facts) setSessionFacts(data.facts);
       if (data.clarification_round !== undefined) setClarificationRound(data.clarification_round);
@@ -495,6 +903,9 @@ export default function Home() {
         setAppState("CLARIFICATION");
       } else {
         setResult(data);
+        setGeneratedLetter(null);
+        setHasTriggeredLetterPreview(false);
+        letterTranslationsRef.current = {};
         if (data.user_name || userName.trim()) {
           const prefill = data.user_name || userName.trim();
           setLetterFields(prev => ({
@@ -504,45 +915,95 @@ export default function Home() {
         }
         setAppState("RESULT");
         setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+
+        if (effectiveLang && effectiveLang !== "en" && !data.translated) {
+          handleSelectLanguage(effectiveLang, data);
+        }
+
+        // Record resolved result into session history
+        const histItem: HistoryItem = {
+          id: Date.now().toString(),
+          timestamp: Date.now(),
+          originalQuery: currentOrigQuery || queryText,
+          stateCode,
+          category: data.detectedCategory,
+          language: effectiveLang,
+          result: data,
+          translations: data.translated ? { [effectiveLang]: data.translated } : undefined,
+        };
+        setHistory((prev) => {
+          const filtered = prev.filter(h => h.originalQuery.trim().toLowerCase() !== histItem.originalQuery.trim().toLowerCase());
+          const updated = [histItem, ...filtered].slice(0, 20);
+          try {
+            localStorage.setItem("kyr_session_history", JSON.stringify(updated));
+          } catch {}
+          return updated;
+        });
       }
     } catch { setError("Could not connect to backend server. Please verify FastAPI is running at port 8000."); setAppState("EMPTY"); }
-  }, [stateCode, advanceLoading, userName]);
+  }, [stateCode, advanceLoading, userName, selectedLanguage]);
 
   const handleFirstSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query.trim() || query.trim().length < 10) return;
+    if (!query.trim() || query.trim().length < 5) return;
     const initialText = query.trim();
     setOriginalQuery(initialText);
-    submit(initialText, {}, 0, [], initialText);
+    const clientDetected = detectClientLanguage(initialText);
+    if (clientDetected !== "en") {
+      setSelectedLanguage(clientDetected);
+    }
+    submit(initialText, {}, 0, [], initialText, clientDetected !== "en" ? clientDetected : undefined);
   };
 
   const handleClarifySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!clarifyAnswer.trim()) return;
-    submit(clarifyAnswer.trim(), sessionFacts, clarificationRound, askedFacts, originalQuery);
+    const answer = clarifyAnswer.trim();
+    const origLang = detectClientLanguage(originalQuery);
+    const langToUse = origLang !== "en" ? origLang : selectedLanguage;
+    if (!answer) {
+      submit("SKIP", sessionFacts, clarificationRound, askedFacts, originalQuery, langToUse);
+    } else {
+      submit(answer, sessionFacts, clarificationRound, askedFacts, originalQuery, langToUse);
+    }
   };
 
   const handleSkipClarify = () => {
-    submit("SKIP", sessionFacts, clarificationRound, askedFacts, originalQuery);
+    const origLang = detectClientLanguage(originalQuery);
+    const langToUse = origLang !== "en" ? origLang : selectedLanguage;
+    submit("SKIP", sessionFacts, clarificationRound, askedFacts, originalQuery, langToUse);
   };
 
-  const handleSelectLanguage = async (langCode: string) => {
-    if (langCode === selectedLanguage) return;
+  const handleSelectLanguage = async (langCode: string, queryRes?: QueryResult) => {
+    if (langCode === selectedLanguage && !queryRes) return;
+
+    const shouldAutoRenderLetter = hasTriggeredLetterPreview || generatedLetter !== null;
+
     if (langCode === "en") {
       setSelectedLanguage("en");
+      if (shouldAutoRenderLetter) {
+        handleGenerateLetter("en");
+      }
       return;
     }
 
     if (translations[langCode]) {
       setSelectedLanguage(langCode);
+      if (shouldAutoRenderLetter) {
+        handleGenerateLetter(langCode);
+      }
       return;
     }
 
-    if (!result) return;
+    const targetResult = queryRes || result;
+    if (!targetResult) return;
 
     setSelectedLanguage(langCode);
     setIsTranslating(true);
     setTranslationError(null);
+
+    if (shouldAutoRenderLetter) {
+      handleGenerateLetter(langCode);
+    }
 
     try {
       const res = await fetch(`${API}/api/translate`, {
@@ -550,28 +1011,37 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           target_language: langCode,
-          answer: result.answer,
-          answerSimple: result.answerSimple,
-          evidence_reasons: result.evidence?.reasons,
-          pathway_authority: result.pathway?.authority,
-          pathway_deadline: result.pathway?.deadlineNote,
-          pathway_steps: result.pathway?.steps?.map((s) => ({
+          answer: targetResult.answer,
+          answerSimple: targetResult.answerSimple,
+          evidence_reasons: targetResult.evidence?.reasons,
+          pathway_authority: targetResult.pathway?.authority,
+          pathway_deadline: targetResult.pathway?.deadlineNote,
+          pathway_steps: targetResult.pathway?.steps?.map((s) => ({
             title: s.title,
             detail: s.detail,
             docs: s.docs || [],
+          })),
+          citations: targetResult.citations?.map((c) => ({
+            act: c.act,
+            section: c.section,
+            jurisdiction: c.jurisdiction,
           })),
         }),
       });
 
       if (!res.ok) {
         const errJson = await res.json().catch(() => null);
-        const errMsg = errJson?.detail || "Translation request failed";
-        throw new Error(typeof errMsg === "string" ? errMsg : JSON.stringify(errMsg));
+        const rawMsg = errJson?.detail || "Translation could not be completed at this time.";
+        const displayMsg = typeof rawMsg === "string" ? rawMsg : JSON.stringify(rawMsg);
+        setTranslationError(displayMsg);
+        setSelectedLanguage("en");
+        setIsTranslating(false);
+        return;
       }
 
       const data = await res.json();
-      const mergedSteps = result.pathway?.steps
-        ? result.pathway.steps.map((orig, i) => {
+      const mergedSteps = targetResult.pathway?.steps
+        ? targetResult.pathway.steps.map((orig, i) => {
             const tr = data.pathway_steps?.[i];
             return {
               ...orig,
@@ -582,7 +1052,6 @@ export default function Home() {
           })
         : data.pathway_steps;
 
-      setGeneratedLetter(null);
       setTranslations((prev) => ({
         ...prev,
         [langCode]: {
@@ -592,11 +1061,11 @@ export default function Home() {
           pathway_authority: data.pathway_authority,
           pathway_deadline: data.pathway_deadline,
           pathway_steps: mergedSteps,
+          citations: data.citations || targetResult.citations,
         },
       }));
     } catch (err: unknown) {
-      console.error("Translation error:", err);
-      const msg = err instanceof Error ? err.message : "Translation failed. Displaying English version.";
+      const msg = err instanceof Error ? err.message : "Translation could not be completed. Displaying English version.";
       setTranslationError(msg);
       setSelectedLanguage("en");
     } finally {
@@ -635,18 +1104,24 @@ export default function Home() {
       .map(p => `<p style="margin: 0 0 10px 0; line-height: 1.6; text-align: justify;">${p}</p>`)
       .join("");
 
-    const citationsHtml = result.citations && result.citations.length > 0
-      ? result.citations
-          .map((c, i) => `
+    const secWord = SECTION_WORD[selectedLanguage] || "Section";
+    const jurMap = JURISDICTION_WORD[selectedLanguage] || JURISDICTION_WORD.en;
+    const citsToRender = (activeTranslation?.citations as Citation[]) || result.citations || [];
+    const citationsHtml = citsToRender && citsToRender.length > 0
+      ? citsToRender
+          .map((c, i) => {
+            const jurLabel = jurMap[c.jurisdiction?.toLowerCase()] || c.jurisdiction?.toUpperCase();
+            return `
             <div style="padding: 8px 12px; border: 1px solid #d1d5db; margin-bottom: 6px; background-color: #fafafa; border-radius: 2px;">
               <div style="font-family: 'Times New Roman', serif; font-size: 13px; font-weight: bold; color: #111827;">
                 §${(i + 1).toString().padStart(2, "0")}. ${renderText(c.act)}
               </div>
               <div style="font-family: monospace; font-size: 11px; color: #4b5563; margin-top: 2px;">
-                Section ${renderText(c.section)} · Jurisdiction: ${renderText(c.jurisdiction).toUpperCase()}
+                ${secWord} ${renderText(c.section).replace(/^(?:Section|பிரிவு|धारा|ವಿಭಾಗ|कलम|విభాగం)\s*/i, "")} · ${renderText(jurLabel)}
               </div>
             </div>
-          `)
+          `;
+          })
           .join("")
       : `<p style="font-style: italic; color: #6b7280; font-size: 12px;">No specific statutory sections cited.</p>`;
 
@@ -885,8 +1360,16 @@ export default function Home() {
     }
   };
 
-  const handleGenerateLetter = async () => {
+  const handleGenerateLetter = async (targetLang?: string) => {
     if (!result) return;
+    const langToUse = typeof targetLang === "string" ? targetLang : selectedLanguage;
+    setHasTriggeredLetterPreview(true);
+
+    if (letterTranslationsRef.current[langToUse]) {
+      setGeneratedLetter(letterTranslationsRef.current[langToUse]);
+      return;
+    }
+
     setLetterError(null);
     setLetterLoading(true);
     try {
@@ -900,7 +1383,7 @@ export default function Home() {
           section: firstCitation?.section || "Statutory Section",
           authority: result.pathway?.authority || "District Legal Services Authority (DLSA)",
           ask_text: result.pathway?.steps[0]?.title || "resolve the outstanding claim",
-          language: selectedLanguage,
+          language: langToUse,
           fields: {
             employee_name: letterFields.employee_name.trim() || result.user_name || userName || undefined,
           },
@@ -912,6 +1395,7 @@ export default function Home() {
         return;
       }
       const data: { text: string; html: string } = await res.json();
+      letterTranslationsRef.current[langToUse] = data;
       setGeneratedLetter(data);
     } catch {
       setLetterError("Failed to connect to backend server for notice letter rendering.");
@@ -960,6 +1444,7 @@ export default function Home() {
   const displayAuthority = activeTranslation?.pathway_authority || result?.pathway?.authority || "";
   const displayDeadline = activeTranslation?.pathway_deadline || result?.pathway?.deadlineNote || "";
   const displaySteps = (activeTranslation?.pathway_steps as PathwayStep[]) || result?.pathway?.steps || [];
+  const displayCitations = (activeTranslation?.citations as Citation[]) || result?.citations || [];
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text-1)] font-sans antialiased py-8 px-4 sm:px-8 md:px-12">
@@ -973,53 +1458,97 @@ export default function Home() {
                 KNOWYOURRIGHTS
               </span>
               <span className="text-[9px] font-mono tracking-[0.2em] text-[var(--text-3)] uppercase block mt-1">
-                EST. · INDIAN STATUTORY ARCHIVE
+                {currentUi.nav.tagline}
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-4 text-xs font-mono">
+          <div className="flex items-center gap-3 text-xs font-mono flex-wrap justify-end">
+            {/* Global language dropdown — hidden entirely during clarification loop */}
+            {appState !== "CLARIFICATION" && (
+              <div className="flex items-center gap-2">
+                <LanguageDropdown
+                  selectedLanguage={selectedLanguage}
+                  isTranslating={isTranslating}
+                  onSelectLanguage={(newLang) => {
+                    if (appState === "RESULT") {
+                      handleSelectLanguage(newLang);
+                    } else {
+                      setSelectedLanguage(newLang);
+                    }
+                  }}
+                  languages={LANGUAGES}
+                />
+                {isTranslating && (
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 border border-amber-500/40 bg-amber-500/10 text-amber-400 text-[10px] font-mono tracking-widest uppercase rounded-none select-none animate-pulse">
+                    <span className="w-1.5 h-1.5 bg-amber-400 animate-ping" />
+                    <span className="font-bold hidden sm:inline">Translating...</span>
+                  </div>
+                )}
+              </div>
+            )}
             {appState === "HOME" ? (
               <>
-                <a href="#how-it-works" className="text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors">
-                  [ How it works ]
+                <button
+                  type="button"
+                  onClick={() => setHistoryModalOpen(true)}
+                  className="px-3 py-1.5 border border-[var(--border)] bg-[var(--bg-surface)] hover:border-[var(--text-1)] hover:bg-[var(--bg-subtle)] text-[var(--text-2)] hover:text-[var(--text-1)] text-xs font-mono rounded-none uppercase transition-colors cursor-pointer select-none flex items-center gap-1.5"
+                >
+                  <span>{(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).history}</span>
+                  <span className="text-[10px] text-[var(--text-3)] font-bold">[{history.length}]</span>
+                </button>
+                <a
+                  href="#how-it-works"
+                  className="px-3 py-1.5 border border-[var(--border)] bg-[var(--bg-surface)] hover:border-[var(--text-1)] hover:bg-[var(--bg-subtle)] text-[var(--text-2)] hover:text-[var(--text-1)] text-xs font-mono rounded-none uppercase transition-colors cursor-pointer select-none hidden sm:inline-block"
+                >
+                  {(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).howItWorks}
                 </a>
                 <button
                   type="button"
                   onClick={handleHeaderNewQuery}
-                  className="border border-[var(--text-1)] bg-[var(--text-1)] text-[var(--bg)] px-3.5 py-1.5 font-bold cursor-pointer hover:opacity-90 transition-opacity"
+                  className="px-3.5 py-1.5 border border-[var(--text-1)] bg-[var(--text-1)] text-[var(--bg)] text-xs font-mono font-bold uppercase tracking-wider hover:opacity-90 rounded-none transition-opacity cursor-pointer select-none"
                 >
-                  [ New query ]
+                  {(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).newQuery}
                 </button>
               </>
             ) : (
               <>
                 <button
                   type="button"
-                  onClick={handleLogoClick}
-                  className="text-[var(--text-2)] hover:text-[var(--text-1)] cursor-pointer"
+                  onClick={() => setHowModalOpen(true)}
+                  className="px-3 py-1.5 border border-[var(--border)] bg-[var(--bg-surface)] hover:border-[var(--text-1)] hover:bg-[var(--bg-subtle)] text-[var(--text-2)] hover:text-[var(--text-1)] text-xs font-mono rounded-none uppercase transition-colors cursor-pointer select-none hidden sm:inline-block"
                 >
-                  [ Home ]
+                  {(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).howItWorks}
                 </button>
                 <button
                   type="button"
-                  onClick={() => setHowModalOpen(true)}
-                  className="text-[var(--text-2)] hover:text-[var(--text-1)] cursor-pointer"
+                  onClick={() => setHistoryModalOpen(true)}
+                  className="px-3 py-1.5 border border-[var(--border)] bg-[var(--bg-surface)] hover:border-[var(--text-1)] hover:bg-[var(--bg-subtle)] text-[var(--text-2)] hover:text-[var(--text-1)] text-xs font-mono rounded-none uppercase transition-colors cursor-pointer select-none flex items-center gap-1.5"
                 >
-                  [ How it works ]
+                  <span>{(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).history}</span>
+                  <span className="text-[10px] text-[var(--text-3)] font-bold">[{history.length}]</span>
                 </button>
                 <button
                   type="button"
                   onClick={handleNewQuestion}
-                  className="border border-[var(--text-1)] bg-[var(--text-1)] text-[var(--bg)] px-3 py-1 font-bold cursor-pointer hover:opacity-90"
+                  className="px-3.5 py-1.5 border border-[var(--text-1)] bg-[var(--text-1)] text-[var(--bg)] text-xs font-mono font-bold uppercase tracking-wider hover:opacity-90 rounded-none transition-opacity cursor-pointer select-none"
                 >
-                  + NEW QUERY
+                  {(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).newQuery}
                 </button>
               </>
             )}
           </div>
         </header>
 
-        <HowItWorksModal open={howModalOpen} onClose={() => setHowModalOpen(false)} />
+        <HowItWorksModal open={howModalOpen} onClose={() => setHowModalOpen(false)} lang={selectedLanguage} />
+        <HistoryModal
+          open={historyModalOpen}
+          onClose={() => setHistoryModalOpen(false)}
+          history={history}
+          onSelectHistory={handleSelectHistoryItem}
+          onClearHistory={handleClearHistory}
+          onDeleteHistoryItem={handleDeleteHistoryItem}
+          lang={selectedLanguage}
+        />
 
         {appState === "HOME" && (
           <Homepage
@@ -1029,6 +1558,7 @@ export default function Home() {
             setTermsAccepted={setTermsAccepted}
             onStartQuery={handleStartFromHomepage}
             onOpenHowModal={() => setHowModalOpen(true)}
+            lang={selectedLanguage}
           />
         )}
 
@@ -1037,20 +1567,20 @@ export default function Home() {
             {/* Session Context Bar */}
             <div className="flex items-center justify-between border-b border-[var(--border)] pb-3 mb-6 font-mono text-xs text-[var(--text-3)] flex-wrap gap-2">
               <div className="flex items-center gap-2">
-                <span className="text-[var(--accent-crimson)] font-bold">● INQUIRY WORKSPACE</span>
+                <span className="text-[var(--accent-crimson)] font-bold">● {currentUi.workspace.statusKicker}</span>
                 <span>·</span>
                 <span>
-                  APPLICANT: {userName.trim() ? userName.trim().toUpperCase() : "ANONYMOUS"}
+                  {currentUi.workspace.applicantLabel} {userName.trim() ? userName.trim().toUpperCase() : "ANONYMOUS"}
                 </span>
               </div>
               <div className="flex items-center gap-3 text-[10px]">
-                <span className="text-[var(--text-2)]">TERMS ACKNOWLEDGED ✓</span>
+                <span className="text-[var(--text-2)]">{currentUi.workspace.termsAcknowledged}</span>
                 <button
                   type="button"
                   onClick={handleLogoClick}
                   className="text-[var(--text-3)] hover:text-[var(--text-1)] underline cursor-pointer"
                 >
-                  ← Back to overview
+                  {currentUi.workspace.backToOverview}
                 </button>
               </div>
             </div>
@@ -1058,14 +1588,14 @@ export default function Home() {
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[var(--accent-crimson)] uppercase">
-                  LEGAL INFORMATION & RECOURSE
+                  {currentUi.workspace.kicker}
                 </span>
               </div>
               <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[var(--text-1)] leading-tight">
-                Tell us what happened.
+                {currentUi.workspace.title}
               </h1>
               <p className="text-2xl sm:text-3xl font-serif text-[var(--text-2)] italic mt-1">
-                We&apos;ll find the law.
+                {currentUi.workspace.subtitle}
               </p>
             </div>
 
@@ -1074,7 +1604,7 @@ export default function Home() {
               {/* Jurisdiction Selector */}
               <div>
                 <label className="block text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase mb-3">
-                  WHERE DOES THIS APPLY?
+                  {currentUi.workspace.jurisdictionLabel}
                 </label>
                 <div className="flex flex-wrap gap-2 font-mono text-xs font-bold uppercase">
                   {(Object.entries(STATE_LABELS) as [StateCode, string][]).map(([code, label]) => (
@@ -1082,7 +1612,7 @@ export default function Home() {
                       key={code}
                       type="button"
                       onClick={() => setStateCode(code)}
-                      className={`px-5 py-2.5 border transition-all ${
+                      className={`px-5 py-2.5 border transition-all rounded-none ${
                         stateCode === code
                           ? "bg-[var(--text-1)] text-[var(--bg)] border-[var(--text-1)] shadow-sm"
                           : "bg-[var(--bg-surface)] text-[var(--text-2)] border-[var(--border)] hover:border-[var(--text-1)]"
@@ -1098,18 +1628,18 @@ export default function Home() {
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="block text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase">
-                    WHAT HAPPENED?
+                    {currentUi.workspace.inputLabel}
                   </label>
                   <span className={`text-xs font-mono ${charCount > 800 ? "text-[var(--accent-crimson)]" : "text-[var(--text-3)]"}`}>
                     {charCount} / 1000
                   </span>
                 </div>
 
-                <div className="border border-[var(--border)] bg-[var(--bg-surface)] p-5 focus-within:border-[var(--text-1)] transition-colors">
+                <div className="border border-[var(--border)] bg-[var(--bg-surface)] p-5 focus-within:border-[var(--text-1)] transition-colors rounded-none">
                   <textarea
                     value={query}
                     onChange={e => { setQuery(e.target.value); setCharCount(e.target.value.length); }}
-                    placeholder="Tell us what happened..."
+                    placeholder={currentUi.workspace.inputPlaceholder}
                     rows={7}
                     maxLength={1000}
                     className="w-full bg-transparent text-[var(--text-1)] text-base sm:text-lg placeholder:text-[var(--text-4)] focus:outline-none resize-y leading-relaxed font-sans"
@@ -1118,7 +1648,7 @@ export default function Home() {
               </div>
 
               {error && (
-                <div className="p-4 bg-[var(--bg-subtle)] border-l-2 border-[var(--accent-crimson)] text-[var(--accent-crimson)] text-xs font-mono">
+                <div className="p-4 bg-[var(--bg-subtle)] border-l-2 border-[var(--accent-crimson)] text-[var(--accent-crimson)] text-xs font-mono rounded-none">
                   [ERROR] {typeof error === "string" ? error : JSON.stringify(error)}
                 </div>
               )}
@@ -1129,44 +1659,44 @@ export default function Home() {
               <button
                 type="submit"
                 suppressHydrationWarning
-                disabled={query.trim().length < 10}
-                className={`w-full py-4 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase transition-all border ${
-                  query.trim().length >= 10
+                disabled={query.trim().length < 5}
+                className={`w-full py-4 text-xs sm:text-sm font-mono font-bold tracking-[0.2em] uppercase transition-all border rounded-none ${
+                  query.trim().length >= 5
                     ? "bg-[var(--text-1)] text-[var(--bg)] border-[var(--text-1)] hover:opacity-90 cursor-pointer shadow-sm"
                     : "bg-[var(--bg-subtle)] text-[var(--text-4)] border-[var(--border)] cursor-not-allowed"
                 }`}
               >
-                [ ANALYZE CASE ]
+                {currentUi.workspace.analyzeBtn}
               </button>
             </form>
 
             {/* Bottom Metadata */}
             <div className="mt-8 pt-4 border-t border-[var(--border)] flex items-center justify-between font-mono text-xs text-[var(--text-3)] flex-wrap gap-4">
               <div>
-                <span className="block font-bold text-[var(--text-2)] tracking-wider uppercase mb-0.5">JURISDICTIONS COVERED</span>
+                <span className="block font-bold text-[var(--text-2)] tracking-wider uppercase mb-0.5">{currentUi.workspace.jurisdictionsCovered}</span>
                 <span>TAMIL NADU · MAHARASHTRA · KARNATAKA</span>
               </div>
               <div className="text-right">
-                <span className="font-bold text-[var(--text-2)] tracking-wider uppercase">VERIFIED LEGAL SOURCES</span>
+                <span className="font-bold text-[var(--text-2)] tracking-wider uppercase">{currentUi.workspace.verifiedSources}</span>
               </div>
             </div>
 
             {/* Start with an example section */}
             <div className="mt-12">
               <p className="text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase mb-4">
-                START WITH AN EXAMPLE
+                {currentUi.workspace.exampleHeader}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-sans">
-                {EXAMPLE_QUERIES.map((ex, i) => (
+                {activeExamples.map((ex, i) => (
                   <button
                     key={i}
                     onClick={() => { setQuery(ex.text); setCharCount(ex.text.length); }}
-                    className="p-4 border border-[var(--border)] bg-[var(--bg-surface)] text-left interactive-paper flex flex-col justify-between group cursor-pointer"
+                    className="p-4 border border-[var(--border)] bg-[var(--bg-surface)] text-left interactive-paper flex flex-col justify-between group cursor-pointer rounded-none"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2 font-mono text-[10px]">
                         <span className="text-[var(--accent-crimson)] font-bold">{ex.ref}</span>
-                        <span className="text-[var(--text-3)] group-hover:text-[var(--text-1)] font-bold">USE THIS →</span>
+                        <span className="text-[var(--text-3)] group-hover:text-[var(--text-1)] font-bold">{currentUi.workspace.useThis}</span>
                       </div>
                       <p className="text-xs font-bold text-[var(--text-1)] uppercase tracking-wide mb-1">{ex.label}</p>
                       <p className="text-xs text-[var(--text-2)] line-clamp-2 leading-relaxed">&ldquo;{ex.text}&rdquo;</p>
@@ -1180,24 +1710,27 @@ export default function Home() {
 
         {appState === "LOADING" && (
           <main className="py-16 flex items-center justify-center">
-            <LoadingChecklist step={loadingStep} />
+            <LoadingChecklist step={loadingStep} lang={selectedLanguage} />
           </main>
         )}
 
         {appState === "CLARIFICATION" && (
           <main className="py-8 animate-fade-up max-w-2xl mx-auto font-sans">
-            <div className="border border-[var(--border)] bg-[var(--bg-surface)] p-6 sm:p-10 shadow-sm">
-              <div className="flex items-center justify-between border-b border-[var(--border)] pb-3 mb-6 font-mono text-xs text-[var(--text-3)]">
-                <span className="font-bold text-[var(--text-1)]">STATUTORY INTAKE</span>
-                <span>FACT INTAKE {clarifyTurn} OF {MAX_TURNS}</span>
+            <div className="border border-[var(--border)] bg-[var(--bg-surface)] p-6 sm:p-10 shadow-sm rounded-none">
+              <div className="flex items-center justify-between border-b border-[var(--border)] pb-3 mb-6 font-mono text-xs text-[var(--text-3)] flex-wrap gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-bold text-[var(--text-1)]">{currentUi.clarification.header}</span>
+                  <span>·</span>
+                  <span>FACT INTAKE {clarifyTurn} OF {MAX_TURNS}</span>
+                </div>
               </div>
 
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="legal-stamp">STATUTORY INTAKE</span>
+                  <span className="legal-stamp">{currentUi.clarification.stamp}</span>
                 </div>
                 <p className="text-xs text-[var(--text-2)] font-serif italic mb-4">
-                  One fact is needed before we can determine which statutory provisions apply.
+                  {currentUi.clarification.intro}
                 </p>
                 <h2 className="text-xl sm:text-2xl font-serif font-bold text-[var(--text-1)] leading-snug">{renderText(clarifyQ)}</h2>
                 {clarifyReason && <p className="text-xs text-[var(--text-2)] mt-2">{renderText(clarifyReason)}</p>}
@@ -1209,26 +1742,26 @@ export default function Home() {
                   onChange={e => setClarifyAnswer(e.target.value)}
                   rows={3}
                   autoFocus
-                  className="w-full p-4 border border-[var(--border)] bg-[var(--bg-subtle)] text-base text-[var(--text-1)] placeholder:text-[var(--text-4)] focus:outline-none focus:border-[var(--text-1)] font-sans"
+                  className="w-full p-4 border border-[var(--border)] bg-[var(--bg-subtle)] text-base text-[var(--text-1)] placeholder:text-[var(--text-4)] focus:outline-none focus:border-[var(--text-1)] font-sans rounded-none"
                 />
                 <div className="flex gap-3 font-mono text-xs font-bold uppercase">
                   <button
                     type="submit"
                     disabled={!clarifyAnswer.trim()}
-                    className={`flex-1 py-3.5 border transition-all ${
+                    className={`flex-1 py-3.5 border transition-all rounded-none ${
                       clarifyAnswer.trim()
                         ? "bg-[var(--text-1)] text-[var(--bg)] border-[var(--text-1)] cursor-pointer"
                         : "bg-[var(--bg-subtle)] text-[var(--text-4)] border-[var(--border)] cursor-not-allowed"
                     }`}
                   >
-                    CONTINUE →
+                    {currentUi.clarification.continueBtn}
                   </button>
                   <button
                     type="button"
                     onClick={handleSkipClarify}
-                    className="px-5 py-3.5 text-[var(--text-3)] hover:text-[var(--text-1)] border border-[var(--border)] cursor-pointer"
+                    className="px-5 py-3.5 text-[var(--text-3)] hover:text-[var(--text-1)] border border-[var(--border)] cursor-pointer rounded-none"
                   >
-                    SKIP
+                    {currentUi.clarification.skipBtn}
                   </button>
                 </div>
               </form>
@@ -1246,67 +1779,65 @@ export default function Home() {
             {/* Digital Case File Container */}
             <div className="border border-[var(--border)] bg-[var(--bg-surface)] p-6 sm:p-12 shadow-sm">
               {/* Top Legal Docket Header */}
-              <div className="flex items-center justify-between border-b-2 border-[var(--text-1)] pb-4 mb-8 font-mono text-xs flex-wrap gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="font-bold text-base tracking-wider text-[var(--text-1)]">
-                    LEGAL CASE SHEET
-                  </span>
-                  <span className="legal-stamp">VERIFIED STATUTES</span>
-                </div>
-                <div className="flex items-center gap-4 text-[var(--text-2)] font-bold">
-                  <span>{STATE_LABELS[stateCode].toUpperCase()}</span>
-                  <span>·</span>
-                  <span>CONFIDENCE: {result.evidence.level.toUpperCase()}</span>
-                  <button
-                    onClick={exportToPdf}
-                    className="px-2.5 py-1 border border-[var(--border)] bg-[var(--bg-subtle)] hover:border-[var(--text-1)] text-[var(--text-1)] transition-colors text-[10px] no-print cursor-pointer"
-                    title="Export legal brief as PDF document"
-                  >
-                    [ EXPORT TO PDF ]
-                  </button>
-                </div>
-              </div>
+              {(() => {
+                const sh = SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en;
+                return (
+                  <div className="flex items-center justify-between border-b-2 border-[var(--text-1)] pb-4 mb-8 font-mono text-xs flex-wrap gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="font-bold text-base tracking-wider text-[var(--text-1)]">
+                        {sh.caseSheet}
+                      </span>
+                      <span className="legal-stamp">{sh.verifiedBadge}</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-[var(--text-2)] font-bold">
+                      <span>{STATE_LABELS[stateCode].toUpperCase()}</span>
+                      <span>·</span>
+                      <span>{sh.confidence}: {result.evidence.level.toUpperCase()}</span>
+                      <button
+                        onClick={exportToPdf}
+                        className="px-2.5 py-1 border border-[var(--border)] bg-[var(--bg-subtle)] hover:border-[var(--text-1)] text-[var(--text-1)] transition-colors text-[10px] no-print cursor-pointer"
+                        title="Export legal brief as PDF document"
+                      >
+                        [ {sh.exportPdf} ]
+                      </button>
+                    </div>
+                  </div>
+                );
+              })()}
 
-              {/* Language Selector Bar */}
-              <div className="flex items-center justify-between flex-wrap gap-3 mb-8 p-3 bg-[var(--bg-subtle)] border border-[var(--border)] text-xs font-mono no-print">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[var(--text-3)] uppercase tracking-wider text-[10px] font-bold">
-                    🌐 TRANSLATE CASE SHEET:
+              {/* Translation loading banner */}
+              {isTranslating && (
+                <div className="mb-6 p-4 border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-mono text-xs flex items-center justify-between gap-4 animate-fade-up no-print">
+                  <div className="flex items-center gap-3">
+                    <svg className="animate-spin h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <div>
+                      <span className="font-bold uppercase tracking-wider block">Translating Case Sheet...</span>
+                      <span className="text-[11px] text-[var(--text-2)] font-sans">
+                        Converting statutory analysis, applicable legal provisions, and procedural pathway into {LANGUAGES.find(l => l.code === selectedLanguage)?.name || selectedLanguage}.
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-2)] hidden sm:inline-block">
+                    PROCESSING
                   </span>
-                  {isTranslating && (
-                    <span className="text-[var(--accent-crimson)] text-[10px] font-bold animate-pulse">
-                      Translating into {LANGUAGES.find(l => l.code === selectedLanguage)?.name}...
-                    </span>
-                  )}
-                  {translationError && (
-                    <span className="text-[var(--accent-crimson)] text-[10px]">
-                      {translationError}
-                    </span>
-                  )}
                 </div>
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  {LANGUAGES.map((lang) => (
-                    <button
-                      key={lang.code}
-                      type="button"
-                      disabled={isTranslating}
-                      onClick={() => handleSelectLanguage(lang.code)}
-                      className={`px-2.5 py-1 text-[11px] font-mono transition-colors border cursor-pointer ${
-                        selectedLanguage === lang.code
-                          ? "bg-[var(--text-1)] text-[var(--bg)] font-bold border-[var(--text-1)] shadow-xs"
-                          : "bg-[var(--bg-surface)] text-[var(--text-2)] hover:text-[var(--text-1)] border-[var(--border)]"
-                      }`}
-                    >
-                      {lang.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              )}
 
+              {/* Translation error notice (shown inline when translation fails) */}
+              {translationError && (
+                <div className="mb-4 p-2 bg-[var(--bg-subtle)] border border-[var(--border)] text-[var(--accent-crimson)] text-[10px] font-mono no-print">
+                  {translationError}
+                </div>
+              )}
+
+              <div className={`transition-opacity duration-300 ${isTranslating ? "opacity-30 pointer-events-none select-none" : "opacity-100"}`}>
               {/* Reported facts */}
               <div className="mb-8">
                 <p className="text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase mb-2">
-                  WHAT YOU REPORTED
+                  {(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).reportedFacts}
                 </p>
                 <p className="text-xl font-serif italic text-[var(--text-1)] paper-rule-margin leading-relaxed">
                   &ldquo;{renderText(originalQuery)}&rdquo;
@@ -1319,7 +1850,7 @@ export default function Home() {
               <div className="mb-8">
                 <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
                   <p className="text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase">
-                    LEGAL POSITION & STATUTORY SUMMARY
+                    {(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).legalPosition}
                   </p>
                   <div className="flex items-center gap-1.5 bg-[var(--bg-subtle)] p-1 border border-[var(--border)] no-print text-[10px] font-mono">
                     <button
@@ -1331,7 +1862,7 @@ export default function Home() {
                           : "text-[var(--text-3)] hover:text-[var(--text-1)]"
                       }`}
                     >
-                      DETAILED STATUTORY
+                      {(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).detailedMode}
                     </button>
                     <button
                       type="button"
@@ -1342,7 +1873,7 @@ export default function Home() {
                           : "text-[var(--text-3)] hover:text-[var(--text-1)]"
                       }`}
                     >
-                      SIMPLER WORDING
+                      {(SECTION_HEADERS[selectedLanguage] || SECTION_HEADERS.en).simpleMode}
                     </button>
                   </div>
                 </div>
@@ -1363,23 +1894,34 @@ export default function Home() {
                   <>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                       {/* Applicable Provisions */}
-                      {result.citations.length > 0 && (
+                      {displayCitations.length > 0 && (
                         <div>
                           <p className="text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--text-3)] uppercase mb-4">
-                            {sectionHeaders.provisions} ({result.citations.length})
+                            {sectionHeaders.provisions} ({displayCitations.length})
                           </p>
                           <div className="space-y-3 font-sans">
-                            {result.citations.map((c, i) => (
-                              <div key={i} className="p-4 border border-[var(--border)] bg-[var(--bg-subtle)] flex items-start gap-4 interactive-paper">
-                                <span className="font-mono font-bold text-sm text-[var(--accent-crimson)]">
-                                  §{(i + 1).toString().padStart(2, "0")}
-                                </span>
-                                <div>
-                                  <p className="text-base font-serif font-bold text-[var(--text-1)]">{renderText(c.act)}</p>
-                                  <p className="text-xs font-mono text-[var(--text-2)] mt-1">Section {renderText(c.section)} · {renderText(c.jurisdiction).toUpperCase()}</p>
+                            {displayCitations.map((c, i) => {
+                              const secWord = SECTION_WORD[selectedLanguage] || "Section";
+                              const jurMap = JURISDICTION_WORD[selectedLanguage] || JURISDICTION_WORD.en;
+                              const jurLabel = jurMap[c.jurisdiction?.toLowerCase()] || c.jurisdiction?.toUpperCase();
+                              return (
+                                <div key={i} className="p-4 border border-[var(--border)] bg-[var(--bg-subtle)] flex items-start gap-4 interactive-paper">
+                                  <span className="font-mono font-bold text-sm text-[var(--accent-crimson)]">
+                                    §{(i + 1).toString().padStart(2, "0")}
+                                  </span>
+                                  <div>
+                                    <p className="text-base font-serif font-bold text-[var(--text-1)]">{renderText(c.act)}</p>
+                                    {(() => {
+                                      const rawSec = renderText(c.section);
+                                      const cleanSec = rawSec.replace(/^(?:Section|பிரிவு|धारा|ವಿಭಾಗ|कलम|విభాగం)\s*/i, "");
+                                      return (
+                                        <p className="text-xs font-mono text-[var(--text-2)] mt-1">{secWord} {cleanSec} · {renderText(jurLabel)}</p>
+                                      );
+                                    })()}
+                                  </div>
                                 </div>
-                              </div>
-                            ))}
+                              );
+                            })}
                           </div>
                         </div>
                       )}
@@ -1478,7 +2020,10 @@ export default function Home() {
                               <input
                                 type="text"
                                 value={letterFields.employee_name}
-                                onChange={e => setLetterFields({ employee_name: e.target.value })}
+                                onChange={e => {
+                                  setLetterFields({ employee_name: e.target.value });
+                                  letterTranslationsRef.current = {};
+                                }}
                                 className="w-full p-3 bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-1)] text-sm sm:text-base focus:outline-none focus:border-[var(--text-1)] font-sans transition-colors"
                               />
                               <p className="text-[11px] text-[var(--text-3)] mt-1.5 font-sans">
@@ -1495,7 +2040,7 @@ export default function Home() {
                             <div className="flex gap-3 pt-1">
                               <button
                                 type="button"
-                                onClick={handleGenerateLetter}
+                                onClick={() => handleGenerateLetter()}
                                 disabled={letterLoading}
                                 className="px-5 py-2.5 bg-[var(--text-1)] text-[var(--bg)] font-mono text-xs font-bold hover:opacity-90 transition-opacity cursor-pointer shadow-sm"
                               >
@@ -1507,18 +2052,22 @@ export default function Home() {
                             {generatedLetter && (
                               <div className="mt-6 pt-6 border-t border-[var(--border)]">
                                 <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
-                                  <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-[var(--text-3)]">
-                                    {noticeUi.previewHeading}
+                                  <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-[var(--text-3)] flex items-center gap-2">
+                                    <span>{noticeUi.previewHeading}</span>
+                                    {letterLoading && (
+                                      <span className="inline-block animate-pulse text-[var(--accent-crimson)] font-bold">●</span>
+                                    )}
                                   </span>
                                   <button
                                     type="button"
                                     onClick={handleDownloadDocx}
-                                    className="px-4 py-2 border border-[var(--border-strong)] bg-[var(--text-1)] text-[var(--bg)] text-xs font-mono font-bold hover:opacity-90 transition-opacity cursor-pointer flex items-center gap-2 shadow-sm"
+                                    disabled={letterLoading}
+                                    className="px-4 py-2 border border-[var(--border-strong)] bg-[var(--text-1)] text-[var(--bg)] text-xs font-mono font-bold hover:opacity-90 transition-opacity cursor-pointer flex items-center gap-2 shadow-sm disabled:opacity-50"
                                   >
                                     <span>⬇</span> {noticeUi.downloadBtn}
                                   </button>
                                 </div>
-                                <pre className="p-5 bg-[var(--bg-surface)] border border-[var(--border)] text-xs sm:text-sm font-mono text-[var(--text-1)] whitespace-pre-wrap leading-relaxed max-h-[480px] overflow-y-auto">
+                                <pre className={`p-5 bg-[var(--bg-surface)] border border-[var(--border)] text-xs sm:text-sm font-mono text-[var(--text-1)] whitespace-pre-wrap leading-relaxed max-h-[480px] overflow-y-auto transition-opacity ${letterLoading ? "opacity-50" : "opacity-100"}`}>
                                   {generatedLetter.text}
                                 </pre>
                               </div>
@@ -1530,6 +2079,7 @@ export default function Home() {
                   </>
                 );
               })()}
+              </div>
             </div>
 
             <DebugPanel data={result.ragDebug} />

@@ -41,7 +41,7 @@ def get_pathway(category: Optional[str]) -> Dict[str, Any]:
     db_url = os.getenv("DATABASE_URL")
     if db_url and "localhost:5432/postgres" not in db_url:
         try:
-            conn = psycopg2.connect(db_url, cursor_factory=RealDictCursor)
+            conn = psycopg2.connect(db_url, cursor_factory=RealDictCursor, connect_timeout=5)
             with conn.cursor() as cur:
                 cur.execute("SELECT category, authority, deadline_days, deadline_note, steps FROM pathways WHERE category = %s", [category])
                 row = cur.fetchone()

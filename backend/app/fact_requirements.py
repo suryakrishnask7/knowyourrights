@@ -169,3 +169,13 @@ def check_category_consistency(corpus_categories: set, pathway_categories: set, 
     for name, s in all_sets.items():
         if s != reference:
             raise ValueError(f"Category mismatch: {name} has {s - reference} extra / {reference - s} missing vs corpus")
+
+
+from app.fact_requirements_localized import (
+    LOCALIZED_DEFAULT_REASON,
+    LOCALIZED_COMBINED_QUESTIONS,
+    LOCALIZED_COMBINED_REASONS,
+    LOCALIZED_QUESTIONS,
+    LOCALIZED_REASONS,
+)
+
