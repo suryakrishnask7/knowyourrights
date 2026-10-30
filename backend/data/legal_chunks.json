@@ -7,7 +7,7 @@
     "section": "Section 1",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "It applies to the payment of wages to persons employed in any factory, railway administration, and industrial or other establishment.",
     "keywords": [
       "applicability",
@@ -25,7 +25,7 @@
     "section": "Section 2(vi)",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "'Wages' means all remuneration capable of being expressed in terms of money which would, if the terms of employment were fulfilled, be payable to a person employed in respect of his employment, including remuneration under award or settlement, overtime work, holiday or leave period.",
     "keywords": [
       "wages definition",
@@ -43,7 +43,7 @@
     "section": "Section 3",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every employer shall be responsible for the payment of all wages required to be paid under this Act to persons employed by him, including managers and supervisors named by the employer.",
     "keywords": [
       "employer responsibility",
@@ -61,7 +61,7 @@
     "section": "Section 4",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every person responsible for the payment of wages under section 3 shall fix periods in respect of which such wages shall be payable. No wage-period shall exceed one month.",
     "keywords": [
       "wage period",
@@ -78,7 +78,7 @@
     "section": "Section 5(1)",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The wages of every person employed in any establishment upon which less than one thousand persons are employed shall be paid before the expiry of the seventh day, and in any other establishment before the expiry of the tenth day, after the last day of the wage-period.",
     "keywords": [
       "payment deadline",
@@ -96,7 +96,7 @@
     "section": "Section 5(2)",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where the employment of any person is terminated by or on behalf of the employer, the wages earned by him shall be paid before the expiry of the second working day from the day on which his employment is terminated.",
     "keywords": [
       "termination wage deadline",
@@ -113,7 +113,7 @@
     "section": "Section 6",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "All wages shall be paid in current coin or currency notes or by cheque or by crediting the wages in the bank account of the employee.",
     "keywords": [
       "mode of payment",
@@ -131,7 +131,7 @@
     "section": "Section 7(1)",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The wages of an employed person shall be paid to him without deductions of any kind except those authorized by or under this Act.",
     "keywords": [
       "authorized deductions",
@@ -147,7 +147,7 @@
     "section": "Section 7(2)",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Deductions from wages may be made only in accordance with the provisions of this Act, namely: fines, deductions for absence from duty, deductions for damage or loss of goods expressly entrusted, deductions for house accommodation, loans, advances and income tax.",
     "keywords": [
       "permissible deductions",
@@ -166,7 +166,7 @@
     "section": "Section 13A",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every employer shall maintain registers and records giving particulars of persons employed, work performed, wages paid, and deductions made, preserved for at least three years.",
     "keywords": [
       "registers",
@@ -183,7 +183,7 @@
     "section": "Section 15(1)",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The appropriate Government may appoint an Authority to hear and decide all claims arising out of deductions from wages, or delay in payment of wages of persons employed.",
     "keywords": [
       "Payment of Wages Authority",
@@ -200,7 +200,7 @@
     "section": "Section 15(2)",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every such application shall be presented within twelve months from the date on which the deduction from wages was made or from the date on which payment of wages was due. The Authority may admit application after twelve months on sufficient cause.",
     "keywords": [
       "12 months limitation",
@@ -217,13 +217,14 @@
     "section": "Section 15(3)",
     "category": "unpaid_wages",
     "effective_date": "1936-04-23",
-    "superseded_date": null,
-    "text": "The Authority may direct the refund of the amount deducted or payment of delayed wages together with compensation not exceeding ten times the amount deducted, and up to Rs. 3,000 but not less than Rs. 1,500 for delayed wages.",
+    "superseded_date": "2020-09-29",
+    "text": "When any application under Section 15(2) is entertained, the Authority may direct the refund of the amount deducted or payment of delayed wages together with compensation not exceeding ten times the amount deducted for unauthorized deductions, and in case of delayed wages, compensation not exceeding three thousand rupees (Rs. 3,000) but not less than one thousand five hundred rupees (Rs. 1,500) under Section 15(3) of Payment of Wages Act, 1936.",
     "keywords": [
-      "statutory compensation",
-      "ten times penalty",
-      "refund order",
-      "delayed wage compensation"
+      "Section 15 Payment of Wages Act",
+      "compensation",
+      "Rs 1500 to Rs 3000",
+      "ten times deduction",
+      "delayed wages penalty"
     ]
   },
   {
@@ -234,7 +235,7 @@
     "section": "Section 12",
     "category": "unpaid_wages",
     "effective_date": "1948-03-15",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where in respect of any scheduled employment a notification is in force, the employer shall pay to every employee wages at a rate not less than the minimum rate of wages fixed by such notification without unauthorized deductions.",
     "keywords": [
       "minimum wages",
@@ -251,7 +252,7 @@
     "section": "Section 20",
     "category": "unpaid_wages",
     "effective_date": "1948-03-15",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The Authority may hear claims arising out of payment of less than minimum wages. Applications must be presented within six months from the date wages became payable. The Authority may award compensation up to ten times the shortfall.",
     "keywords": [
       "minimum wage claim",
@@ -454,7 +455,6 @@
     ]
   },
   {
-    "id": "cow2019-s45",
     "domain": "labour",
     "jurisdiction": "central",
     "act_name": "Code on Wages, 2019",
@@ -462,12 +462,12 @@
     "category": "unpaid_wages",
     "effective_date": "2019-08-08",
     "superseded_date": null,
-    "text": "Every claim under this Code (minimum wages, unpaid wages, bonus, unauthorized deductions) may be filed before the Designated Authority (Gazetted Officer) within a limitation period of three years from the date on which the claim arose.",
+    "text": "Every claim under the Code on Wages, 2019 arising out of payment of less than minimum wages, equal remuneration, unauthorized deductions, or delayed payment of wages may be filed before the Designated Authority within a limitation period of three years (3 years) from the date on which the claim arose under Section 45.",
     "keywords": [
-      "3 years limitation period",
-      "Designated Authority",
-      "claim limitation extension",
-      "three year claim window"
+      "Section 45 Code on Wages",
+      "claims limitation",
+      "three years limitation",
+      "Designated Authority claim"
     ]
   },
   {
@@ -496,7 +496,7 @@
     "section": "Section 2(oo)",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "'Retrenchment' means the termination by the employer of the service of a workman for any reason whatsoever, otherwise than as a punishment inflicted by way of disciplinary action, voluntary retirement, superannuation, or continued ill-health.",
     "keywords": [
       "retrenchment definition",
@@ -513,7 +513,7 @@
     "section": "Section 2(s)",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "'Workman' means any person employed in an industry to do manual, unskilled, skilled, technical, operational, clerical or supervisory work for hire or reward, but excludes persons employed mainly in a managerial or administrative capacity.",
     "keywords": [
       "workman definition",
@@ -531,7 +531,7 @@
     "section": "Section 2A",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where an employer discharges, dismisses, retrenches or terminates the services of an individual workman, any dispute connected with such discharge shall be deemed to be an industrial dispute notwithstanding that no union is a party to the dispute.",
     "keywords": [
       "individual dispute",
@@ -548,7 +548,7 @@
     "section": "Section 10",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where the appropriate Government is of opinion that any industrial dispute exists or is apprehended, it may at any time by order in writing refer the dispute to a Labour Court or Industrial Tribunal for adjudication.",
     "keywords": [
       "reference of dispute",
@@ -565,7 +565,7 @@
     "section": "Section 11A",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where an industrial dispute relating to discharge or dismissal has been referred to a Labour Court or Tribunal, the Court may set aside the discharge or dismissal and direct reinstatement of the workman on such terms as it thinks fit, or award lesser punishment or compensation.",
     "keywords": [
       "reinstatement power",
@@ -583,7 +583,7 @@
     "section": "Section 25B",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "A workman who during a period of twelve calendar months has actually worked under the employer for not less than two hundred and forty days shall be deemed to have completed one year of continuous service.",
     "keywords": [
       "continuous service",
@@ -600,7 +600,7 @@
     "section": "Section 25F",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "No workman employed in any industry who has been in continuous service for not less than one year shall be retrenched until: (a) given one month's notice in writing or wages in lieu of notice; (b) paid retrenchment compensation equivalent to fifteen days' average pay for every completed year of continuous service or part in excess of six months; and (c) notice is served on the appropriate Government.",
     "keywords": [
       "conditions precedent",
@@ -618,7 +618,7 @@
     "section": "Section 25G",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where any workman in an industrial establishment is to be retrenched, the employer shall ordinarily retrench the workman who was the last person to be employed in that category (Principle of 'Last Come, First Go'), unless reasons are recorded in writing.",
     "keywords": [
       "last come first go",
@@ -635,7 +635,7 @@
     "section": "Section 25H",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where any workmen are retrenched and the employer proposes to take into his employ any persons, he shall give an opportunity to the retrenched workmen who offer themselves for re-employment to have preference over other persons.",
     "keywords": [
       "re employment preference",
@@ -644,20 +644,20 @@
     ]
   },
   {
-    "id": "ida-s25n",
     "domain": "labour",
     "jurisdiction": "central",
     "act_name": "Industrial Disputes Act, 1947",
     "section": "Section 25N",
     "category": "wrongful_termination",
-    "effective_date": "1947-04-01",
-    "superseded_date": null,
-    "text": "In an industrial establishment employing not less than one hundred workmen, no workman in continuous service for one year shall be retrenched without three months' notice in writing and prior permission of the appropriate Government.",
+    "effective_date": "1947-03-11",
+    "superseded_date": "2020-09-29",
+    "text": "No workman employed in any industrial establishment under Chapter V-B (employing 100 or more workmen) who has been in continuous service for not less than one year shall be retrenched by that employer without giving three months' notice in writing indicating reasons for retrenchment, or wages in lieu of notice, and obtaining the prior permission of the appropriate Government under Section 25N of the Industrial Disputes Act, 1947.",
     "keywords": [
-      "Chapter VB",
-      "100 workmen establishment",
+      "Section 25N Industrial Disputes Act",
       "three months notice",
-      "prior government permission"
+      "prior government permission",
+      "Chapter V-B retrenchment",
+      "100 workmen"
     ]
   },
   {
@@ -668,7 +668,7 @@
     "section": "Section 33",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "During the pendency of any conciliation or adjudication proceeding, no employer shall alter service conditions to the prejudice of workmen or discharge/dismiss any workman concerned in the dispute without express permission in writing of the authority.",
     "keywords": [
       "protection during pendency",
@@ -685,7 +685,7 @@
     "section": "Section 33A",
     "category": "wrongful_termination",
     "effective_date": "1947-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where an employer contravenes the provisions of section 33 during the pendency of proceedings, any employee aggrieved may make a complaint in writing to the Labour Court or Tribunal, which shall adjudicate upon the complaint as if it were a dispute referred to it.",
     "keywords": [
       "Section 33A complaint",
@@ -1118,7 +1118,7 @@
     "section": "Section 1(3)",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The Act applies to every factory and every establishment employing twenty or more persons.",
     "keywords": [
       "EPF applicability",
@@ -1135,7 +1135,7 @@
     "section": "Section 2(b)",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "'Basic wages' means all emoluments which are earned by an employee while on duty or on leave with wages in accordance with the terms of employment, but excludes dearness allowance, house-rent allowance, overtime allowance, bonus and commission.",
     "keywords": [
       "basic wages definition",
@@ -1152,7 +1152,7 @@
     "section": "Section 6",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The contribution which shall be paid by the employer shall be ten per cent (or twelve per cent where notified) of basic wages, DA and retaining allowance, and the employee's contribution shall be equal to the contribution payable by the employer.",
     "keywords": [
       "contribution rate",
@@ -1170,7 +1170,7 @@
     "section": "Section 6A",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The Central Government may frame an Employees' Pension Scheme for employees in establishments to which this Act applies, providing for superannuation pension, retiring pension, permanent total disablement pension, and widow/children pension.",
     "keywords": [
       "Employees Pension Scheme",
@@ -1188,7 +1188,7 @@
     "section": "Section 7A",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The Regional Provident Fund Commissioner or Assistant PF Commissioner may, by order, determine the amount due from any employer under this Act, conducting quasi-judicial inquiry with powers of a civil court.",
     "keywords": [
       "Section 7A inquiry",
@@ -1206,7 +1206,7 @@
     "section": "Section 7B",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Any person aggrieved by an order made under section 7A may apply for a review of that order within forty-five days to the officer who made the order, on discovery of new evidence or mistake on the face of the record.",
     "keywords": [
       "Section 7B review",
@@ -1223,7 +1223,7 @@
     "section": "Section 7I",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Any person aggrieved by a notification or order passed under section 7A or 14B may prefer an appeal to the Industrial Tribunal (constituted under Industrial Disputes Act) within sixty days from the date of the order.",
     "keywords": [
       "EPF appeal",
@@ -1240,7 +1240,7 @@
     "section": "Section 7Q",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The employer shall be liable to pay simple interest at the rate of twelve per cent per annum on any amount due from him under this Act from the date on which the amount became due till the date of actual payment.",
     "keywords": [
       "12 percent interest",
@@ -1257,7 +1257,7 @@
     "section": "Section 8",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Any amount due from the employer may be recovered by the CPFC or Recovery Officer in the same manner as an arrear of land revenue through attachment and sale of movable or immovable property, or arrest and detention of the employer.",
     "keywords": [
       "recovery of dues",
@@ -1275,7 +1275,7 @@
     "section": "Section 8B",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where any amount is in arrear from an employer, the authorized officer may issue to the Recovery Officer a certificate specifying the amount of arrears, and the Recovery Officer shall proceed to recover the amount by attachment of bank accounts and property.",
     "keywords": [
       "recovery certificate",
@@ -1292,7 +1292,7 @@
     "section": "Section 14(1)",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Whoever, for the purpose of avoiding any payment to be made, knowingly makes or causes to be made any false statement or false representation shall be punishable with imprisonment for a term up to one year, or with fine up to five thousand rupees, or both.",
     "keywords": [
       "false representation",
@@ -1309,7 +1309,7 @@
     "section": "Section 14(1A)",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "An employer who defaults in payment of employee's contribution which has been deducted by him from the employee's wages shall be punishable with imprisonment for a term which shall not be less than one year and fine of ten thousand rupees.",
     "keywords": [
       "deduction non remittance",
@@ -1326,7 +1326,7 @@
     "section": "Section 14B",
     "category": "pf_nonpayment",
     "effective_date": "1952-03-04",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where an employer makes default in the payment of any contribution to the Fund, the CPFC or authorized officer may recover from the employer by way of penalty such damages, not exceeding the amount of arrears, as specified in the Scheme.",
     "keywords": [
       "damages",
@@ -1394,7 +1394,7 @@
     "section": "Section 1",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The Act applies to every factory and every other establishment in which twenty or more persons are employed on any day during an accounting year.",
     "keywords": [
       "bonus applicability",
@@ -1412,7 +1412,7 @@
     "section": "Section 2(13)",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "'Employee' means any person (other than an apprentice) employed on a salary or wage not exceeding twenty-one thousand rupees per mensem in any industry to do any skilled, unskilled, manual, supervisory, managerial, administrative, technical or clerical work.",
     "keywords": [
       "employee definition",
@@ -1429,7 +1429,7 @@
     "section": "Section 8",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every employee shall be entitled to be paid by his employer in an accounting year, bonus, in accordance with the provisions of this Act, provided he has worked in the establishment for not less than thirty working days in that year.",
     "keywords": [
       "bonus eligibility",
@@ -1446,7 +1446,7 @@
     "section": "Section 9",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "An employee shall be disqualified from receiving bonus under this Act if he is dismissed from service for fraud, riotous or violent behaviour while on the premises of the establishment, or theft, misappropriation or sabotage of any property.",
     "keywords": [
       "disqualification",
@@ -1464,7 +1464,7 @@
     "section": "Section 10",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every employer shall be bound to pay to every employee in respect of the accounting year a minimum bonus which shall be 8.33 per cent of the salary or wage earned by the employee or one hundred rupees, whichever is higher, whether or not the employer has any allocable surplus.",
     "keywords": [
       "minimum bonus",
@@ -1482,7 +1482,7 @@
     "section": "Section 11",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where allocable surplus exceeds the amount of minimum bonus payable, the employer shall pay bonus proportionate to salary, subject to a maximum of twenty per cent of such salary or wage.",
     "keywords": [
       "maximum bonus",
@@ -1499,7 +1499,7 @@
     "section": "Section 12",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where the salary or wage of an employee exceeds seven thousand rupees or the minimum wage for the scheduled employment, whichever is higher, per mensem, the bonus payable to such employee shall be calculated as if his salary or wage were seven thousand rupees or the minimum wage.",
     "keywords": [
       "bonus calculation ceiling",
@@ -1516,7 +1516,7 @@
     "section": "Section 15",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where for any accounting year the allocable surplus exceeds the maximum bonus payable (20%), the excess shall, to the extent of 20% of total wages, be carried forward for being set on in succeeding years (up to fourth accounting year). Similarly, deficiencies shall be set off.",
     "keywords": [
       "set on and set off",
@@ -1526,38 +1526,37 @@
     ]
   },
   {
-    "id": "pba-s19",
     "domain": "labour",
     "jurisdiction": "central",
     "act_name": "Payment of Bonus Act, 1965",
     "section": "Section 19",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
-    "text": "All amounts payable to an employee by way of bonus shall be paid in cash by his employer within a period of eight months from the close of the accounting year. Where a dispute is pending before an authority, within one month from the award becoming enforceable.",
+    "superseded_date": "2020-09-29",
+    "text": "All amounts payable to an employee by way of bonus under this Act shall be paid in cash by his employer within a period of eight months from the close of the accounting year. Where there is a dispute regarding payment of bonus pending before any authority under Section 22, the bonus shall be paid within a period of one month from the date on which the award comes into operation (Section 19 Payment of Bonus Act, 1965).",
     "keywords": [
-      "8 months deadline",
-      "payment timeline",
-      "accounting year",
-      "cash payment",
-      "delayed bonus"
+      "Section 19 Payment of Bonus Act",
+      "bonus deadline",
+      "eight months",
+      "cash bonus payment",
+      "PBA Section 19"
     ]
   },
   {
-    "id": "pba-s21",
     "domain": "labour",
     "jurisdiction": "central",
     "act_name": "Payment of Bonus Act, 1965",
     "section": "Section 21",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
-    "text": "Where any money is due to an employee by way of bonus, the employee may make an application to the appropriate Government within one year from the date it became due. The Government shall issue a recovery certificate to the Collector to recover as arrears of land revenue.",
+    "superseded_date": "2020-09-29",
+    "text": "Where any money is due to an employee by way of bonus from his employer, the employee or any person authorized by him may make an application to the appropriate Government for the recovery of the money within one year from the date on which the money became due. The Government, on being satisfied, shall issue a certificate to the Collector who shall proceed to recover the same as an arrear of land revenue under Section 21 of the Payment of Bonus Act, 1965.",
     "keywords": [
-      "Section 21 recovery",
-      "Collector recovery certificate",
+      "Section 21 Payment of Bonus Act",
+      "recovery of bonus",
+      "revenue recovery certificate",
       "one year limitation",
-      "land revenue recovery"
+      "PBA Section 21"
     ]
   },
   {
@@ -1568,7 +1567,7 @@
     "section": "Section 22",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where any dispute arises between an employer and his employees with respect to the bonus payable under this Act, such dispute shall be deemed to be an industrial dispute within the meaning of the Industrial Disputes Act, 1947.",
     "keywords": [
       "bonus dispute",
@@ -1585,7 +1584,7 @@
     "section": "Section 28",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "If any person contravenes any of the provisions of this Act or any rule made thereunder, he shall be punishable with imprisonment for a term which may extend to six months, or with fine up to one thousand rupees, or both.",
     "keywords": [
       "bonus penalty",
@@ -1602,7 +1601,7 @@
     "section": "Section 31A",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "An agreement or settlement entered into between employees and employer for payment of an annual bonus linked to production or productivity in lieu of bonus based on profits is valid, provided it does not deprive employees of minimum bonus of 8.33%.",
     "keywords": [
       "productivity bonus",
@@ -1619,7 +1618,7 @@
     "section": "Section 34",
     "category": "bonus_nonpayment",
     "effective_date": "1965-09-25",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Subject to the provisions of section 31A, the provisions of this Act shall have effect notwithstanding anything inconsistent therewith contained in any other law for the time being in force or in the terms of any award, agreement, settlement or contract of service.",
     "keywords": [
       "overriding effect",
@@ -1636,7 +1635,7 @@
     "section": "Section 1(3)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The Act applies to every factory, mine, plantation, port, railway, and every shop or establishment in a State in which ten or more persons are employed on any day of the preceding twelve months.",
     "keywords": [
       "gratuity applicability",
@@ -1653,7 +1652,7 @@
     "section": "Section 2(e)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "'Employee' means any person (other than an apprentice) employed on wages in any establishment, factory or shop, to do any skilled, semi-skilled, unskilled, manual, technical or clerical work, whether terms of employment be express or implied.",
     "keywords": [
       "employee definition",
@@ -1671,7 +1670,7 @@
     "section": "Section 2A",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "An employee shall be said to be in continuous service for a period if he has, for that period, been in uninterrupted service. Working for not less than 240 days in 12 months (or 190 days in mines/underground) constitutes one year continuous service.",
     "keywords": [
       "continuous service",
@@ -1688,7 +1687,7 @@
     "section": "Section 4(1)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Gratuity shall be payable to an employee on termination of employment after rendering continuous service for not less than five years: (a) on superannuation, (b) on retirement or resignation, or (c) on death or disablement. The five-year service condition shall not apply in case of death or disablement.",
     "keywords": [
       "gratuity eligibility",
@@ -1706,7 +1705,7 @@
     "section": "Section 4(2)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "For every completed year of service or part in excess of six months, the employer shall pay gratuity at the rate of fifteen days' wages based on last drawn rate of wages (calculated as monthly basic + DA divided by 26 and multiplied by 15).",
     "keywords": [
       "gratuity formula",
@@ -1724,7 +1723,7 @@
     "section": "Section 4(3)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The amount of gratuity payable to an employee shall not exceed twenty lakh rupees (as notified by Central Government).",
     "keywords": [
       "20 lakh cap",
@@ -1741,7 +1740,7 @@
     "section": "Section 4(5)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Nothing in this section shall affect the right of an employee to receive better terms of gratuity under any award or agreement or contract with the employer.",
     "keywords": [
       "better terms",
@@ -1758,7 +1757,7 @@
     "section": "Section 4(6)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Gratuity may be forfeited to the extent of damage or loss caused if terminated for willful omission or negligence causing damage to property; or wholly forfeited if terminated for riotous conduct or moral turpitude committed in course of employment.",
     "keywords": [
       "forfeiture",
@@ -1776,7 +1775,7 @@
     "section": "Section 7(1)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "A person eligible for gratuity shall send a written application to the employer within thirty days from the date gratuity became payable, in Form I prescribed under the Rules.",
     "keywords": [
       "Form I application",
@@ -1793,7 +1792,7 @@
     "section": "Section 7(2)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "As soon as gratuity becomes payable, the employer shall, whether an application has been made or not, determine the amount of gratuity and give notice in writing to the person and to the Controlling Authority specifying the amount.",
     "keywords": [
       "employer determination duty",
@@ -1809,7 +1808,7 @@
     "section": "Section 7(3)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The employer shall arrange to pay the amount of gratuity within thirty days from the date it becomes payable to the person entitled. If not paid within thirty days, simple interest at 10% per annum shall be paid by the employer.",
     "keywords": [
       "30 days disbursement",
@@ -1826,7 +1825,7 @@
     "section": "Section 7(4)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "If there is any dispute as to the amount of gratuity payable or admissibility of claim, the employer or employee may make an application in Form N to the Controlling Authority (Assistant Labour Commissioner) for adjudication.",
     "keywords": [
       "Controlling Authority",
@@ -1843,7 +1842,7 @@
     "section": "Section 7(7)",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Any person aggrieved by an order of the Controlling Authority may prefer an appeal to the Appellate Authority within sixty days from the date of receipt of order, provided the employer deposits the disputed gratuity amount prior to appeal.",
     "keywords": [
       "60 days appeal",
@@ -1860,7 +1859,7 @@
     "section": "Section 8",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "If gratuity is not paid within the prescribed time, the Controlling Authority shall issue a certificate for that amount to the Collector, who shall recover the same together with compound interest at fifteen per cent per annum as arrears of land revenue.",
     "keywords": [
       "recovery certificate",
@@ -1877,7 +1876,7 @@
     "section": "Section 9",
     "category": "gratuity_nonpayment",
     "effective_date": "1972-09-16",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "An employer who defaults in complying with any provision of this Act shall be punishable with imprisonment for a term not less than six months up to two years, or with fine up to twenty thousand rupees.",
     "keywords": [
       "gratuity penalty",
@@ -1894,7 +1893,7 @@
     "section": "Section 2",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The Act applies to every factory, mine, plantation, and every shop or establishment in which ten or more persons are employed on any day of the preceding twelve months.",
     "keywords": [
       "maternity applicability",
@@ -1911,7 +1910,7 @@
     "section": "Section 3(h)",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "'Maternity benefit' means the payment referred to in sub-section (1) of section 5 payable to a woman at the rate of average daily wage for the period of her actual absence.",
     "keywords": [
       "maternity benefit definition",
@@ -1927,7 +1926,7 @@
     "section": "Section 4(1)",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "No employer shall knowingly employ a woman in any establishment during the six weeks immediately following the day of her delivery or her miscarriage.",
     "keywords": [
       "prohibition of employment",
@@ -1944,7 +1943,7 @@
     "section": "Section 4(3)",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "No pregnant woman shall be required to do any work of an arduous nature, work involving long hours of standing, or work likely to interfere with pregnancy during the one month preceding six weeks before delivery.",
     "keywords": [
       "arduous work prohibition",
@@ -1961,7 +1960,7 @@
     "section": "Section 5(1)",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every woman shall be entitled to, and her employer shall be liable for, the payment of maternity benefit at the rate of the average daily wage for the period of her actual absence.",
     "keywords": [
       "maternity benefit entitlement",
@@ -1978,7 +1977,7 @@
     "section": "Section 5(2)",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "No woman shall be entitled to maternity benefit unless she has actually worked in an establishment of the employer for a period of not less than eighty days in the twelve months immediately preceding the date of her expected delivery.",
     "keywords": [
       "80 days qualifying service",
@@ -1995,7 +1994,7 @@
     "section": "Section 5(3)",
     "category": "maternity_benefit",
     "effective_date": "2017-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The maximum period for which any woman shall be entitled to maternity benefit shall be twenty-six weeks of which not more than eight weeks shall precede the expected delivery date. For women having two or more surviving children, maximum benefit is twelve weeks (max 6 weeks pre-delivery).",
     "keywords": [
       "26 weeks paid leave",
@@ -2012,7 +2011,7 @@
     "section": "Section 5(4)",
     "category": "maternity_benefit",
     "effective_date": "2017-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "A woman who legally adopts a child below the age of three months or a commissioning mother shall be entitled to maternity benefit for a period of twelve weeks from the date the child is handed over.",
     "keywords": [
       "adoption leave",
@@ -2029,7 +2028,7 @@
     "section": "Section 5(5)",
     "category": "maternity_benefit",
     "effective_date": "2017-04-01",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "In case where the nature of work assigned to a woman is of such nature that she may work from home, the employer may allow her to do so after availing of the maternity benefit for such period and on such conditions as mutually agreed.",
     "keywords": [
       "work from home",
@@ -2046,7 +2045,7 @@
     "section": "Section 6",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Any woman entitled to maternity benefit may give notice in writing to her employer in Form E stating that her maternity benefit be paid to her, and the employer shall permit her to absent herself until the expiry of six weeks after delivery.",
     "keywords": [
       "Form E notice",
@@ -2063,7 +2062,7 @@
     "section": "Section 8",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every woman entitled to maternity benefit shall also be entitled to receive from her employer a medical bonus of three thousand five hundred rupees, if no pre-natal confinement and post-natal care is provided by the employer free of charge.",
     "keywords": [
       "medical bonus",
@@ -2080,7 +2079,7 @@
     "section": "Section 9",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "In case of miscarriage or medical termination of pregnancy, a woman shall, on production of prescribed proof, be entitled to leave with wages at the rate of maternity benefit for a period of six weeks immediately following the day of miscarriage or MTP.",
     "keywords": [
       "miscarriage leave",
@@ -2097,7 +2096,7 @@
     "section": "Section 11",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Every woman delivered of a child who returns to duty shall, in addition to the interval for rest allowed to her, be allowed two nursing breaks of prescribed duration daily until the child attains the age of fifteen months.",
     "keywords": [
       "nursing breaks",
@@ -2107,20 +2106,20 @@
     ]
   },
   {
-    "id": "mba-s11a",
     "domain": "labour",
     "jurisdiction": "central",
     "act_name": "Maternity Benefit Act, 1961",
     "section": "Section 11A",
     "category": "maternity_benefit",
-    "effective_date": "2017-07-01",
-    "superseded_date": null,
-    "text": "Every establishment having fifty or more employees shall have the facility of creche within prescribed distance. The employer shall allow four visits a day to the creche by the woman, including the rest interval.",
+    "effective_date": "2017-04-01",
+    "superseded_date": "2020-09-29",
+    "text": "Every establishment having fifty or more employees (50+ employees) shall have the facility of a creche within such distance as may be prescribed, either separately or along with common facilities. The employer shall allow four visits a day to the creche by the woman, which shall also include the interval for rest allowed to her under Section 11A of the Maternity Benefit Act, 1961.",
     "keywords": [
+      "Section 11A Maternity Benefit Act",
       "creche facility",
       "50 employees threshold",
       "four visits daily",
-      "mandatory creche"
+      "creche amenity"
     ]
   },
   {
@@ -2131,7 +2130,7 @@
     "section": "Section 12",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "When a woman absents herself from work in accordance with this Act, it shall be unlawful for her employer to discharge or dismiss her during or on account of such absence, or give notice of dismissal expiring during such absence.",
     "keywords": [
       "unlawful dismissal",
@@ -2148,7 +2147,7 @@
     "section": "Section 21",
     "category": "maternity_benefit",
     "effective_date": "1961-12-12",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "If any employer fails to pay maternity benefit or dismisses a woman in contravention of section 12, he shall be punishable with imprisonment not less than three months up to one year and with fine up to five thousand rupees.",
     "keywords": [
       "maternity penalty",
@@ -2165,7 +2164,7 @@
     "section": "Section 51",
     "category": "overtime_hours",
     "effective_date": "1948-09-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "No adult worker shall be required or allowed to work in a factory for more than forty-eight hours in any week.",
     "keywords": [
       "weekly hours limit",
@@ -2182,7 +2181,7 @@
     "section": "Section 52",
     "category": "overtime_hours",
     "effective_date": "1948-09-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "No adult worker shall be required or allowed to work in a factory on the first day of the week (Sunday), unless he has or will have a holiday for a whole day on one of the three days immediately before or after the said day (Compensatory Holiday).",
     "keywords": [
       "weekly holiday",
@@ -2199,7 +2198,7 @@
     "section": "Section 54",
     "category": "overtime_hours",
     "effective_date": "1948-09-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Subject to the provisions of section 51, no adult worker shall be required or allowed to work in a factory for more than nine hours in any day.",
     "keywords": [
       "daily hours limit",
@@ -2216,7 +2215,7 @@
     "section": "Section 55",
     "category": "overtime_hours",
     "effective_date": "1948-09-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The periods of work of adult workers in a factory each day shall be so fixed that no period shall exceed five hours and that no worker shall work for more than five hours before he has had an interval for rest of at least half an hour.",
     "keywords": [
       "intervals for rest",
@@ -2233,7 +2232,7 @@
     "section": "Section 56",
     "category": "overtime_hours",
     "effective_date": "1948-09-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The periods of work of an adult worker in a factory shall be so arranged that inclusive of his intervals for rest under section 55, they shall not spread over more than ten and a half hours in any day.",
     "keywords": [
       "spread over limit",
@@ -2250,7 +2249,7 @@
     "section": "Section 59(1)",
     "category": "overtime_hours",
     "effective_date": "1948-09-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where a worker works in a factory for more than nine hours in any day or for more than forty-eight hours in any week, he shall, in respect of overtime work, be entitled to wages at the rate of twice his ordinary rate of wages.",
     "keywords": [
       "overtime wages",
@@ -2268,7 +2267,7 @@
     "section": "Section 59(2)",
     "category": "overtime_hours",
     "effective_date": "1948-09-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "'Ordinary rate of wages' means the basic wages plus such allowances, including dearness allowance and cash equivalent of food concessions, as the worker is for the time being entitled to, but does not include bonus or overtime.",
     "keywords": [
       "ordinary rate definition",
@@ -2285,7 +2284,7 @@
     "section": "Section 64",
     "category": "overtime_hours",
     "effective_date": "1948-09-23",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "The total number of hours of overtime work shall not exceed fifty for any one quarter, and total working hours including overtime shall not exceed ten hours on any day and sixty hours in any week.",
     "keywords": [
       "quarterly overtime cap",
@@ -2302,7 +2301,7 @@
     "section": "Section 14",
     "category": "overtime_hours",
     "effective_date": "1948-03-15",
-    "superseded_date": null,
+    "superseded_date": "2020-09-29",
     "text": "Where an employee whose minimum rate of wages is fixed under this Act works on any day in excess of normal working hours, the employer shall pay him for every hour worked in excess at the overtime rate fixed under this Act or State law, whichever is higher.",
     "keywords": [
       "minimum wage overtime",
@@ -3092,12 +3091,13 @@
     "category": "security_deposit_dispute",
     "effective_date": "2019-02-22",
     "superseded_date": null,
-    "text": "The security deposit shall be refunded to the tenant within one month of taking over vacant possession of premises, after making due deduction of any liability.",
+    "text": "The security deposit shall be refunded to the tenant at the time of taking over of possession of the vacant premises by the landlord, after making due deduction of any liability of the tenant (Section 11(2) TNRRRLT Act as amended by TN Act 39 of 2018).",
     "keywords": [
-      "Tamil Nadu",
-      "one month refund deadline",
+      "security deposit refund",
       "vacant possession",
-      "deposit refund"
+      "TNRRRLT Section 11",
+      "deductions",
+      "Tamil Nadu"
     ]
   },
   {
@@ -3109,12 +3109,13 @@
     "category": "security_deposit_dispute",
     "effective_date": "2019-02-22",
     "superseded_date": null,
-    "text": "If landlord fails to refund security deposit within one month, landlord shall be liable to pay simple interest at such rate as may be prescribed on the unpaid deposit.",
+    "text": "If the landlord fails to refund the security deposit at the time of takeover of vacant possession, the landlord shall be liable to pay simple interest at the rate of 8% per annum on the unpaid deposit under Rule 7(2) of the TNRRRLT Rules, 2019.",
     "keywords": [
-      "Tamil Nadu",
-      "interest on delayed deposit",
-      "landlord penalty",
-      "statutory interest"
+      "security deposit default",
+      "8% interest",
+      "TNRRRLT Rule 7",
+      "unpaid deposit penalty",
+      "Tamil Nadu"
     ]
   },
   {
@@ -3742,6 +3743,717 @@
       "Controller order",
       "repair ceiling",
       "rent deduction authorization"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Payment of Wages Act, 1936",
+    "section": "Section 12",
+    "category": "unpaid_wages",
+    "effective_date": "1936-04-23",
+    "superseded_date": "2020-09-29",
+    "text": "Deductions for recovery of advances of money given before employment began shall be made from the first payment of wages in respect of a complete wage-period, but no deduction shall be made of advances given for travelling expenses. Recovery of advances of wages given after employment began shall be subject to rules prescribed by the appropriate Government under Section 12 of the Payment of Wages Act, 1936.",
+    "keywords": [
+      "Section 12 Payment of Wages Act",
+      "recovery of advances",
+      "wage deduction",
+      "travel advance",
+      "PWA Section 12"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Equal Remuneration Act, 1976",
+    "section": "Section 4",
+    "category": "unpaid_wages",
+    "effective_date": "1976-02-11",
+    "superseded_date": "2020-09-29",
+    "text": "No employer shall pay to any worker remuneration at rates less favourable than those at which remuneration is paid by him to workers of the opposite sex in the same establishment for performing the same work or work of a similar nature. An employer shall not reduce the rate of remuneration of any worker to comply with this requirement under Section 4 of the Equal Remuneration Act, 1976.",
+    "keywords": [
+      "Section 4 Equal Remuneration Act",
+      "gender wage equality",
+      "equal pay for equal work",
+      "no wage reduction",
+      "ERA Section 4"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Equal Remuneration Act, 1976",
+    "section": "Section 5",
+    "category": "unpaid_wages",
+    "effective_date": "1976-02-11",
+    "superseded_date": "2020-09-29",
+    "text": "No employer shall, while making recruitment for the same work or work of a similar nature, or in any condition of service subsequent to recruitment such as promotions, training or transfer, make any discrimination against women except where employment of women in such work is prohibited or restricted by or under any law (Section 5 of the Equal Remuneration Act, 1976).",
+    "keywords": [
+      "Section 5 Equal Remuneration Act",
+      "gender discrimination recruitment",
+      "promotion parity",
+      "ERA Section 5"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Wages, 2019",
+    "section": "Section 9",
+    "category": "unpaid_wages",
+    "effective_date": "2019-08-08",
+    "superseded_date": null,
+    "text": "The Central Government shall fix floor wage taking into account minimum living standards of a worker. The minimum rates of wages fixed by the appropriate Government shall not be less than the floor wage, and if the existing minimum wages are higher than the floor wage, the State Government cannot reduce them (Section 9 Code on Wages, 2019).",
+    "keywords": [
+      "Section 9 Code on Wages",
+      "floor wage",
+      "national floor wage",
+      "minimum living standard",
+      "wage protection"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Disputes Act, 1947",
+    "section": "Section 25O",
+    "category": "wrongful_termination",
+    "effective_date": "1947-03-11",
+    "superseded_date": "2020-09-29",
+    "text": "An employer who intends to close down an industrial establishment employing 100 or more workmen shall apply for prior permission at least ninety days (90 days) before the date on which the intended closure is to become effective, stating clearly the reasons for closure, and a copy shall be served simultaneously on the representatives of workmen under Section 25O of the Industrial Disputes Act, 1947.",
+    "keywords": [
+      "Section 25O Industrial Disputes Act",
+      "closure of undertaking",
+      "90 days notice",
+      "prior permission closure",
+      "Chapter V-B"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Employment (Standing Orders) Act, 1946",
+    "section": "Section 10",
+    "category": "wrongful_termination",
+    "effective_date": "1946-04-23",
+    "superseded_date": "2020-09-29",
+    "text": "Standing orders certified under this Act shall not be liable to modification until the expiry of six months (6 months) from the date on which they came into operation, except on agreement between the employer and the workmen or a trade union, under Section 10 of the Industrial Employment (Standing Orders) Act, 1946.",
+    "keywords": [
+      "Section 10 Industrial Employment Standing Orders",
+      "modification of standing orders",
+      "six months bar",
+      "certified standing orders"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Employment (Standing Orders) Central Rules, 1946",
+    "section": "Schedule I, Paragraph 14",
+    "category": "wrongful_termination",
+    "effective_date": "1946-12-18",
+    "superseded_date": "2020-09-29",
+    "text": "Under Model Standing Orders Paragraph 14, no order of dismissal for misconduct shall be made unless the workman concerned is informed in writing of the alleged misconduct and given an opportunity to explain the circumstances alleged against him. An inquiry shall be held before dismissal, and pending inquiry, suspension allowance under Section 10A must be paid: 50% of wages for first 90 days, and 75% of wages thereafter.",
+    "keywords": [
+      "Model Standing Orders Paragraph 14",
+      "domestic inquiry",
+      "disciplinary enquiry",
+      "misconduct dismissal",
+      "subsistence allowance Section 10A"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Relations Code, 2020",
+    "section": "Section 70",
+    "category": "wrongful_termination",
+    "effective_date": "2020-09-29",
+    "superseded_date": null,
+    "text": "Under Section 70 of the Industrial Relations Code, 2020, no worker employed in any industry who has been in continuous service for not less than one year shall be retrenched until given one month's notice in writing or payment in lieu thereof, and paid compensation equivalent to fifteen days' average pay for every completed year of continuous service or any part thereof in excess of six months.",
+    "keywords": [
+      "Section 70 Industrial Relations Code",
+      "retrenchment compensation",
+      "15 days average pay",
+      "one month notice",
+      "IR Code retrenchment"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Relations Code, 2020",
+    "section": "Section 77",
+    "category": "wrongful_termination",
+    "effective_date": "2020-09-29",
+    "superseded_date": null,
+    "text": "Under Section 77 of Chapter X of the Industrial Relations Code, 2020, special provisions relating to lay-off, retrenchment and closure apply to industrial establishments in which not less than three hundred workers (300 workers) were employed on an average per working day in the preceding twelve months (increasing the prior permission threshold from 100 to 300 workers).",
+    "keywords": [
+      "Section 77 Industrial Relations Code",
+      "300 workers threshold",
+      "prior permission retrenchment",
+      "Chapter X IR Code",
+      "layoff permission"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Industrial Relations Code, 2020",
+    "section": "Section 62",
+    "category": "wrongful_termination",
+    "effective_date": "2020-09-29",
+    "superseded_date": null,
+    "text": "Section 62 of the Industrial Relations Code, 2020 prohibits any person employed in an industrial establishment from going on strike without giving to the employer notice of strike within sixty days before striking, or within fourteen days of giving such notice, or during the pendency of conciliation proceedings before a conciliation officer and seven days after the conclusion of such proceedings.",
+    "keywords": [
+      "Section 62 Industrial Relations Code",
+      "strike notice",
+      "14 to 60 days notice",
+      "prohibition of strike",
+      "conciliation pendency"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Industrial Establishments (Conferment of Permanent Status to Workmen) Act, 1981",
+    "section": "Section 3",
+    "category": "wrongful_termination",
+    "effective_date": "1981-08-05",
+    "superseded_date": null,
+    "text": "Notwithstanding anything contained in any law for the time being in force, every workman who is in continuous service for a period of four hundred and eighty days (480 days) in a period of twenty-four calendar months (24 months) in an industrial establishment shall be conferred permanent status by the employer under Section 3(1) of the Tamil Nadu Industrial Establishments (Conferment of Permanent Status to Workmen) Act, 1981.",
+    "keywords": [
+      "Section 3 Conferment of Permanent Status Act",
+      "480 days continuous service",
+      "24 calendar months",
+      "Tamil Nadu permanent status",
+      "TN Act 46 of 1981"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Trade Unions Act, 1926",
+    "section": "Section 4",
+    "category": "wrongful_termination",
+    "effective_date": "1926-03-25",
+    "superseded_date": "2020-09-29",
+    "text": "Any seven or more members of a Trade Union may, by subscribing their names to the rules of the Trade Union and complying with the provisions of this Act with respect to registration, apply for registration of the Trade Union under Section 4 of the Trade Unions Act, 1926.",
+    "keywords": [
+      "Section 4 Trade Unions Act",
+      "union registration",
+      "seven members",
+      "Trade Union formation"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Trade Unions Act, 1926",
+    "section": "Section 18",
+    "category": "wrongful_termination",
+    "effective_date": "1926-03-25",
+    "superseded_date": "2020-09-29",
+    "text": "No suit or other legal proceeding shall be maintainable in any Civil Court against any registered Trade Union or any office-bearer or member thereof in respect of any act done in contemplation or furtherance of a trade dispute on the ground only that such act induces some other person to break a contract of employment under Section 18 of the Trade Unions Act, 1926.",
+    "keywords": [
+      "Section 18 Trade Unions Act",
+      "civil immunity",
+      "trade dispute protection",
+      "strike action immunity"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Indian Contract Act, 1872",
+    "section": "Section 27",
+    "category": "wrongful_termination",
+    "effective_date": "1872-09-01",
+    "superseded_date": null,
+    "text": "Every agreement by which anyone is restrained from exercising a lawful profession, trade or business of any kind, is to that extent void under Section 27 of the Indian Contract Act, 1872. Indian courts consistently hold that post-termination non-compete clauses in employment contracts are invalid, unenforceable, and contrary to public policy.",
+    "keywords": [
+      "Section 27 Indian Contract Act",
+      "non-compete clause void",
+      "restraint of trade",
+      "employment bond restriction"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Indian Contract Act, 1872",
+    "section": "Section 74",
+    "category": "wrongful_termination",
+    "effective_date": "1872-09-01",
+    "superseded_date": null,
+    "text": "When a contract has been broken, if a sum is named in the contract as the amount to be paid in case of such breach, the party complaining of the breach is entitled to receive reasonable compensation not exceeding the amount so named under Section 74 of the Indian Contract Act, 1872. Employers cannot arbitrarily recover exorbitant employment bond sums without demonstrating actual training expenditure and financial loss.",
+    "keywords": [
+      "Section 74 Indian Contract Act",
+      "liquidated damages",
+      "employment bond penalty",
+      "training bond recovery",
+      "reasonable compensation"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' State Insurance Act, 1948",
+    "section": "Section 38 & 39",
+    "category": "pf_nonpayment",
+    "effective_date": "1948-04-19",
+    "superseded_date": "2020-09-29",
+    "text": "Subject to the provisions of this Act, all employees in factories or establishments to which this Act applies shall be insured in the manner provided by this Act (Section 38). Contributions payable in respect of an employee shall comprise contribution payable by the employer (3.25% of wages) and employee (0.75% of wages) paid to the ESI Corporation within twenty-one days of the last day of the calendar month under Section 39.",
+    "keywords": [
+      "Section 38 ESI Act",
+      "Section 39 ESI Act",
+      "ESI contribution",
+      "0.75 percent employee",
+      "3.25 percent employer",
+      "ESI deposit"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' State Insurance Act, 1948",
+    "section": "Section 75",
+    "category": "pf_nonpayment",
+    "effective_date": "1948-04-19",
+    "superseded_date": "2020-09-29",
+    "text": "If any question or dispute arises as to whether any person is an employee within the meaning of this Act or whether he is liable to pay the employee's contribution, or as to the rate of wages or average daily wages, or as to the claim for recovery of contributions from the employer, such dispute shall be decided by the Employees' Insurance Court (EI Court) under Section 75 of the ESI Act, 1948.",
+    "keywords": [
+      "Section 75 ESI Act",
+      "Employees Insurance Court",
+      "EI Court dispute",
+      "ESI contribution dispute",
+      "ESI adjudication"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Maternity Benefit Act, 1961",
+    "section": "Section 17",
+    "category": "maternity_benefit",
+    "effective_date": "1961-12-12",
+    "superseded_date": "2020-09-29",
+    "text": "Any woman claiming that maternity benefit or any other amount to which she is entitled under this Act has been improperly withheld, or an employer has dismissed her on account of pregnancy or absence, may make a complaint to the Inspector within one year from the date of alleged dismissal or withholding. The Inspector may inquire and direct the employer to pay such amount under Section 17 of the Maternity Benefit Act, 1961.",
+    "keywords": [
+      "Section 17 Maternity Benefit Act",
+      "complaint to inspector",
+      "withheld maternity pay",
+      "one year limitation",
+      "maternity enforcement"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Employees' Compensation Act, 1923",
+    "section": "Section 4A",
+    "category": "unpaid_wages",
+    "effective_date": "1923-03-05",
+    "superseded_date": "2020-09-29",
+    "text": "Compensation under Section 4 shall be paid as soon as it falls due, and in no case later than one month from the date it fell due. If the employer defaults in paying compensation within one month, the Commissioner shall direct the employer to pay simple interest at 12% per annum, and if in the opinion of the Commissioner there is no justification for delay, an additional sum not exceeding 50% of the compensation by way of penalty under Section 4A.",
+    "keywords": [
+      "Section 4A Employees Compensation Act",
+      "compensation deadline",
+      "one month payment",
+      "12 percent interest",
+      "50 percent penalty"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Social Security, 2020",
+    "section": "Section 53",
+    "category": "gratuity_nonpayment",
+    "effective_date": "2020-09-29",
+    "superseded_date": null,
+    "text": "Under Section 53 of the Code on Social Security, 2020, gratuity shall be payable to an employee on the termination of his employment after he has rendered continuous service for not less than five years. Provided that the completion of continuous service of five years shall not be necessary where the termination of the employment of any employee is on death or disablement, or on expiration of fixed term employment on pro-rata basis for fixed term contracts of not less than one year.",
+    "keywords": [
+      "Section 53 Code on Social Security",
+      "gratuity eligibility",
+      "fixed term gratuity 1 year",
+      "Rs 20 Lakhs ceiling",
+      "Social Security Code gratuity"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Code on Social Security, 2020",
+    "section": "Chapter IX (Sections 112-114)",
+    "category": "unpaid_wages",
+    "effective_date": "2020-09-29",
+    "superseded_date": null,
+    "text": "Chapter IX of the Code on Social Security, 2020 (Sections 112 to 114) empowers the Central and State Governments to frame and notify social security schemes for unorganised workers, gig workers, and platform workers relating to life and disability cover, health and maternity benefits, old age protection, and crèche facilities, financed through contributions from aggregators.",
+    "keywords": [
+      "Chapter IX Code on Social Security",
+      "gig workers social security",
+      "platform workers",
+      "aggregator welfare cess",
+      "Sections 112 to 114"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Factories Act, 1948",
+    "section": "Section 79",
+    "category": "overtime_hours",
+    "effective_date": "1948-09-23",
+    "superseded_date": "2020-09-29",
+    "text": "Every worker who has worked for a period of 240 days or more in a factory during a calendar year shall be allowed during the subsequent calendar year leave with wages at the rate of one day for every twenty days of work performed (Section 79 Factories Act, 1948). If a worker is discharged or quits service before taking leave, he shall be entitled to wages in respect of the leave earned.",
+    "keywords": [
+      "Section 79 Factories Act",
+      "annual leave with wages",
+      "240 days work",
+      "one day for every 20 days",
+      "earned leave encashment"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "TN",
+    "act_name": "Tamil Nadu Industrial Establishments (National and Festival Holidays) Act, 1958",
+    "section": "Section 3",
+    "category": "overtime_hours",
+    "effective_date": "1958-11-26",
+    "superseded_date": null,
+    "text": "Every employee shall be allowed in each calendar year a holiday with full wages on the 26th January (Republic Day), 1st May (May Day), 15th August (Independence Day), and 2nd October (Gandhi Jayanthi), and five other festival holidays as specified by the Inspector in consultation with the employer and employees under Section 3 of the Tamil Nadu Act 33 of 1958 (Total 9 paid holidays).",
+    "keywords": [
+      "Section 3 National and Festival Holidays Act",
+      "Tamil Nadu paid holidays",
+      "9 paid holidays",
+      "May Day",
+      "statutory festival leave"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Occupational Safety, Health and Working Conditions Code, 2020",
+    "section": "Section 32",
+    "category": "overtime_hours",
+    "effective_date": "2020-09-29",
+    "superseded_date": null,
+    "text": "Under Section 32 of the OSH Code, 2020, every worker who has worked for a period of one hundred and eighty days (180 days) or more in an establishment during a calendar year shall be allowed during the subsequent calendar year leave with wages at the rate of one day for every twenty days of work performed (reducing the threshold from 240 days under the 1948 Factories Act to 180 days).",
+    "keywords": [
+      "Section 32 OSH Code",
+      "180 days annual leave threshold",
+      "leave with wages",
+      "one day per 20 days",
+      "OSH Code leave"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Occupational Safety, Health and Working Conditions Code, 2020",
+    "section": "Section 43",
+    "category": "overtime_hours",
+    "effective_date": "2020-09-29",
+    "superseded_date": null,
+    "text": "Under Section 43 of the OSH Code, 2020, women shall be entitled to be employed in all establishments for all types of work and they may also be employed, with their consent before 6 a.m. and beyond 7 p.m. subject to such conditions relating to safety, holidays and working hours or other conditions as may be prescribed by the appropriate Government.",
+    "keywords": [
+      "Section 43 OSH Code",
+      "women night shift",
+      "work beyond 7 pm",
+      "consent night work",
+      "safety transport conditions"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Contract Labour (Regulation and Abolition) Act, 1970",
+    "section": "Section 21",
+    "category": "unpaid_wages",
+    "effective_date": "1970-09-05",
+    "superseded_date": "2020-09-29",
+    "text": "A contractor shall be responsible for payment of wages to each worker employed by him as contract labour before the expiry of such period as may be prescribed. In case the contractor fails to make payment of wages within the prescribed period or makes short payment, then the principal employer shall be liable to make payment of wages in full or the unpaid balance due to the contract labour under Section 21(4) of the Contract Labour Act, 1970.",
+    "keywords": [
+      "Section 21 Contract Labour Act",
+      "principal employer liability",
+      "unpaid contract labour wages",
+      "contractor default",
+      "CLA Section 21"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Apprentices Act, 1961",
+    "section": "Section 13",
+    "category": "unpaid_wages",
+    "effective_date": "1961-12-12",
+    "superseded_date": null,
+    "text": "The employer shall pay to every apprentice during the period of apprenticeship training such stipend at a rate not less than the prescribed minimum rate as may be specified in the contract of apprenticeship. An apprentice shall not be paid by his employer on the basis of piece work nor shall he be required to take part in any output bonus or other incentive scheme under Section 13 of the Apprentices Act, 1961.",
+    "keywords": [
+      "Section 13 Apprentices Act",
+      "apprentice stipend",
+      "minimum stipend rate",
+      "no piece work",
+      "stipend nonpayment"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Inter-State Migrant Workmen (RECS) Act, 1979",
+    "section": "Section 14 & 15",
+    "category": "unpaid_wages",
+    "effective_date": "1979-06-11",
+    "superseded_date": "2020-09-29",
+    "text": "Under Section 14, every inter-State migrant workman shall be paid a displacement allowance equal to 50% of the monthly wages or Rs. 75, whichever is higher, non-refundable. Under Section 15, a journey allowance not less than the fare from place of residence to establishment plus wages for the journey period shall be paid by the contractor under the Inter-State Migrant Workmen Act, 1979.",
+    "keywords": [
+      "Section 14 Migrant Workmen Act",
+      "Section 15 Migrant Workmen Act",
+      "displacement allowance 50 percent",
+      "journey allowance",
+      "migrant worker wages"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Building and Other Construction Workers (RECS) Act, 1996",
+    "section": "Section 12 & 22",
+    "category": "unpaid_wages",
+    "effective_date": "1996-08-19",
+    "superseded_date": "2020-09-29",
+    "text": "Every building worker who has completed eighteen years of age, but has not completed sixty years, and who has been engaged in any building or other construction work for not less than ninety days (90 days) during the preceding twelve months shall be eligible for registration as a beneficiary under Section 12, entitled to welfare benefits, accident assistance, maternity benefit, and pension from the State BOCW Welfare Board under Section 22.",
+    "keywords": [
+      "Section 12 BOCW Act",
+      "Section 22 BOCW Act",
+      "construction worker registration",
+      "90 days construction work",
+      "BOCW Welfare Board"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Child and Adolescent Labour (Prohibition and Regulation) Act, 1986",
+    "section": "Section 3 & 14",
+    "category": "wrongful_termination",
+    "effective_date": "1986-12-23",
+    "superseded_date": null,
+    "text": "No child (under 14 years of age) shall be employed or permitted to work in any occupation or process, and no adolescent (14 to 18 years) shall be employed in hazardous occupations under Section 3. Whoever employs any child or adolescent in contravention shall be punishable with imprisonment for a term which shall not be less than six months but which may extend to two years, or with fine not less than twenty thousand rupees but up to fifty thousand rupees (Rs. 20,000 to Rs. 50,000) under Section 14.",
+    "keywords": [
+      "Section 3 Child Labour Act",
+      "Section 14 Child Labour Act",
+      "child labour ban",
+      "Rs 20000 to Rs 50000 fine",
+      "six months to two years imprisonment"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Bonded Labour System (Abolition) Act, 1976",
+    "section": "Section 4 & 16",
+    "category": "unpaid_wages",
+    "effective_date": "1976-02-09",
+    "superseded_date": null,
+    "text": "On the commencement of this Act, the bonded labour system shall stand abolished and every bonded labourer shall stand freed and discharged from any obligation to render any bonded labour (Section 4). Whoever compels any person to render any bonded labour shall be punishable with imprisonment for a term which may extend to three years and also with fine which may extend to two thousand rupees under Section 16.",
+    "keywords": [
+      "Section 4 Bonded Labour Act",
+      "Section 16 Bonded Labour Act",
+      "bonded labour abolition",
+      "debt discharge",
+      "three years imprisonment"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Bharatiya Nyaya Sanhita, 2023",
+    "section": "Section 75 & 79",
+    "category": "posh_complaint",
+    "effective_date": "2024-07-01",
+    "superseded_date": null,
+    "text": "Section 75 of the Bharatiya Nyaya Sanhita, 2023 defines and penalises sexual harassment (unwelcome physical contact, demand for sexual favours, showing pornography) with rigorous imprisonment up to three years or fine (replacing IPC Section 354A). Section 79 penalises word, gesture or act intended to insult the modesty of a woman with imprisonment up to three years and fine (replacing IPC Section 509).",
+    "keywords": [
+      "Section 75 BNS 2023",
+      "Section 79 BNS 2023",
+      "sexual harassment criminal",
+      "insult to modesty",
+      "BNS sexual offence",
+      "replaces IPC 354A"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Bharatiya Nyaya Sanhita, 2023",
+    "section": "Section 351",
+    "category": "posh_complaint",
+    "effective_date": "2024-07-01",
+    "superseded_date": null,
+    "text": "Section 351 of the Bharatiya Nyaya Sanhita, 2023 defines criminal intimidation as threatening another with injury to person, reputation or property with intent to cause alarm or compel acts (replacing IPC Sections 503 and 506). Punishable with imprisonment up to two years or fine, and if threat is to cause death or grievous hurt, imprisonment up to seven years.",
+    "keywords": [
+      "Section 351 BNS 2023",
+      "criminal intimidation",
+      "workplace threats",
+      "replaces IPC 506",
+      "injury to reputation"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "KA",
+    "act_name": "The Karnataka Platform-based GIG Workers (Social Security and Welfare) Bill, 2024",
+    "section": "Clauses 11-15",
+    "category": "unpaid_wages",
+    "effective_date": "2024-07-01",
+    "superseded_date": null,
+    "text": "The Karnataka Platform-based Gig Workers Bill, 2024 establishes the Karnataka Gig Workers Welfare Board, mandates automated registration of platform gig workers with a unique ID, requires aggregators to pay a welfare fee per transaction, mandates 14 days' written notice before deactivation or termination of gig workers, and establishes a statutory grievance redressal mechanism.",
+    "keywords": [
+      "Karnataka Gig Workers Bill 2024",
+      "platform workers",
+      "aggregator welfare fee",
+      "14 days deactivation notice",
+      "Karnataka Gig Board"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Recognition of Trade Unions and Prevention of Unfair Labour Practices Act, 1971",
+    "section": "Schedule IV",
+    "category": "wrongful_termination",
+    "effective_date": "1972-02-01",
+    "superseded_date": null,
+    "text": "Schedule IV of the MRTU & PULP Act, 1971 enumerates general unfair labour practices on the part of employers, including discharge or dismissal by way of victimisation, discharge without good cause, dismissal for union activities, and maintaining workers as badlis or casuals for years with the object of depriving them of permanent status. Complaints lie before the Labour Court within ninety days (90 days).",
+    "keywords": [
+      "Schedule IV MRTU PULP Act",
+      "unfair labour practices Maharashtra",
+      "victimisation discharge",
+      "badli exploitation",
+      "90 days complaint"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "MH",
+    "act_name": "Maharashtra Mathadi, Hamal and Other Manual Workers Act, 1969",
+    "section": "Section 3 & 4",
+    "category": "unpaid_wages",
+    "effective_date": "1969-06-13",
+    "superseded_date": null,
+    "text": "Under the Maharashtra Mathadi, Hamal and Other Manual Workers Act, 1969, schemes are established for regulating employment and welfare of unprotected manual workers (loaders, unloaders, stackers). Registered workers are allocated through the Mathadi Board, employers must deposit statutory wage levies directly to the Board, and direct engagement without Board registration is prohibited.",
+    "keywords": [
+      "Maharashtra Mathadi Act 1969",
+      "mathadi workers",
+      "manual loading unloading",
+      "Mathadi Board wage levy",
+      "unprotected workers"
+    ]
+  },
+  {
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Specific Relief Act, 1963",
+    "section": "Section 6",
+    "category": "eviction_dispute",
+    "effective_date": "1963-12-13",
+    "superseded_date": null,
+    "text": "If any person is dispossessed without his consent of immovable property otherwise than in due course of law, he or any person through whom he has been in possession may, by suit, recover possession thereof, notwithstanding any other title that may be set up in such suit. No suit under this section shall be brought after the expiry of six months (6 months) from the date of dispossession under Section 6 of the Specific Relief Act, 1963.",
+    "keywords": [
+      "Section 6 Specific Relief Act",
+      "summary suit dispossession",
+      "unlawful eviction recovery",
+      "six months limitation",
+      "forcible eviction remedy"
+    ]
+  },
+  {
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Limitation Act, 1963",
+    "section": "Article 113",
+    "category": "security_deposit_dispute",
+    "effective_date": "1963-10-05",
+    "superseded_date": null,
+    "text": "Under Article 113 of the Schedule to the Limitation Act, 1963 (the residuary article), any suit for which no period of limitation is provided elsewhere in the Schedule must be instituted within three years (3 years) from the date when the right to sue accrues. This statutory window anchors claims for recovery of unpaid tenancy security deposits, salary arrears, and civil damages.",
+    "keywords": [
+      "Article 113 Limitation Act",
+      "three years limitation",
+      "residuary limitation article",
+      "right to sue accrues",
+      "deposit recovery deadline"
+    ]
+  },
+  {
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Registration Act, 1908",
+    "section": "Section 17 & 49",
+    "category": "tenant_landlord",
+    "effective_date": "1908-12-18",
+    "superseded_date": null,
+    "text": "Under Section 17(1)(d) of the Registration Act, 1908, leases of immovable property from year to year, or for any term exceeding one year, or reserving a yearly rent, are compulsorily registrable. Under Section 49, no document required by Section 17 to be registered shall affect any immovable property comprised therein or be received as evidence of any transaction affecting such property unless it has been registered.",
+    "keywords": [
+      "Section 17 Registration Act",
+      "Section 49 Registration Act",
+      "compulsory lease registration",
+      "leases exceeding 11 months",
+      "unregistered lease inadmissible"
+    ]
+  },
+  {
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Bharatiya Nyaya Sanhita, 2023",
+    "section": "Section 316",
+    "category": "security_deposit_dispute",
+    "effective_date": "2024-07-01",
+    "superseded_date": null,
+    "text": "Section 316 of the Bharatiya Nyaya Sanhita, 2023 defines criminal breach of trust as dishonestly misappropriating, converting to one's own use, or dishonestly using or disposing of property entrusted to a person (replaces IPC Section 405). Applies where a landlord dishonestly refuses to refund an entrusted security deposit or an employer deducts PF/wages and misappropriates funds. Punishable under Section 316(2) with imprisonment up to five years or fine.",
+    "keywords": [
+      "Section 316 BNS 2023",
+      "criminal breach of trust",
+      "security deposit misappropriation",
+      "replaces IPC 405 406",
+      "five years imprisonment"
+    ]
+  },
+  {
+    "domain": "tenancy",
+    "jurisdiction": "central",
+    "act_name": "Consumer Protection Act, 2019",
+    "section": "Section 35 & 69",
+    "category": "security_deposit_dispute",
+    "effective_date": "2019-08-09",
+    "superseded_date": null,
+    "text": "Under Section 35 of the Consumer Protection Act, 2019, a complaint in relation to any goods sold or delivered or agreed to be sold or delivered or any service provided or agreed to be provided may be filed with a District Commission. Under Section 69, the District Commission, State Commission or National Commission shall not admit a complaint unless it is filed within two years (2 years) from the date on which the cause of action has arisen.",
+    "keywords": [
+      "Section 35 Consumer Protection Act",
+      "Section 69 Consumer Protection Act",
+      "two years limitation",
+      "deficiency in service",
+      "District Consumer Commission"
+    ]
+  },
+  {
+    "domain": "labour",
+    "jurisdiction": "central",
+    "act_name": "Right to Information Act, 2005",
+    "section": "Section 6, 7 & 19",
+    "category": "unpaid_wages",
+    "effective_date": "2005-06-21",
+    "superseded_date": null,
+    "text": "Under Section 6 of the RTI Act, 2005, a person desiring information may request the Public Information Officer (PIO). Under Section 7(1), the PIO must provide information or reject the request within thirty days (30 days) of receipt, or within forty-eight hours (48 hours) where information concerns life or liberty of a person. First appeal lies within 30 days under Section 19(1), and Second appeal to Information Commission within 90 days under Section 19(3).",
+    "keywords": [
+      "Section 6 RTI Act",
+      "Section 7 RTI Act",
+      "30 days RTI response",
+      "48 hours life and liberty",
+      "Section 19 RTI appeal"
     ]
   }
 ]

@@ -72,7 +72,16 @@ const JURISDICTION_WORD: Record<string, Record<string, string>> = {
   te: { central: "కేంద్ర", state: "రాష్ట్ర", tn: "తమిళనాడు", mh: "మహారాష్ట్ర", ka: "కర్ణాటక" },
 };
 
-const STATE_LABELS: Record<StateCode, string> = { TN: "Tamil Nadu", MH: "Maharashtra", KA: "Karnataka" };
+export const LOCALIZED_STATE_LABELS: Record<string, Record<StateCode, string>> = {
+  en: { TN: "Tamil Nadu", MH: "Maharashtra", KA: "Karnataka" },
+  ta: { TN: "தமிழ்நாடு", MH: "மகாராஷ்டிரா", KA: "கர்நாடகா" },
+  hi: { TN: "तमिलनाडु", MH: "महाराष्ट्र", KA: "कर्नाटक" },
+  te: { TN: "తమిళనాడు", MH: "మహారాష్ట్ర", KA: "కర్ణాటక" },
+  kn: { TN: "ತಮಿಳುನಾಡು", MH: "ಮಹಾರಾಷ್ಟ್ರ", KA: "ಕರ್ನಾಟಕ" },
+  mr: { TN: "तमिळनाडू", MH: "महाराष्ट्र", KA: "कर्नाटक" },
+};
+
+const STATE_LABELS: Record<StateCode, string> = LOCALIZED_STATE_LABELS.en;
 
 const LANGUAGES = [
   { code: "en", label: "EN", name: "English" },
@@ -1083,7 +1092,7 @@ export default function Home() {
     });
 
     const activeUser = (result.user_name || userName || "").trim();
-    const jurisdictionLabel = STATE_LABELS[stateCode] || stateCode;
+    const jurisdictionLabel = (LOCALIZED_STATE_LABELS[selectedLanguage] || LOCALIZED_STATE_LABELS.en)[stateCode] || stateCode;
     const categoryLabel = (result.detectedCategory || "General Dispute")
       .replace(/_/g, " ")
       .toUpperCase();
@@ -1607,7 +1616,7 @@ export default function Home() {
                   {currentUi.workspace.jurisdictionLabel}
                 </label>
                 <div className="flex flex-wrap gap-2 font-mono text-xs font-bold uppercase">
-                  {(Object.entries(STATE_LABELS) as [StateCode, string][]).map(([code, label]) => (
+                  {(Object.entries(LOCALIZED_STATE_LABELS[selectedLanguage] || LOCALIZED_STATE_LABELS.en) as [StateCode, string][]).map(([code, label]) => (
                     <button
                       key={code}
                       type="button"
@@ -1790,7 +1799,7 @@ export default function Home() {
                       <span className="legal-stamp">{sh.verifiedBadge}</span>
                     </div>
                     <div className="flex items-center gap-4 text-[var(--text-2)] font-bold">
-                      <span>{STATE_LABELS[stateCode].toUpperCase()}</span>
+                      <span>{((LOCALIZED_STATE_LABELS[selectedLanguage] || LOCALIZED_STATE_LABELS.en)[stateCode] || stateCode).toUpperCase()}</span>
                       <span>·</span>
                       <span>{sh.confidence}: {result.evidence.level.toUpperCase()}</span>
                       <button

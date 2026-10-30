@@ -3,7 +3,7 @@ import json
 import logging
 import re
 import threading
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Tuple
 from pathlib import Path
 from dotenv import load_dotenv
 from groq import Groq
@@ -82,6 +82,94 @@ JURISDICTION_NATIVE: Dict[str, Dict[str, str]] = {
     "te": {"central": "కేంద్ర", "tn": "తమిళనాడు", "mh": "మహారాష్ట్ర", "ka": "కర్ణాటక"},
 }
 
+
+PLACEHOLDER_TRANSLATIONS: Dict[str, List[Tuple[str, str]]] = {
+    "ta": [
+        ("[Employer / Company / Landlord Full Legal Name]", "[நிறுவனம் / முதலாளி / வீட்டு உரிமையாளரின் முழு சட்டப்பூர்வ பெயர்]"),
+        ("[Employer / Company / Landlord Name]", "[நிறுவனம் / முதலாளி / வீட்டு உரிமையாளரின் பெயர்]"),
+        ("[Registered Office Address / Landlord Postal Address, PIN]", "[நிறுவனத்தின் பதிவு அலுவலக முகவரி / உரிமையாளர் அஞ்சல் முகவரி, பின்கோடு]"),
+        ("[Registered Office Address / Postal Address]", "[பதிவு அலுவலக முகவரி / அஞ்சல் முகவரி]"),
+        ("[Joining / Commencement Date]", "[பணியில் சேர்ந்த தேதி / தொடக்க தேதி]"),
+        ("[Lease Commencement Date]", "[வாடகை ஒப்பந்த தொடக்க தேதி]"),
+        ("[Your Designation / Job Title / Department]", "[உங்கள் பதவி / பணியின் பெயர் / துறை]"),
+        ("[Your Designation / Job Title]", "[உங்கள் பதவி / பணியின் பெயர்]"),
+        ("[Your Complete Postal Address, City, State, PIN]", "[உங்கள் முழுமையான அஞ்சல் முகவரி, நகரம், மாநிலம், பின்கோடு]"),
+        ("[Your Complete Postal Address, City, State]", "[உங்கள் முழுமையான அஞ்சல் முகவரி, நகரம், மாநிலம்]"),
+        ("[Contact Number & Email ID]", "[தொடர்பு எண் மற்றும் மின்னஞ்சல் முகவரி]"),
+        ("[Claim Amount in INR, e.g., Rs. ________ / Duration of Non-Payment]", "[கோரப்படும் தொகை (ரூ.), எ.கா., ரூ. ________ / நிலுவைக் காலம்]"),
+        ("[Claim Amount in INR]", "[கோரப்படும் தொகை (ரூபாய்)]"),
+        ("[Full Legal Name]", "[முழு சட்டப்பூர்வ பெயர்]"),
+        ("[Your Full Legal Name]", "[உங்கள் முழு சட்டப்பூர்வ பெயர்]"),
+    ],
+    "hi": [
+        ("[Employer / Company / Landlord Full Legal Name]", "[नियोक्ता / कंपनी / मकान मालिक का पूरा कानूनी नाम]"),
+        ("[Employer / Company / Landlord Name]", "[नियोक्ता / कंपनी / मकान मालिक का नाम]"),
+        ("[Registered Office Address / Landlord Postal Address, PIN]", "[पंजीकृत कार्यालय का पता / मकान मालिक का डाक पता, पिन]"),
+        ("[Registered Office Address / Postal Address]", "[पंजीकृत कार्यालय का पता / डाक पता]"),
+        ("[Joining / Commencement Date]", "[कार्यभार ग्रहण / प्रारंभ करने की तिथि]"),
+        ("[Lease Commencement Date]", "[पट्टा / किराया प्रारंभ होने की तिथि]"),
+        ("[Your Designation / Job Title / Department]", "[आपका पद / कार्य पदनाम / विभाग]"),
+        ("[Your Designation / Job Title]", "[आपका पद / कार्य पदनाम]"),
+        ("[Your Complete Postal Address, City, State, PIN]", "[आपका पूरा डाक पता, शहर, राज्य, पिनकोड]"),
+        ("[Your Complete Postal Address, City, State]", "[आपका पूरा डाक पता, शहर, राज्य]"),
+        ("[Contact Number & Email ID]", "[संपर्क नंबर एवं ईमेल आईडी]"),
+        ("[Claim Amount in INR, e.g., Rs. ________ / Duration of Non-Payment]", "[दावा की गई राशि (रुपये में), उदा. रु. ________ / भुगतान न होने की अवधि]"),
+        ("[Claim Amount in INR]", "[दावा की गई राशि (रुपये में)]"),
+        ("[Full Legal Name]", "[पूरा कानूनी नाम]"),
+        ("[Your Full Legal Name]", "[आपका पूरा कानूनी नाम]"),
+    ],
+    "te": [
+        ("[Employer / Company / Landlord Full Legal Name]", "[యజమాని / కంపెనీ / ఇంటి యజమాని పూర్తి చట్టపరమైన పేరు]"),
+        ("[Employer / Company / Landlord Name]", "[యజమాని / కంపెనీ / ఇంటి యజమాని పేరు]"),
+        ("[Registered Office Address / Landlord Postal Address, PIN]", "[రిజిస్టర్డ్ ఆఫీస్ చిరునామా / ఇంటి యజమాని పోస్టల్ చిరునామా, పిన్]"),
+        ("[Registered Office Address / Postal Address]", "[రిజిస్టర్డ్ ఆఫీస్ చిరునామా / పోస్టల్ చిరునామా]"),
+        ("[Joining / Commencement Date]", "[ఉద్యోగంలో చేరిన తేదీ / ప్రారంభ తేదీ]"),
+        ("[Lease Commencement Date]", "[అద్దె ఒప్పంద ప్రారంభ తేదీ]"),
+        ("[Your Designation / Job Title / Department]", "[మీ హోదా / ఉద్యోగ శీర్షిక / విభాగం]"),
+        ("[Your Designation / Job Title]", "[మీ హోదా / ఉద్యోగ శీర్షిక]"),
+        ("[Your Complete Postal Address, City, State, PIN]", "[మీ పూర్తి పోస్టల్ చిరునామా, నగరం, రాష్ట్రం, పిన్ కోడ్]"),
+        ("[Your Complete Postal Address, City, State]", "[మీ పూర్తి పోస్టల్ చిరునామా, నగరం, రాష్ట్రం]"),
+        ("[Contact Number & Email ID]", "[సంప్రదింపు నంబర్ & ఇమెయిల్ ఐడి]"),
+        ("[Claim Amount in INR, e.g., Rs. ________ / Duration of Non-Payment]", "[క్లెయిమ్ మొత్తం (రూపాయల్లో), ఉదా., రూ. ________ / చెల్లించని కాలవ్యవధి]"),
+        ("[Claim Amount in INR]", "[క్లెయిమ్ మొత్తం (రూపాయల్లో)]"),
+        ("[Full Legal Name]", "[పూర్తి చట్టపరమైన పేరు]"),
+        ("[Your Full Legal Name]", "[మీ పూర్తి చట్టపరమైన పేరు]"),
+    ],
+    "kn": [
+        ("[Employer / Company / Landlord Full Legal Name]", "[ಉದ್ಯೋಗದಾತ / ಕಂಪನಿ / ಮನೆ ಮಾಲೀಕರ ಪೂರ್ಣ ಕಾನೂನುಬದ್ಧ ಹೆಸರು]"),
+        ("[Employer / Company / Landlord Name]", "[ಉದ್ಯೋಗದಾತ / ಕಂಪನಿ / ಮನೆ ಮಾಲೀಕರ ಹೆಸರು]"),
+        ("[Registered Office Address / Landlord Postal Address, PIN]", "[ನೋಂದಾಯಿತ ಕಚೇರಿ ವಿಳಾಸ / ಮನೆ ಮಾಲೀಕರ ಅಂಚೆ ವಿಳಾಸ, ಪಿನ್]"),
+        ("[Registered Office Address / Postal Address]", "[ನೋಂದಾಯಿತ ಕಚೇರಿ ವಿಳಾಸ / ಅಂಚೆ ವಿಳಾಸ]"),
+        ("[Joining / Commencement Date]", "[ಸೇವೆಗೆ ಸೇರಿದ ದಿನಾಂಕ / ಪ್ರಾರಂಭ ದಿನಾಂಕ]"),
+        ("[Lease Commencement Date]", "[ಬಾಡಿಗೆ ಪ್ರಾರಂಭ ದಿನಾಂಕ]"),
+        ("[Your Designation / Job Title / Department]", "[ನಿಮ್ಮ ಹುದ್ದೆ / ಕೆಲಸದ ಶೀರ್ಷಿಕೆ / ಇಲಾಖೆ]"),
+        ("[Your Designation / Job Title]", "[ನಿಮ್ಮ ಹುದ್ದೆ / ಕೆಲಸದ ಶೀರ್ಷಿಕೆ]"),
+        ("[Your Complete Postal Address, City, State, PIN]", "[ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಅಂಚೆ ವಿಳಾಸ, ನಗರ, ರಾಜ್ಯ, ಪಿನ್ ಕೋಡ್]"),
+        ("[Your Complete Postal Address, City, State]", "[ನಿಮ್ಮ ಸಂಪೂರ್ಣ ಅಂಚೆ ವಿಳಾಸ, ನಗರ, ರಾಜ್ಯ]"),
+        ("[Contact Number & Email ID]", "[ಸಂಪರ್ಕ ಸಂಖ್ಯೆ ಮತ್ತು ಇಮೇಲ್ ಐಡಿ]"),
+        ("[Claim Amount in INR, e.g., Rs. ________ / Duration of Non-Payment]", "[ಕ್ಲೈಮ್ ಮೊತ್ತ (ರೂಪಾಯಿಗಳಲ್ಲಿ), ಉದಾ., ರೂ. ________ / ಪಾವತಿಸದ ಅವಧಿ]"),
+        ("[Claim Amount in INR]", "[ಕ್ಲೈಮ್ ಮೊತ್ತ (ರೂಪಾಯಿಗಳಲ್ಲಿ)]"),
+        ("[Full Legal Name]", "[ಪೂರ್ಣ ಕಾನೂನುಬದ್ಧ ಹೆಸರು]"),
+        ("[Your Full Legal Name]", "[ನಿಮ್ಮ ಪೂರ್ಣ ಕಾನೂನುಬದ್ಧ ಹೆಸರು]"),
+    ],
+    "mr": [
+        ("[Employer / Company / Landlord Full Legal Name]", "[नियोक्ता / कंपनी / घरमालकाचे पूर्ण कायदेशीर नाव]"),
+        ("[Employer / Company / Landlord Name]", "[नियोक्ता / कंपनी / घरमालकाचे नाव]"),
+        ("[Registered Office Address / Landlord Postal Address, PIN]", "[नोंदणीकृत कार्यालयाचा पत्ता / घरमालकाचा टपाल पत्ता, पिन]"),
+        ("[Registered Office Address / Postal Address]", "[नोंदणीकृत कार्यालयाचा पत्ता / टपाल पत्ता]"),
+        ("[Joining / Commencement Date]", "[रुजू झाल्याची तारीख / प्रारंभ तारीख]"),
+        ("[Lease Commencement Date]", "[भाडेकरार प्रारंभ तारीख]"),
+        ("[Your Designation / Job Title / Department]", "[तुमचे पद / कामाचे नाव / विभाग]"),
+        ("[Your Designation / Job Title]", "[तुमचे पद / कामाचे नाव]"),
+        ("[Your Complete Postal Address, City, State, PIN]", "[तुमचा संपूर्ण टपाल पत्ता, शहर, राज्य, पिनकोड]"),
+        ("[Your Complete Postal Address, City, State]", "[तुमचा संपूर्ण टपाल पत्ता, शहर, राज्य]"),
+        ("[Contact Number & Email ID]", "[संपर्क क्रमांक आणि ईमेल आयडी]"),
+        ("[Claim Amount in INR, e.g., Rs. ________ / Duration of Non-Payment]", "[दावा केलेली रक्कम (रुपयांमध्ये), उदा., रु. ________ / थकबाकीचा कालावधी]"),
+        ("[Claim Amount in INR]", "[दावा केलेली रक्कम (रुपयांमध्ये)]"),
+        ("[Full Legal Name]", "[पूर्ण कायदेशीर नाव]"),
+        ("[Your Full Legal Name]", "[तुमचे पूर्ण कायदेशीर नाव]"),
+    ],
+}
 EVIDENCE_LEVEL_NATIVE: Dict[str, Dict[str, str]] = {
     "ta": {"High": "அதிகம்", "Medium": "மிதமான", "Low": "குறைவு"},
     "hi": {"High": "उच्च", "Medium": "मध्यम", "Low": "निम्न"},
@@ -407,7 +495,7 @@ def translate_notice_letter(letter_text: str, target_lang: str) -> str:
     if target_lang == "en" or target_lang not in SUPPORTED_LANGUAGES or not letter_text.strip():
         return letter_text
 
-    cache_key = f"letter_{target_lang}_{hash(letter_text[:120])}"
+    cache_key = f"letter_v2_{target_lang}_{hash(letter_text[:140])}"
     cached = _get_cache(cache_key)
     if cached:
         return cached
@@ -421,27 +509,43 @@ def translate_notice_letter(letter_text: str, target_lang: str) -> str:
     sec_word = headers.get("section_word", "Section")
 
     def _letter_cleanup(text: str) -> str:
+        # Normalize header labels
         text = re.sub(r'\bDate:', date_word, text)
         text = re.sub(r'\bTo,', to_word, text)
         text = re.sub(r'\bSubject:', subj_word, text)
         text = re.sub(r'Dear Sir\s*/\s*Madam,', salut_word, text, flags=re.IGNORECASE)
         text = re.sub(r'Yours sincerely,', close_word, text, flags=re.IGNORECASE)
         text = re.sub(r'\bSection\b', sec_word, text)
+        
+        # Replace erroneous "Sender" label at the top with "Recipient" label
+        if target_lang == "ta":
+            text = re.sub(r'^\s*அனுப்புநர்\s*,?\s*\n(?=\s*\[?(?:நிறுவனம்|முதலாளி|Employer|Company))', f"{to_word}\n", text, flags=re.MULTILINE)
+
+        # Deterministically replace any leftover English placeholders with native language
+        placeholders = PLACEHOLDER_TRANSLATIONS.get(target_lang, [])
+        for eng_ph, local_ph in placeholders:
+            text = text.replace(eng_ph, local_ph)
+            inner_eng = eng_ph.strip("[]")
+            inner_local = local_ph.strip("[]")
+            text = re.sub(re.escape(inner_eng), inner_local, text, flags=re.IGNORECASE)
+
         return text
 
     lang_name = SUPPORTED_LANGUAGES[target_lang]["name"]
 
-    # 1. Primary: Groq LLM (1 call, full letter preservation)
+    # 1. Primary: Groq LLM (1 call, 100% regional translation including placeholders)
     res = _call_groq_text(
         messages=[
             {
                 "role": "system",
                 "content": (
                     f"You are a professional legal drafting assistant specializing in Indian statutory notices. "
-                    f"Translate the following legal notice completely into formal {lang_name} native script. "
-                    f"Keep all bracketed placeholders like [Name], [Address], [Amount] intact. "
-                    f"Preserve standard formal legal notice formatting, date, salutation, statutory sections, and closing. "
-                    f"Return ONLY the translated notice letter with no extra conversational commentary."
+                    f"Translate the following legal notice completely into 100% formal {lang_name} native script. "
+                    f"CRITICAL REQUIREMENTS:\n"
+                    f"1. 100% REGIONAL LANGUAGE: Every single word must be in {lang_name} native script. Do NOT leave English text anywhere.\n"
+                    f"2. BRACKETED PLACEHOLDERS: Translate the descriptive text INSIDE every square bracket placeholder into {lang_name} (e.g. translate '[Employer / Company / Landlord Full Legal Name]' to '[{PLACEHOLDER_TRANSLATIONS.get(target_lang, [('', '')])[0][1].strip('[]')}]', '[Contact Number & Email ID]' to '[{PLACEHOLDER_TRANSLATIONS.get(target_lang, [('', '')])[10][1].strip('[]')}]'). Keep the square brackets [...] around the placeholder.\n"
+                    f"3. FORMATTING: Preserve the formal legal letter layout (Date, Recipient / To, Subject, Salutation, Body paragraphs, Demand deadline, Closing, Sender signature block).\n"
+                    f"Return ONLY the translated notice letter."
                 )
             },
             {"role": "user", "content": letter_text}
@@ -462,8 +566,8 @@ def translate_notice_letter(letter_text: str, target_lang: str) -> str:
         _set_cache(cache_key, cleaned)
         return cleaned
 
-    # 3. Graceful fallback: original letter
-    return letter_text
+    # 3. Graceful fallback: original letter with cleaned placeholders
+    return _letter_cleanup(letter_text)
 
 
 # ── Language Detection & Ingress Translation ────────────────────────────────────
